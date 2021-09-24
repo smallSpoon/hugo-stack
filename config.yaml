@@ -1,5 +1,6 @@
-baseurl: https://example.com
-languageCode: en-us
+baseurl: https://mantyke.icu
+languageCode: zh-cn
+hasCJKLanguage: true
 theme: stack
 paginate: 10
 title: 小 球 飞 鱼
@@ -44,12 +45,13 @@ params:
     article:
         math: false
         toc: true
-        readingTime: false
+        readingTime: true
         license:
-            enabled: false
+            enabled: true
             default: Licensed under CC BY-NC-SA 4.0
 
-    #comments:
+
+    comments:
         enabled: true
         provider: disqus
 
@@ -113,16 +115,16 @@ params:
 
     widgets:
         enabled:
+            #- search
             - toc
             - archives
             - tag-cloud
-           
 
         archives:
             limit: 5
 
         tagCloud:
-            limit: 20
+            limit: 10
 
     opengraph:
         twitter:
@@ -152,7 +154,7 @@ params:
             enabled: true
 
 ### Custom menu
-### See https://docs.stack.jimmycai.com/configuration/custom-menu.html
+### See https://docs.stack.jimmycai.com/configuration/custom-menu
 ### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter
 menu:
     main:
@@ -182,16 +184,4 @@ markup:
         ordered: true
         startLevel: 2
     highlight:
-        codeFences: true
-        guessSyntax: false
-        hl_Lines: ""
-        lineNoStart: 1
-        lineNos: false
-        lineNumbersInTable: true
-        noClasses: true
-        stacktyle: monokai
-        tabWidth: 4
-
-
-
-         
+        noClasses: false

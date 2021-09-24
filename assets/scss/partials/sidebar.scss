@@ -1,6 +1,6 @@
 .sidebar {
     &.sticky {
-        @include respond(lg) {
+        @include respond(md) {
             position: sticky;
         }
     }
@@ -13,18 +13,13 @@
     align-self: stretch;
 
     width: 100%;
-    padding: 30px 0 15px 25px;
+    padding: 30px 0 15px 0;
     max-width: none;
 
     --sidebar-avatar-size: 120px;
     --sidebar-element-separation: 20px;
 
-    @include respond(lg) {
-        display: none;
-    }
-
-    @include respond(xl) {
-        display: flex;
+    @include respond(md) {
         width: auto;
         padding-top: var(--main-top-padding);
         padding-bottom: var(--main-top-padding);
@@ -45,25 +40,12 @@
     flex-shrink: 0;
     display: none;
 
-    #article-toolbar {
-        @media(max-width: 1279px) {
-            display: flex;
-        }
-
-        .back-home {
-            width: 40%;
-            margin: 0 4%;
-            padding: 10px 4% 10px 7%;
-        }
-    }
-
     &.sticky {
         top: 0;
     }
 
     @include respond(lg) {
         padding-top: var(--main-top-padding);
-        max-height: 100vh;
     }
 }
 
@@ -73,13 +55,13 @@
 
     padding: 15px;
 
-    @include respond(lg) {
+    @include respond(md) {
         padding: 0;
     }
 
     .site-avatar {
         position: relative;
-        margin-left:auto;
+        margin-left:auto; //站点头像居中
         margin-right:auto;
         width: var(--sidebar-avatar-size);
         height: var(--sidebar-avatar-size);
@@ -116,10 +98,9 @@
 
     .site-name {
         color: var(--accent-color);
-        margin: 0;
-        text-align:center;
+        margin: auto;
         font-size: 1.8rem;
-
+        text-align:center; //站点名称居中
         @include respond(2xl) {
             font-size: 2rem;
         }
@@ -128,11 +109,11 @@
     .site-description {
         color: var(--body-text-color);
         font-weight: normal;
-        text-align:center;
+        text-align:center; 
         font-size: 1.6rem;
 
         @include respond(2xl) {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
         }
     }
 }
@@ -148,6 +129,7 @@
             background-color: var(--body-text-color);
             display: block;
             margin-top: var(--section-separation);
+
         }
     }
 }
