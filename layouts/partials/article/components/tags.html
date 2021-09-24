@@ -1,0 +1,11 @@
+{{ if .Params.Tags }}
+    <section class="article-tags">
+        {{ range (.GetTerms "tags") }}
+            {{ $url := .RelPermalink }}
+            {{ if .Site.Params.TrimTrailingSlash }}
+                {{ $url = $url | replaceRE "/$" "" }}
+            {{ end }}
+            <a href="{{ $url }}">{{ .LinkTitle }}</a>
+        {{ end }}
+    </section>
+{{ end }}

@@ -1,0 +1,18 @@
+{{ if .Site.Params.widgets.enabled }}
+    {{ $context := . }}
+    <aside class="sidebar right-sidebar sticky">
+        <div id="article-toolbar">
+            <a href="{{ .Site.BaseURL }}" class="back-home">
+                {{ (resources.Get "icons/home.svg").Content | safeHTML }}
+                <span>Home</span>
+            </a>
+            <a href="/about" class="back-home">
+                {{ (resources.Get "icons/user.svg").Content | safeHTML }}
+                <span>About</span>
+            </a>
+        </div>
+        {{ range $widget := .Site.Params.widgets.enabled }}
+            {{ partial (printf "widget/%s" $widget) $context }}
+        {{ end }}
+    </aside>
+{{ end }}
