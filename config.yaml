@@ -50,9 +50,9 @@ params:
             default: Licensed under CC BY-NC-SA 4.0
 
 
-    #comments:
-        #enabled: flase
-        #provider: disqus
+    comments:
+        enabled: flase
+        provider: valine
 
         disqusjs:
             shortname:
@@ -94,6 +94,16 @@ params:
             placeholder:
             locale:
                 admin: Admin
+
+        valine:
+            enable: true 
+            appId: nBfkBawpQM7bU3fFJqvxdguo-MdYXbMMI
+            appKey: DxKwYQhldWXe2hKgvcxSrVR8
+            notify: true
+            verify: false
+            avatar: ''
+            placeholder: "谢谢你的支持"
+            visitor: true
 
         twikoo:
             envId:
