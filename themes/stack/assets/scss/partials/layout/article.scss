@@ -310,8 +310,7 @@
         border-left: var(--blockquote-border-size) solid var(--card-separator-color);
         padding: 15px calc(var(--card-padding) - var(--blockquote-border-size));
         background-color: var(--blockquote-background-color);
-        white-space: pre-wrap;
-        word-wrap: break-word;
+
     }
 
     hr {

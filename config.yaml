@@ -2,7 +2,7 @@ baseurl: https://mantyke.icu
 languageCode: zh-cn
 hasCJKLanguage: true
 theme: stack
-paginate: 10
+paginate: 5
 title: 小 球 飞 鱼
 
 # Change it to your Disqus shortname before using

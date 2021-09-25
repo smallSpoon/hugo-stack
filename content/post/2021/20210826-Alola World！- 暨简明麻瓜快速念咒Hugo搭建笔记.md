@@ -487,19 +487,20 @@ git push -u orgin master
 
 但是我实在没搞懂怎么自动部署，读了半天只大致理解了在做什么，实际操作上还是不太开窍，搞砸几次之后就手动着来了，这部分是毛象朋友Suica教我的，在建站和装修过程中得到过好多人的帮助，我真的非常幸运。
 
-1. 删除public文件夹中，除了`.git`之外的所有文件（.git是一个隐藏的文件夹，没有进行相关设置的话，也可能看不到）（Suica说如果使用了自己的域名的话，也可能有`_config.yml`、`CNAME`、`README.md`这些文件，如果有的话，也不要删掉。）
-
-2.  hugo server`确认本地效果，之后`Ctrl+C`退出。依次输入以下代码，引号内内容可以随便改。
-
-```
-hugo 
-cd public
-git add -A
-git commit -m "new blog added" 
-git push -u origin master
-```
-
-4. 没问题的话，过一会儿刷新，就可以看到内容被更新到了网页上。
+> 1. 删除public文件夹中，除了`.git`之外的所有文件（.git是一个隐藏的文件夹，没有进行相关设置的话，也可能看不到）（Suica说如果使用了自己的域名的话，也可能有`_config.yml`、`CNAME`、`README.md`这些文件，如果有的话，也不要删掉。）
+>
+> 2.  hugo server`确认本地效果，之后`Ctrl+C`退出。依次输入以下代码，引号内内容可以随便改。
+>
+> ```
+> hugo 
+> cd public
+> git add -A
+> git commit -m "new blog added" 
+> git push -u origin master
+> ```
+>
+> 4. 没问题的话，过一会儿刷新，就可以看到内容被更新到了网页上。
+>
 
 
 
