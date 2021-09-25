@@ -348,7 +348,7 @@
 
 <script>
     
-    let placeholder = `Type something...\nWaring: If you use QQ as your nickname and email, your QQ avatar information may be leaked!`
+    let placeholder = `注意：如果输入QQ邮箱，Valine会拉取QQ头像作为评论头像\n默认头像是随机小机器人，如果想显示自定义头像，需要注册Gravatar并在Email处填写Gravatar的注册邮箱\n邮箱有错误的话，我收不到评论提醒哦`
 
     var valine = new Valine();
 
@@ -360,13 +360,13 @@
         placeholder: placeholder,
         enableQQ: true,
         lang:'en',
-        requiredFields: ['nick'],
+        requiredFields: ['nick','mail'],
         recordIP: false,
         visitor: true
     })
 
     html = `<p><label>Author*</label><input name='nick' placeholder='Your name' class='vnick vinput' type='text'></p>
-            <p><label>Email</label><input name='mail' placeholder='joe@example.com' class='vmail vinput' type='email'></p>
+            <p><label>Email*</label><input name='mail' placeholder='joe@example.com' class='vmail vinput' type='email'></p>
             <p><label>Website</label><input name='link' placeholder='https://' class='vlink vinput' type='text'></p>`
             
     document.querySelector(".vheader").innerHTML = html
