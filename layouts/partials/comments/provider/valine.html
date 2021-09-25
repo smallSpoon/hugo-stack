@@ -6,9 +6,12 @@
     #vcomments .vcards .vcard {
         background-color: var(--card-background);
 	    padding: 25px 25px 5px 25px;
-	    border-radius: 3px;
+        box-shadow: var(--shadow-l2);
+	    border-radius: 10px;
 	    margin-bottom: 15px;
 	    transition: all .3s
+        
+    
     }
 
     #vcomments .vcards .vh .vquote .vcard {
@@ -73,7 +76,7 @@
     #vcomments .vwrap {
         background-color: var(--card-background);
         border: 0px solid #f0f0f0;
-        border-radius: 3px;
+        border-radius: 10px;
         margin-bottom: 10px;
         overflow: hidden;
         position: relative;
@@ -81,6 +84,7 @@
         font-family: inherit;
         display: flex;
         flex-direction: column;
+        box-shadow: var(--shadow-l2);
     }
 
     #vcomments .vwrap .cancel-reply {
@@ -352,7 +356,7 @@
         el: '#vcomments',
         appId: 'nBfkBawpQM7bU3fFJqvxdguo-MdYXbMMI',  //這裏填入你的appId
         appKey: 'DxKwYQhldWXe2hKgvcxSrVR8', //這裏填入你的appKey
-        avatar: 'identicon',
+        avatar: 'robohash',
         placeholder: placeholder,
         enableQQ: true,
         lang:'en',

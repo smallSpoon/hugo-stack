@@ -99,11 +99,7 @@ params:
             enable: true 
             appId: nBfkBawpQM7bU3fFJqvxdguo-MdYXbMMI
             appKey: DxKwYQhldWXe2hKgvcxSrVR8
-            notify: true
-            verify: false
-            avatar: ''
-            placeholder: "谢谢你的支持"
-            visitor: true
+
 
         twikoo:
             envId:
