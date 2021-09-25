@@ -132,11 +132,12 @@
     font-size: 1.4rem;
 
     background-color: var(--card-background);
-    padding: 15px 0;
-    box-shadow: var(--shadow-l1);
+    padding: 15px ;
+    box-shadow: var(--shadow-l2);
     display: none;
+    border-radius: 10px; 
 
-    margin: 0 -15px;
+    margin: 0;
 
     &.show {
         display: block;

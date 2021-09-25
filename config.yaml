@@ -51,7 +51,7 @@ params:
 
 
     comments:
-        enabled: flase
+        enabled: true
         provider: valine
 
         disqusjs:

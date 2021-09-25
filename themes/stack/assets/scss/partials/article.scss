@@ -14,7 +14,7 @@
         transition: box-shadow 0.3s ease;
 
         &:hover {
-            box-shadow: var(--shadow-l1);
+            box-shadow: var(--shadow-l2);
         }
 
         &:not(:last-of-type) {
@@ -85,9 +85,9 @@
     margin: 5px 0;
     line-height: 1.5;
 
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     @include respond(xl) {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 }
 

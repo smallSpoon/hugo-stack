@@ -61,7 +61,8 @@
 
     .site-avatar {
         position: relative;
-        margin: 0;
+        margin-left:auto; //站点头像居中
+        margin-right:auto;
         width: var(--sidebar-avatar-size);
         height: var(--sidebar-avatar-size);
 
@@ -97,9 +98,9 @@
 
     .site-name {
         color: var(--accent-color);
-        margin: 0;
+        margin: auto;
         font-size: 1.8rem;
-
+        text-align:center; //站点名称居中
         @include respond(2xl) {
             font-size: 2rem;
         }
@@ -108,11 +109,11 @@
     .site-description {
         color: var(--body-text-color);
         font-weight: normal;
-        margin: 10px 0;
+        text-align:center; 
         font-size: 1.6rem;
 
         @include respond(2xl) {
-            font-size: 1.8rem;
+            font-size: 1.7rem;
         }
     }
 }
@@ -128,6 +129,7 @@
             background-color: var(--body-text-color);
             display: block;
             margin-top: var(--section-separation);
+
         }
     }
 }

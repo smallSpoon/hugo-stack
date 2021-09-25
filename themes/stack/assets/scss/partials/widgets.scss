@@ -18,7 +18,7 @@
         a {
             background: var(--card-background);
             box-shadow: var(--shadow-l1);
-            border-radius: var(--tag-border-radius);
+            border-radius: 10px;
             padding: 8px 20px;
 
             color: var(--card-text-color-main);
@@ -26,9 +26,10 @@
             margin-right: 5px;
             font-size: 1.4rem;
             transition: box-shadow 0.3s ease;
+            box-shadow: var(--shadow-l1);
 
             &:hover {
-                box-shadow: var(--shadow-l2);
+                box-shadow: var(--shadow-l1);
             }
         }
     }
