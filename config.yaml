@@ -24,11 +24,10 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon: favicon.svg
-
+    favicon: img/favicon.png
     footer:
         since: 2021
-        customText:
+        customText: 
 
     dateFormat:
         published: Jan 02, 2006
