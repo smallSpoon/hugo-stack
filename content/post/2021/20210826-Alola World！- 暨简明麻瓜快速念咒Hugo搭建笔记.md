@@ -13,18 +13,13 @@ lastmod: 2021-08-26T02:06:09+08:00
 featuredImage:
 draft: false
 slug: f185ce41
+description: 一场独一无二的惊险之旅，带来心跳万分的刺激体验，我们保证，没有麻瓜因此受到伤害
 ---
+本次小组作业使用的基本教材为：[Hugo中文文档](https://www.gohugo.org/)，教辅资料见文中涉及部分。 
 
----
-  <br />
+​	
 
-一场独一无二的惊险之旅，带来心跳万分的刺激体验，我们保证，没有麻瓜因此受到伤害
 
-<!--more-->
-
-本次小组作业使用的基本教材为：[Hugo中文文档](https://www.gohugo.org/)，教辅资料见文中涉及部分。  
-
-  <br />
 
 ## 起始
 
@@ -36,7 +31,7 @@ slug: f185ce41
 
 这篇文章主要是讲一下搭建过程和搭建过程里踩过的坑，JK罗琳的魔法世界中曾经描述哑炮们想要通过学习快速念咒函授教程来掌握魔法能力，如今来看，编程知识（可以这么说吗？）就像是麻瓜们的魔法，因而如此取名。  
 
- <br />
+​	
 
 
 
@@ -50,7 +45,7 @@ Hugo搭站的流程在我看来是比Hexo简单很多的，分为如下几个步
 
 接下来我会逐条记录我在每个过程中做了什么，这些步骤是我从各个教程当中阅读并学习的，我本人没有任何相关知识基础，仅凭着直觉进行理解和使用，因此一定会有错漏之处，如果有朋友发现了它，欢迎指出或者帮忙改正。
 
- <br />
+​	
 
 
 
@@ -64,7 +59,11 @@ Hugo是一个**静态网页生成器**，它可以将本地储存的内容经过
 
 静态网站托管服务并不唯一，腾讯云、码云、Gitlab等托管平台都可以实现这个功能。相比较而言，我使用的程度比较轻，倾向于免费服务，Github免费，且我比较熟悉操作，因此成为了最终选择。
 
- <br />
+ 		
+
+​	
+
+
 
 
 
@@ -77,7 +76,7 @@ Hugo是一个**静态网页生成器**，它可以将本地储存的内容经过
 > 1.  Repository name的格式为 **“github账号名.github.io”** ，这也是之后访问Blog的链接。例如我的Github账号是“Mantyke”，我就在repository name处写下“Mantyke.github.io”，剩下的不用管，直接点Create repository。
 > 2. 创建repository之后，在**Quick setup**的部分，将网址换成SSH网址（以git@github.com开头）。之后部署的时候要用到。
 
- <br />
+​	
 
 
 
@@ -93,7 +92,7 @@ Github注册告一段落，然后来配置Git，Git是一种分布式版本控�
 
 囫囵吞枣能用就行的话，在[Git官网](https://git-scm.com/)下载相应的程序，然后闭着眼一路下一步，安装完成就可以了。
 
- <br />
+​	
 
 ####  生成SSH密钥
 
@@ -112,6 +111,10 @@ Your public key has been saved in id_rsa.pub.
 
 就是密钥已经生成成功了。
 
+
+
+​	
+
 这里我其实遇见到了两个问题，一个是我之前在这台电脑上搭过Hexo blog，曾经生成过一次密钥——但是！我设置了密码！！还忘记了！！密码是什么！！！不仅是这个，我的直觉告诉我，一个本地仓库对应两个Github的仓库，可能要出事……所以我去找了下怎么让多个SSH密钥分别链接不同的Github仓库：[多个SSH密钥并存且连接到Github](https://kangzhiheng.top/post/11-more-ssh-in-one-laptop/)
 
 但显而易见，我研究半晌，发现自己没有这个脑子……最后只好暴力解决，一想左右Hexo那个Blog该存的修改我也存了，之后想再用也能轻松复制一个出来，我就直接把之前的密钥删了。
@@ -128,7 +131,7 @@ The authenticity of host 'github.com (192.30.255.112)' can't be established.
 
 解决方法也很简单，报错时会一并显示`Are you sure you want to continue connecting (yes/no)?`，输入yes即可。
 
- <br />
+​	
 
 
 
@@ -149,7 +152,7 @@ git config --global user.email "邮箱"
 
 进行绑定。
 
- <br />
+​	
 
 
 
@@ -161,7 +164,7 @@ git config --global user.email "邮箱"
 
 [Hugo下载地址](https://github.com/gohugoio/hugo/releases)
 
- <br />
+​	
 
 
 
@@ -189,7 +192,7 @@ hugo version
 hugo v0.87.0-B0C541E4 windows/amd64 BuildDate=2021-08-03T10:57:28Z VendorInfo=gohugoio
 ```
 
- <br />
+​	
 
 #### 建站！大功告成！
 
@@ -218,7 +221,7 @@ with "hugo new <SECTIONNAME>\<FILENAME>.<FORMAT>".
 Visit https://gohugo.io/ for quickstart guide and full documentation.
 ```
 
- <br />
+​	
 
 
 
@@ -240,8 +243,6 @@ git submodule add https://github.com/wangchucheng/hugo-eureka.git themes/eureka
 >
 > 参考《HUGO | 用Vercel完成blog自动化部署》，我更建议用直接下载项目文件然后复制到`themes`文件夹的方式来完成Blog主题安装，原因是如果使用`git submodule`，将Blog源代码上传到Github仓库的时候，Github会识别主题文件自动建立跳转到作者的主题仓库，或者识别为一个子模块（文件夹上显示一个白色箭头）。如果之后用Vercel等类似的服务来进行自动部署，会导致报错。
 
-<br />
-
 我比较喜欢的其他Hugo主题：
 
 [hugo-theme-nuo](https://github.com/laozhu/hugo-nuo)
@@ -253,6 +254,10 @@ git submodule add https://github.com/wangchucheng/hugo-eureka.git themes/eureka
 [hugo-theme-zozo](https://github.com/varkai/hugo-theme-zozo)
 
 [hugo-theme-pure](https://github.com/xiaoheiAh/hugo-theme-pure)
+
+​	
+
+
 
 来看看我们的主题是否安装成功了吧！打开Git，输入：
 
@@ -289,7 +294,7 @@ Press Ctrl+C to stop
 
 在浏览器中键入`localhost:1313`，可以打开预览界面，看到Blog的雏形。预览页面会实时反映对Blog的修改，如果要停止预览，按下`Ctrl+C`
 
- <br />
+​	
 
 
 
@@ -301,7 +306,7 @@ Press Ctrl+C to stop
 
 **强调！！** 这一部分我还有非常大的疑惑和不确定（前面也有，但这一部分尤其不确定），因此以下内容都是我自己的理解笔记，它并不很靠得住，请以这样的认知继续阅读。
 
- <br />
+​	
 
 
 
@@ -315,7 +320,7 @@ Hugo生成网页的流程是：输入`Hugo`指令，Hugo开始生成静态页面
 
 接下来一步一步操作：
 
- <br />
+​	
 
 
 
@@ -327,7 +332,11 @@ cd public
 
 将目录切换到Public这个文件夹中，非常重要，我以Hexo的做法，习惯性以为推送到Github的是整个Blog文件夹，忽略了这一步，浪费了两三个小时。
 
- <br />
+ 		
+
+​	
+
+
 
 
 
@@ -342,7 +351,9 @@ git init是一个初始化Git仓库命令，之后如果搞砸了不妨先初始
 
 然后可以回到Github仓库看一眼，这里涉及到一个分支问题，进入Github中之前建立的Blog仓库，点击Setting，选择左边的Branches，看右边的Default branch是否为“Master”，这里的意思是，之后推送的内容，会默认推送到“Master”这个预设分支当中，需要和之后的推送命令对应。（有一部分教程为了之后做自动化方便，会设置这里推送到main或其他分支，我没看懂自动化怎么做，暂时先按下不谈，就用默认的分支）
 
- <br />
+ 	
+
+​	
 
 
 
@@ -362,7 +373,11 @@ git remote add origin https://github.com/<使用者名稱>/<使用者名稱>.git
 
 另一个需要特别注意的点是，在origin后应当跟Github仓库的链接，这里理论上无论使用Https链接还是使用SSH链接都可以，但实际操作中，（由于我还不清楚的原因），Https链接无法使用，我在这里只能使用SSH链接（就是建好仓库后在Quick setup部分显示的链接），以git@github.com开头
 
- <br />
+ 	
+
+​	
+
+
 
 
 
@@ -376,9 +391,9 @@ git add .
 
 也有人写`git add -A`，加上-A就是指一次性加入所有变更，我研究了下，和`git add .`应该没什么区别
 
- <br />
 
 
+​	
 
 #### 提交更新
 
@@ -390,9 +405,9 @@ git commit -m "first commit"
 
 > 當完成了這個動作後，對 Git 來說就是「把暫存區的東西存放到儲存庫（Repository）裡」，翻譯成白話文就是「我完成一個存檔（或備份）的動作了」
 
- <br />
+ 
 
-
+​	
 
 #### 推送到Github
 
@@ -404,7 +419,9 @@ git push -u orgin master
 
 到了这一步，顺利的话，它会顿一下然后告诉你推送成功，刷新Github仓库会看到之前在Public文件夹的文件已经被推送到Github仓库，过一会在浏览器中输入Blog链接，就可以顺利看到Blog的内容。这回是真的大功告成了。
 
- <br />
+​	
+
+
 
 
 
@@ -438,7 +455,9 @@ git push -u orgin master
 
 [git - “git push”和 “git push origin master”有什么区别？](https://www.coder.work/article/190667)
 
-<br />
+​	
+
+
 
 
 
@@ -456,7 +475,9 @@ git push -u orgin master
 
 不得不说，这也是我喜欢这种静态网页生成器的一大原因：重启永远是解决问题的良好手段。
 
- <br />
+​	
+
+
 
 
 
@@ -466,25 +487,23 @@ git push -u orgin master
 
 但是我实在没搞懂怎么自动部署，读了半天只大致理解了在做什么，实际操作上还是不太开窍，搞砸几次之后就手动着来了，这部分是毛象朋友Suica教我的，在建站和装修过程中得到过好多人的帮助，我真的非常幸运。
 
-> 1. 删除public文件夹中，除了`.git`之外的所有文件（.git是一个隐藏的文件夹，没有进行相关设置的话，也可能看不到）（Suica说如果使用了自己的域名的话，也可能有`_config.yml`、`CNAME`、`README.md`这些文件，如果有的话，也不要删掉。）
->
-> 2. `hugo server`确认本地效果，之后`Ctrl+C`退出。
->
-> 3. 依次输入以下代码，引号内内容可以随便改。
->
->    ```
->    hugo 
->    cd public
->    git add -A
->    git commit -m "new blog added" 
->    git push -u origin master
->    ```
->
-> 4. 没问题的话，过一会儿刷新，就可以看到内容被更新到了网页上。
->
->    
+1. 删除public文件夹中，除了`.git`之外的所有文件（.git是一个隐藏的文件夹，没有进行相关设置的话，也可能看不到）（Suica说如果使用了自己的域名的话，也可能有`_config.yml`、`CNAME`、`README.md`这些文件，如果有的话，也不要删掉。）
 
- <br />
+2.  hugo server`确认本地效果，之后`Ctrl+C`退出。依次输入以下代码，引号内内容可以随便改。
+
+```
+hugo 
+cd public
+git add -A
+git commit -m "new blog added" 
+git push -u origin master
+```
+
+4. 没问题的话，过一会儿刷新，就可以看到内容被更新到了网页上。
+
+
+
+​	
 
 
 
@@ -492,5 +511,5 @@ git push -u orgin master
 
 
 
- <br />
+​	
 
