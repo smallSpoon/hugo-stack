@@ -1,13 +1,12 @@
 ---
 title: About
 description: Hugo, the world's fastest framework for building websites
-date: '2019-02-28'
+date: '2021-08-24'
 aliases:
   - about-us
   - about-hugo
   - contact
 license: CC BY-NC-ND
-lastmod: '{".Date"=>nil}'
 toc: false
 menu:
     main: 
