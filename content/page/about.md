@@ -1,6 +1,6 @@
 ---
 title: About
-description: Hugo, the world's fastest framework for building websites
+description: 
 date: '2021-08-24'
 aliases:
   - about-us
