@@ -1,0 +1,84 @@
+.tip {
+  background: #eef6fd;
+  padding: 8px 20px;
+  border-left: 3px solid #38a3fd;
+  border-radius: 0 5px 5px 0;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.tip p {
+  margin: 5px 0!important
+}
+
+.tip:before {
+  background: #38a3fd;
+  border-radius: 50%;
+  color: #fff;
+  content: "i";
+  font-family: Dosis,"Source Sans Pro","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  height: 21px;
+  line-height: 21px;
+  margin-left: -32px;
+  margin-top: 5px;
+  position: absolute;
+  text-align: center;
+  width: 21px
+}
+
+.tip ol {
+  margin: 0
+}
+
+.tip.share {
+  border-left-color: #ddd;
+  background: #efefef
+}
+
+.tip.share:before {
+  background: #ddd;
+  content: "\0040"
+}
+
+.tip.success {
+  border-left-color: #86cc00;
+  background: #f0f8e5
+}
+
+.tip.success:before {
+  background: #86cc00;
+  content: "\221a"
+}
+
+.tip.warning {
+  border-left-color: #ff7800;
+  background: #fcf2e9
+}
+
+.tip.warning:before {
+  background: #ff7800;
+  content: "\0021"
+}
+
+.tip.error {
+  border-left-color: #ed0000;
+  background: #fcf1f1
+}
+
+.tip.error:before {
+  background: #ed0000;
+  content: "\00D7"
+}
+
+.tip.inlineBlock {
+  display: inline-block;
+  width: 100%
+}
+
+:root[data-scheme="dark"] {
+  .tip {
+    background: #525252;
+    color: #ccc;
+  }
+}
