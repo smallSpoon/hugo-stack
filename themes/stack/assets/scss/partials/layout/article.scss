@@ -245,7 +245,6 @@
     
     overflow-x: auto;
     padding-bottom: 15px;
-    
 
     & > .flex {
         float: left;
@@ -259,7 +258,6 @@
         width: 250px;
         height: 80px;
         box-shadow: var(--shadow-l2);
-        
 
         .article-title {
             font-size: 1.5rem;
@@ -282,7 +280,6 @@
     padding: 0 var(--card-padding);
     line-height: var(--article-line-height);
 
-    
     & > p {
         margin: 1.5em 0;
     }
@@ -332,7 +329,6 @@
         border-radius: var(--tag-border-radius);
         font-family: var(--code-font-family);
         word-wrap: break-word;
-        
     }
 
     .gallery {
