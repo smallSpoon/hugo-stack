@@ -1,5 +1,5 @@
 ---
-title: "麻瓜快速念咒学习小组"
+title: "麻瓜快速念咒课堂笔记"
 description: 
 image: 
 style:
