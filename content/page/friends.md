@@ -2,7 +2,7 @@
 title: "Friends"
 date: 2019-05-28
 description: 小球飞鱼和她的朋友们
-slug: "links"
+slug: "friends"
 menu:
     main:
         weight: -70
