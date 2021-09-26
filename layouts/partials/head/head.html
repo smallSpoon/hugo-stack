@@ -24,6 +24,6 @@
 {{- template "_internal/google_analytics.html" . -}}
 {{- partial "head/custom.html" . -}}
 
-{{ if not .Site.IsServer }} //这一行用来防止它计入本地服务器的数据
-    {{ template "_internal/google_analytics_async.html" . }}
+{{ if not .Site.IsServer }} //这一行用来防止它计入本地服务器的数据  
+    {{ template "_internal/google_analytics_async.html" . }}  
 {{ end }}
