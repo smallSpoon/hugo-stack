@@ -688,7 +688,7 @@ post: /:year/:slug/
 
 ## 站点总字数统计
 
-放置位置在`layouts\partials\footer\footer.html`，顺便一提，站点上线时间统计也放在这里——上个月前写“在合适位置放置”，这个月找到失去神智，我坑我自己。
+放置位置在`layouts\partials\footer\footer.html`，顺便一提，站点上线时间统计也放在这里——上个月前写“在合适位置放置”，这个月找到失去神智，是我坑我自己。
 
 最终是这么写的，参数和代码参考的是[Hugo 总文章数和总字数](https://immmmm.com/hugo-total-count/)
 
