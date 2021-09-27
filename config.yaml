@@ -194,3 +194,6 @@ markup:
     goldmark:
         renderer:
             unsafe: true
+
+frontmatter:
+  lastmod: [":git", ":fileModTime", "lastmod"]

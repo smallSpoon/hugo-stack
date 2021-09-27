@@ -1,6 +1,7 @@
 ---
 title: "Hugo | 看中Stack主题的归档功能，搬家并做修改"
 date: 2021-09-24T14:15:04+08:00
+lastmod: 2021-09-27T01:21:04+08:00
 toc: true
 tags:
   - Hugo
@@ -40,7 +41,7 @@ draft: false
 - [x] 增加[Google Analytics](https://mantyke.icu/2021/2f0f8e23/#google--analytics)
 - [x] 增加[站点运行时间统计](https://mantyke.icu/2021/2f0f8e23/#%E7%AB%99%E7%82%B9%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E7%BB%9F%E8%AE%A1)
 - [x] 增加页尾站点总字数/篇目数统计
-
+- [x] Google Search Console
 
 
 
@@ -682,8 +683,6 @@ post: /:year/:slug/
 
 
 
-
-​	
 
 
 

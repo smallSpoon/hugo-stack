@@ -1,6 +1,7 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
+lastmod: {{ .Date }}
 description:
   - 简明麻瓜快速念咒Hugo搭建笔记
 toc: true
@@ -15,4 +16,5 @@ hidden: false
 comments: true
 draft: true
 slug: {{ substr (md5 (printf "%s%s" .Date (replace .TranslationBaseName "-" " " | title))) 4 8 }}
+
 ---

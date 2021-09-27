@@ -27,7 +27,7 @@ article:
         other: Related contents
 
     lastUpdatedOn:
-        other: Last updated on
+        other: 最后更新于
 
     readingTime:
         one: "{{ .Count }} min read"
