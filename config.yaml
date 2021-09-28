@@ -19,8 +19,7 @@ permalinks:
     post: /:year/:slug/
     page: /:slug/
 
-frontmatter:
-  lastmod: [":git", ":fileModTime", "lastmod"]
+
 
 
 params:
@@ -199,3 +198,5 @@ markup:
         renderer:
             unsafe: true
 
+frontmatter:
+    lastmod: [":git", ":fileModTime", "lastmod"]
