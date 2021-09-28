@@ -1,0 +1,2101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>小 球 飞 鱼</title>
+        <link>https://mantyke.icu/</link>
+        <description>Recent content on 小 球 飞 鱼</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Mon, 27 Sep 2021 22:55:08 +0800</lastBuildDate><atom:link href="https://mantyke.icu/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hugo | 增加Google Search Console及其他修改</title>
+        <link>https://mantyke.icu/2021/a08f1963/</link>
+        <pubDate>Mon, 27 Sep 2021 22:55:08 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/a08f1963/</guid>
+        <description>&lt;p&gt;之前那篇太长了，转移阵地到这篇来&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;google-search-console&#34;&gt;Google Search Console&lt;/h2&gt;
+&lt;p&gt;参考了&lt;a class=&#34;link&#34; href=&#34;https://immwind.com/google-analytics-for-hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;为 Hugo 配置 Google Analytics&lt;/a&gt;这篇文章来配置&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;Google Search Console&lt;/a&gt;，但前前后后试了好几遍都不能通过DNS验证，最后只能选择通过网址前缀来进行添加，用HTML 标记验证。&lt;/p&gt;
+&lt;p&gt;遇到了站点地图无法读取的情况，参考&lt;a class=&#34;link&#34; href=&#34;https://support.google.com/webmasters/thread/101172591/%E6%98%BE%E7%A4%BA%E6%97%A0%E6%B3%95%E8%AF%BB%E5%8F%96%E6%AD%A4%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE?hl=zh-Hans&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Search Console帮助&lt;/a&gt;，显示站长工具有一定延迟，过几天再看看。&lt;/p&gt;
+&lt;p&gt;另外，写在这儿好了，在装Google Analytics时出了点问题，无论如何无法屏蔽本地的计数——后来发现是因为Stack模板中预先写了一条&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{{- template &amp;quot;_internal/google_analytics.html&amp;quot; . -}}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;而我的文件名叫做&lt;code&gt;google_analytics_async.html&lt;/code&gt;…………至于不小心删了&lt;code&gt;{{- partial &amp;quot;head/custom.html&amp;quot; . -}}&lt;/code&gt;导致惊慌失措地找了半个点为什么字体失效这件事咱们当它没发生过，好吗？&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;解决dns通过验证&#34;&gt;解决DNS通过验证&lt;/h3&gt;
+&lt;p&gt;过了一天Google还是没有读出来我的TXT记录，我觉得这不对劲，开始研究。&lt;/p&gt;
+&lt;p&gt;首先读了排解 &lt;a class=&#34;link&#34; href=&#34;https://support.google.com/a/answer/2716888#zippy=%2C%E4%BD%BF%E7%94%A8%E5%85%8D%E8%B2%BB%E7%B6%B2%E8%B7%AF%E6%9C%8D%E5%8B%99%E6%9F%A5%E8%A9%A2-txt-%E8%A8%98%E9%8C%84%2C%E8%AE%8A%E6%9B%B4-hostname-%E6%AC%84%E4%BD%8D%E4%B8%AD%E7%9A%84%E9%A0%85%E7%9B%AE&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TXT 記錄問題&lt;/a&gt;，文章中提到DNS变更最多可能需要72小时才能生效，这明显和我的情况不符——最早的TXT记录已经加了最少半个月，无论如何也应该生效了。&lt;/p&gt;
+&lt;p&gt;文章中同时提到，可以利用&lt;a class=&#34;link&#34; href=&#34;https://toolbox.googleapps.com/apps/dig/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;DNS查询工具&lt;/a&gt;来查询网址的DNS生效情况，输入后发现并没有显示TXT记录，验证了TXT记录确实没有生效——复查了添加是否出错等一系列错误可能之后，我觉得问题应该不在于填写TXT值的姿势有问题——更可能是某些魔法事故，于是我搜索了“TXT值验证失败”，并在&lt;a class=&#34;link&#34; href=&#34;https://help.aliyun.com/knowledge_detail/48058.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;域名授权验证配置推送失败&lt;/a&gt;里找到了这么一句话：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：如果您的域名解析中存在CNAME记录，请暂时去掉该CNAME记录，否则将无法通过域名授权验证。在数字证书签发后，您可删除添加的TXT记录，并重新添加CNAME记录。如果CNAME记录无法删除，请通过文件验证方式完成域名授权验证。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;把CNAME改成A记录之后十分钟左右，Google Search Console迅速地通过了我的DNS验证申请。&lt;/p&gt;
+&lt;p&gt;……谢谢你，阿里云&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;自动更新文章最后修改时间&#34;&gt;自动更新文章最后修改时间&lt;/h2&gt;
+&lt;p&gt;想要这个功能主要是因为主题里有在篇末显示最后更新时间的功能，所以我开始捣鼓了（你&lt;/p&gt;
+&lt;p&gt;研究了在Front Matter里加lastmod参数的种种可能，最后举手投降，参考了&lt;a class=&#34;link&#34; href=&#34;https://blog.yfei.page/cn/2021/03/lastmod-hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;自动添加博客页面更新日期&lt;/a&gt;，在&lt;code&gt;config.yaml&lt;/code&gt;里写&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;frontmatter:
+  lastmod: [&amp;quot;:fileModTime&amp;quot;, &amp;quot;lastmod&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;本来想加上&lt;code&gt;&amp;quot;:git&amp;quot;&lt;/code&gt;的，意思是读取git推送的时间，但是推上去好像时区不太对，目前还没有解决这个问题……&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Hugo | 在博文中显示豆瓣条目</title>
+        <link>https://mantyke.icu/2021/e7cf079c/</link>
+        <pubDate>Mon, 27 Sep 2021 01:02:41 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/e7cf079c/</guid>
+        <description>&lt;p&gt;因为过段时间会放一篇生存报告上来所以想先搞搞样式，做得我头昏眼花，今天就先把参考链接放上来，下次再工，下次再工啦！&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;功能实现&#34;&gt;功能实现&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://immmmm.com/post-show-douban-item/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;文章内显示豆瓣条目&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xianmin.org/post/hugo-shortcode-douban-item/#%E6%B7%BB%E5%8A%A0-js&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;为 hugo 站点插入豆瓣条目的 shortcode&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://guanqr.com/tech/website/hugo-shortcodes-customization/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;自定义 Hugo Shortcodes 简码&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://matnoble.me/tech/hugo/shortcodes-practice-tutorial-for-hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在 Hugo 博客上实践 Shortcodes 短代码, 太强大了&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zaqizaba.xyz/posts/hugo%E6%B7%BB%E5%8A%A0%E7%9F%AD%E4%BB%A3%E7%A0%81/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo添加短代码&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://wocai.de/post/dev/make-hugo-blog-add-mindmap/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo 中使用思维导图&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://wocai.de/post/dev/make-hugo-blog-share/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;给Hugo blog中增加一些插件&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;额外收获&#34;&gt;额外收获&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/u012525965/article/details/101357288&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;给博客增加豆瓣观影和阅读的页面&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Hugo | 为Blog增加Valine评论区</title>
+        <link>https://mantyke.icu/2021/ca2e5cb6/</link>
+        <pubDate>Sat, 25 Sep 2021 19:12:55 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/ca2e5cb6/</guid>
+        <description>&lt;p&gt;一直蛮犹豫加不加Blog评论区的，但看到&lt;a class=&#34;link&#34; href=&#34;https://www.bigs3.com/article/hugo-theme-stack-valine/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo Stack主題添加Valine支援&lt;/a&gt;修改的样式，好好看哦。那来都来了，加一个试试。&lt;/p&gt;
+ 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;安装valine&#34;&gt;安装Valine&lt;/h2&gt;
+&lt;p&gt;说动手就动手，先读一遍&lt;a class=&#34;link&#34; href=&#34;https://valine.js.org/quickstart.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Valine中文文档&lt;/a&gt;，掏出我一年多没用过的&lt;a class=&#34;link&#34; href=&#34;https://console.leancloud.app/apps&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;LeanCloud国际版&lt;/a&gt;，创建应用，拿到&lt;code&gt;APP ID&lt;/code&gt;和&lt;code&gt;APP Key&lt;/code&gt;，在&lt;code&gt;layouts/partials/comments/provider/valine.html&lt;/code&gt;中写入上面上文作者给的代码，最后在config.yaml中进行配置。配置内容如下：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;        valine:
+            enable: true 
+            appId: 
+            appKey: 
+            avatar: &#39;&#39; //头像
+            placeholder: 
+            visitor: true //文章访问量统计
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;……理论上是这样的。&lt;/p&gt;
+&lt;p&gt;实际上呢，我发现，不管我怎么改&lt;code&gt;avatar&lt;/code&gt;的值，头像都会坚持显示&lt;code&gt;identicon&lt;/code&gt;这个很丑的抽象几何图形。&lt;/p&gt;
+&lt;p&gt;改了七八遍之后终于觉得不对了，怀疑是配置写进了html，搜索后发现确实如此，修改&lt;code&gt;layouts/partials/comments/provider/valine.html&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    valine.init({
+        el: &#39;#vcomments&#39;,
+        appId: &#39;&#39;,  //這裏填入你的appId
+        appKey: &#39;&#39;, //這裏填入你的appKey
+        avatar: &#39;robohash&#39;,//头像默认显示随机小机器人
+        placeholder: placeholder, //评论区占位提示符
+        enableQQ: true,//填入QQ邮箱自动拉取QQ头像和昵称
+        lang:&#39;zh-CN&#39;, //多语言支持
+        requiredFields: [&#39;nick&#39;], //设置必填项
+        recordIP: false, //是否记录评论者IP
+        visitor: true //文章阅读量统计
+    })
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;修改一些样式&#34;&gt;修改一些样式&lt;/h2&gt;
+&lt;p&gt;以下修改都是在&lt;code&gt;valine.html&lt;/code&gt;中实现&lt;/p&gt;
+&lt;h3 id=&#34;评论回复按钮颜色&#34;&gt;评论回复按钮颜色&lt;/h3&gt;
+&lt;p&gt;默认的评论回复按钮是完全看不到的白色，改成灰色让它能够被观测到。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    #vcomments .vmeta .vat {
+        background: 0 0;
+        cursor: pointer;
+        border: 0;
+        border-radius: 10px; //调一下圆角为10px
+        text-transform: uppercase;
+        color: DarkGray; //颜色为深灰色
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h3 id=&#34;回复框修改&#34;&gt;回复框修改&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    #vcomments .vwrap {
+        background-color: var(--card-background);
+        border: 0px solid #f0f0f0;
+        border-radius: 10px; //圆角修改为10px
+        margin-bottom: 10px;
+        overflow: hidden;
+        position: relative;
+        padding: 0px 0px 0px 0px;
+        font-family: inherit;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--shadow-l2); //增加卡片阴影
+    }
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h3 id=&#34;评论卡片修改&#34;&gt;评论卡片修改&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    #vcomments .vcards .vcard {
+        background-color: var(--card-background);
+	    padding: 25px 25px 5px 25px;
+	    border-radius: 10px; //圆角修改为10px
+	    margin-bottom: 15px;
+	    transition: all .3s
+	    box-shadow: var(--shadow-l2); //增加卡片阴影
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;配置邮件提醒&#34;&gt;配置邮件提醒&lt;/h2&gt;
+&lt;p&gt;使用了&lt;a class=&#34;link&#34; href=&#34;https://github.com/DesertsP/Valine-Admin&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Valine Admin&lt;/a&gt;来实现邮件提醒服务。&lt;/p&gt;
+&lt;p&gt;遇到了很多坑，比如一开始完全不理解云引擎域名是怎么回事，尝试用了自己域名的二级域名，但又无论如何都只显示该网页不提供服务，然后是收不到邮件通知……&lt;/p&gt;
+&lt;p&gt;后来研究了一下，二级域名是LeanCloud会把Valine Admin的服务搭建到新域名上，我注册的是Valine.mantyke.icu，把这个填到环境变量里即可。收不到邮件通知……我也不知道哪里出了问题，实在没办法，一股脑把“博主通知收件地址”“发件邮箱”“SMTP登录用户”都填了同一个收件邮箱就成功了。嚯！&lt;/p&gt;
+&lt;p&gt;总之花了很多时间但是却没什么能写，想到这里还挺不甘心的。&lt;/p&gt;
+ 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;导入blobcat表情包&#34;&gt;导入Blobcat表情包&lt;/h2&gt;
+&lt;p&gt;这里遇到了巨大的问题：我想引入本地JS的时候，写&lt;code&gt;src=&#39;assets/Valine.min.js&lt;/code&gt;&amp;lsquo;无论如何无法引用，和朋友研究了好长时间，发现可能是&lt;code&gt;.min.js&lt;/code&gt;这个命名的原因，导致无法本地引用，改成&lt;code&gt;assets/Valine.js&lt;/code&gt;就可以了。&lt;/p&gt;
+&lt;p&gt;太坑了吧！！！！&lt;/p&gt;
+&lt;p&gt;但最后也没有导入表情包成功，倒腾完了发现Valine只有1.4.5以上版本是支持自定义表情包的，而我不知道怎么升级&amp;gt; &amp;lt;&lt;/p&gt;
+&lt;p&gt;先把Blbocat表情包的&lt;a class=&#34;link&#34; href=&#34;https://github.com/injellyfish/valine-blobcatemojis/blob/main/README.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;相关链接&lt;/a&gt;放在这里，万一之后有用呢？&lt;/p&gt;
+ 
+    &lt;br/&gt;
+
+</description>
+        </item>
+        <item>
+        <title>Hugo | 看中Stack主题的归档功能，搬家并做修改</title>
+        <link>https://mantyke.icu/2021/f9f0ec87/</link>
+        <pubDate>Fri, 24 Sep 2021 14:15:04 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/f9f0ec87/</guid>
+        <description>&lt;h2 id=&#34;to-do&#34;&gt;TO-DO&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 调整文章页面的显示样式，在右侧栏显示归档和Tags&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 调整首页文章摘要字号&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 调整左侧栏Home链接，使之不打开新页面&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 修改文章、摘要字号&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 删除vibrant.js插件&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 调整相关文章数量，增加&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/2021/2f0f8e23/#%E9%85%8D%E7%BD%AE%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;永久链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 使文章中能够使用html&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 为分类配色&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 修改超链接显示&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 修改About页&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 增加左侧栏友情链接&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 加入每篇文章的字数统计&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 修改代码框、引用等样式&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 加入代码高亮&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 修改网站配色&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 增加网站icon&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 修改主题字体&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 增加&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/2021/ca2e5cb6/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;文章评论区&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 配置&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/2021/2f0f8e23/#%E9%85%8D%E7%BD%AE%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;永久链接&lt;/a&gt;和&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/p/2f0f8e23/#%E5%8A%A0%E5%85%A5%E7%9B%98%E5%8F%A4%E4%B9%8B%E7%99%BD&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;盘古之白&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 文章按年份分类&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 增加&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/2021/2f0f8e23/#google--analytics&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Google Analytics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 增加&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/2021/2f0f8e23/#%E7%AB%99%E7%82%B9%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E7%BB%9F%E8%AE%A1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;站点运行时间统计&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 增加页尾站点总字数/篇目数统计&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Google Search Console&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;调整文章页面的显示样式&#34;&gt;调整文章页面的显示样式&lt;/h2&gt;
+&lt;p&gt;在主题的Issue里找到了一套&lt;a class=&#34;link&#34; href=&#34;https://github.com/ShadowySpirits/hugo-theme-stack&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;开源修改&lt;/a&gt;，套用了一下&lt;code&gt;_default&lt;/code&gt;文件夹和&lt;code&gt;layouts\partials\widget&lt;/code&gt;中的&lt;code&gt;toc.html&lt;/code&gt;文件，以及&lt;code&gt;assets\scss&lt;/code&gt;中的&lt;code&gt;custom.scss&lt;/code&gt;文件，用以控制右侧栏独立滑动。&lt;/p&gt;
+&lt;p&gt;套用后发现右侧toc栏消失了，后来发现是没加上toc组件，调整根目录下&lt;code&gt;config.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    widgets:
+        enabled: 
+            - search
+            - toc
+            - archives
+            - tag-cloud
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;修改中栏阴影样式&#34;&gt;修改中栏阴影样式&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;.article-page {
+    &amp;amp;.hide-sidebar-sm .left-sidebar {
+        display: none;
+
+        @include respond(md) {
+            display: inherit;
+        }
+    }
+
+    .main-article {
+        background: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l2); //修改阴影样式
+        overflow: hidden;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;修改手机端目录卡片&#34;&gt;修改手机端目录卡片&lt;/h3&gt;
+&lt;p&gt;手机端目录卡片与文章卡片有很明显的不对称，修改一下&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;.menu {
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-grow: 1;
+    font-size: 1.4rem;
+
+    background-color: var(--card-background);
+    padding: 15px ;
+    box-shadow: var(--shadow-l2); //改个阴影
+    display: none;
+    border-radius: 10px;  //加个圆角
+
+    margin: 0; //改为0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;调整字号&#34;&gt;调整字号&lt;/h2&gt;
+&lt;h3 id=&#34;修改文章字号&#34;&gt;修改文章字号&lt;/h3&gt;
+&lt;p&gt;修改&lt;code&gt;hugo-theme-stack/assets/scss/variables.scss&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;:root {
+    --article-font-family: var(--base-font-family);
+    --article-font-size: 1.6rem;
+
+    @include respond(md) {
+        --article-font-size: 1.65rem; //字号
+    }
+
+    --article-line-height: 1.6; //行距
+
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h3 id=&#34;修改摘要字号&#34;&gt;修改摘要字号&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;assets\scss\partials\article.scss&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;.article-subtitle {
+    font-weight: normal;
+    color: var(--card-text-color-secondary);
+    margin: 5px 0;
+    line-height: 1.5;
+
+    font-size: 1.75rem; //改为1.5rem 应该是全局
+    @include respond(xl) {
+        font-size: 2rem; //改为1.5rem 应该是大尺寸屏幕适应？
+    }
+}
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;调整左侧栏home链接&#34;&gt;调整左侧栏Home链接&lt;/h2&gt;
+&lt;p&gt;调整根目录下&lt;code&gt;config.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;menu:
+    main:
+        - identifier: home
+          name: Home
+          url: /
+          weight: -100
+          pre: home
+          params:
+              ### For demonstration purpose, the home link will be open in a new tab
+              newTab: true //改为false
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;删除vibrantjs插件&#34;&gt;删除vibrant.js插件&lt;/h2&gt;
+&lt;p&gt;vibrant.js插件是一个为分类图片加上相似色调滤镜的插件，我用不上，就删了。&lt;/p&gt;
+&lt;p&gt;步骤上完全按照&lt;a class=&#34;link&#34; href=&#34;https://www.bigs3.com/article/modify-hugo-theme-stack-one/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo Stack主題修改記錄 (瘦身篇)&lt;/a&gt;的步骤进行&lt;/p&gt;
+&lt;p&gt;另外同样根据这篇文章修改了页面样式&lt;/p&gt;
+ 
+    &lt;br/&gt;
+
+&lt;h3 id=&#34;删除categories的特色图片&#34;&gt;删除Categories的特色图片&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;assets/scss/partials/layout/list.scss&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;.subsection-list {
+    margin-bottom: var(--section-separation);
+    overflow-x: auto;
+
+    .article-list--tile {
+        display: flex;
+        padding-bottom: 15px;
+
+        article {
+            width: 200px; //改爲200px
+            height: 50px; //改爲50px
+            margin-right: 5px; //改爲5px
+            flex-shrink: 0;
+            box-shadow: var(--shadow-l2); //改个卡片阴影
+
+            .article-title {
+                margin: 0;
+                font-size: 1.5rem; //改爲1.5rem，調整字體尺寸
+            }
+
+            .article-details {
+                padding: 20px;
+                justify-content: center; //添加justify-content設定，保持字體居中
+            }
+
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h3 id=&#34;删除相关文章的特色图片&#34;&gt;删除相关文章的特色图片&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;assets/scss/partials/layout/article.scss&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;.related-contents {
+    overflow-x: auto;
+    padding-bottom: 15px;
+
+    &amp;amp; &amp;gt; .flex {
+        float: left;
+    }
+
+    article {
+        margin-right: 15px;
+        flex-shrink: 0;
+        overflow: hidden;
+        width: 250px;
+        height: 80px; //改为80
+        box-shadow: var(--shadow-l2); //加个卡片阴影
+
+        .article-title {
+            font-size: 1.4rem; //改为1.4
+            margin: auto;
+            justify-content: center; //居中
+        }
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;调整相关文章数量&#34;&gt;调整相关文章数量&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;layouts/partials/article/components/related-contents.html&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt; {{ $related := (where (.Site.RegularPages.Related .) &amp;quot;Params.hidden&amp;quot; &amp;quot;!=&amp;quot; true) | first 3 }}  //修改数字即可
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;为markdown增加html支持&#34;&gt;为Markdown增加Html支持&lt;/h2&gt;
+&lt;p&gt;解决办法来源于&lt;a class=&#34;link&#34; href=&#34;https://d.cosx.org/d/421422-hugomdhtml&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo博客中.md文件中嵌入的html代码无法被渲染&lt;/a&gt;，在&lt;code&gt;config.yaml&lt;/code&gt;里加入&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;markup:
+  goldmark:
+    renderer:
+      unsafe: true
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;但是如果这么开启Html，目录就会跟着被渲染成非常难看的无序列表。大部分情况下，Html只被我用来写空白行，因此这牺牲未免太大了一点，所以换成了用Shortcode来解决。&lt;/p&gt;
+&lt;p&gt;步骤参考&lt;a class=&#34;link&#34; href=&#34;https://yayapipi.com/posts/hugo%E5%A6%82%E4%BD%95%E5%9C%A8markdown%E4%B8%8A%E4%BD%BF%E7%94%A8html/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;HUGO如何在Markdown上使用HTML | Yayapipi Site&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;layout/shortcode/&lt;/code&gt;里新增&lt;code&gt;codehtml.html&lt;/code&gt;，内容为&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{{.Inner}}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;空白行的写法是：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;## codehtml前后包裹{{ }} 
+&amp;lt; codehtml &amp;gt;
+  &amp;lt;br/&amp;gt;
+&amp;lt; /codehtml &amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;不过这样还有个问题在于，代码块里写HTML，代码不能被屏蔽……暂时找不到好的解决办法，先这样吧。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;新的空白行写法！发现换行后Tab+Enter可以写出空白行，再见吧Html标签！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;9.26更新：&lt;a class=&#34;link&#34; href=&#34;https://www.w3school.com.cn/cssref/pr_list-style-type.asp&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;解决了！&lt;/a&gt;在assets/scss/partials/comments/disqusjs.scss中修改&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#dsqjs ol,#dsqjs ul {
+    list-style: none;
+    list-style-type: decimal // 定义为数字
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;div style=&#34;color:#F00&#34;&gt;用红色表示欢欣鼓舞！&lt;/div&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.andbible.com/post/hugo-content-management-shortcodes/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo短代码介绍文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.modb.pro/db/87166&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Goldmark介绍&lt;/a&gt;&lt;/p&gt;
+ 
+  &lt;br/&gt;
+
+&lt;h2 id=&#34;头像与站点描述居中显示&#34;&gt;头像与站点描述居中显示&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;assets\scss\partials\sidebar.scss&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;	.site-avatar {
+        position: relative;
+        margin-left:auto; //站点头像居中
+		margin-right:auto; //站点头像居中
+        width: var(--sidebar-avatar-size);
+        height: var(--sidebar-avatar-size);
+
+	.site-name {
+        color: var(--accent-color);
+        text-align:center; //站点名称居中
+        font-size: 1.8rem;
+
+        @include respond(2xl) {
+            font-size: 2rem;
+        }
+    }
+
+	.site-description {
+        color: var(--body-text-color);
+        font-weight: normal;
+        text-align:center; //站点描述居中
+        font-size: 1.6rem;
+
+        @include respond(2xl) {
+            font-size: 1.7rem;
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;修改分类颜色&#34;&gt;修改分类颜色&lt;/h2&gt;
+&lt;p&gt;这个东西众里寻他千百度找不到，结果就在&lt;code&gt;content\categories&lt;/code&gt;里，像个冷笑话。&lt;/p&gt;
+&lt;p&gt;在categories文件夹创建分类同名文件夹，创建&lt;code&gt;_index.md&lt;/code&gt;文件&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;title: &amp;quot;做猫贵在折腾&amp;quot; //分类名称
+description: &amp;quot;简介 Blablabla&amp;quot; //不需要可以删了
+image: &amp;quot;ffxiv_20210830_230509_817.png&amp;quot; //分类题图，也可以删了
+style:
+    background: &amp;quot;#80aba9&amp;quot; //分类标签底色
+    color: &amp;quot;#fff&amp;quot;
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;另外一个新发现！在&lt;code&gt;_index.md&lt;/code&gt;指定&lt;code&gt;Titie&lt;/code&gt;后，会一次性修改全部的分类名称，不需要再逐个修改，换分类名爱好者大喜过望！&lt;br&gt;
+&lt;br/&gt;&lt;/p&gt;
+&lt;h2 id=&#34;修改超链接显示&#34;&gt;修改超链接显示&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;a {
+    text-decoration: none;
+    color: var(--accent-color);
+
+    &amp;amp;:hover {
+        color: var(--accent-color-darker);
+    }
+
+    &amp;amp;.link {  //鼠标未悬停时，超链接显示6px的高亮
+        box-shadow: 0px -7px 0px rgba(var(--link-background-color), var(--link-background-opacity-hover)) inset; 
+        transition: all 0.3s ease;
+
+        &amp;amp;:hover { //鼠标悬停，高亮为10px
+            box-shadow: 0px -11px 0px rgba(var(--link-background-color), var(--link-background-opacity-hover)) inset; 
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;修改文章标题前提示块&#34;&gt;修改文章标题前提示块&lt;/h2&gt;
+&lt;p&gt;……我也不知道叫它什么比较好，总之是比较喜欢它长一点，修改&lt;code&gt;assets\scss\variables.scss&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    --heading-border-size: 10px; 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​	顺便删掉引用块里左侧的一小条竖线&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;--blockquote-border-size: 0px;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;修改toc样式&#34;&gt;修改Toc样式&lt;/h2&gt;
+&lt;p&gt;原来的目录行间距太宽，超出一定长度还会出现滑块，调整了一下。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;.widget--toc {
+    background-color: var(--card-background);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-l2); //修改阴影样式
+    display: flex;
+    flex-direction: column;
+    color: var(--card-text-color-main);
+    overflow: hidden;
+
+    #TableOfContents {
+        overflow-x: auto;
+        max-height: 150vh; //控制最长高度，超出则出现滑动条
+
+        ol,
+        ul {
+            margin: 10; //应该是上下边距
+            padding: 0;
+        }
+
+        ol {
+            list-style-type: none;
+            counter-reset: item;
+
+            li:before {
+                counter-increment: item;
+                content: counters(item, &amp;quot;.&amp;quot;) &amp;quot;. &amp;quot;;
+                font-weight: bold;
+                margin-right: 5px;
+            }
+        }
+
+        &amp;amp; &amp;gt; ul {
+            padding: 0 1em;
+        }
+
+        li {
+            margin: 5px 20px; //第一个参数是行间距，第二个是卡片周边的宽度
+            
+            padding: 6px; //控制内边距
+
+            &amp;amp; &amp;gt; ol,
+            &amp;amp; &amp;gt; ul {
+                margin-top: 10px;
+                padding-left: 10px;
+                margin-bottom: -5px;
+
+                &amp;amp; &amp;gt; li:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;加入字数统计&#34;&gt;加入字数统计&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;layouts\partials\article\components\details.html&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;        {{ if .Site.Params.article.readingTime }} //偷懒直接用阅读时间改的
+            &amp;lt;div&amp;gt;
+                {{ partial &amp;quot;helper/icon&amp;quot; &amp;quot;brush&amp;quot; }} //图标路径为assets\icons
+                &amp;lt;time class=&amp;quot;article-words&amp;quot;&amp;gt;
+                    {{ .WordCount }}字
+                &amp;lt;/time&amp;gt;
+            &amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后在&lt;code&gt;config.yaml&lt;/code&gt;中加入一行，以正确显示中文字符数量&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hasCJKLanguage: true
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;调整代码框样式&#34;&gt;调整代码框样式&lt;/h2&gt;
+&lt;h3 id=&#34;代码高亮&#34;&gt;代码高亮&lt;/h3&gt;
+&lt;p&gt;……这高亮怎么就是显示不出来呢&lt;/p&gt;
+&lt;p&gt;参考了&lt;a class=&#34;link&#34; href=&#34;https://dp2px.com/2020/05/29/hugo-highlighting/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;设置 Hugo 的代码高亮&lt;/a&gt;，在config.yaml中做以下设置&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;markup:
+	highlight:
+		codeFences: true //代码围栏功能，一般设为true
+		guessSyntax: true //猜测语法，设置为true后自动匹配可能的语法
+		hl_Lines: &amp;quot;&amp;quot; //从第几行开始高亮，一般不设置
+		lineNoStart: 1 //行号从编号几开始显示
+		lineNos: ture //是否显示行号
+		lineNumbersInTable: true //是否使用表来格式化行号和代码，一般设为true，设置true后页面的代码框就不再接连整个文章页面了，但是copy模块会只会复制行号，不知道为什么
+		noClasses: true //使用class标签，设为false后代码框背景消失
+		style: native //样式风格
+		tabWidth: 4 //代码缩进字符数
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置后的一些问题非常明显，因此暂时没动，先保存在这里，看看之后能不能解决。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;代码块自动换行&#34;&gt;代码块自动换行&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;assets/scss/partials/layout/aritcle.scss&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    pre {
+        overflow-x: auto;
+        display: block;
+        background-color: var(--pre-background-color);
+        color: var(--pre-text-color);
+        font-family: var(--code-font-family);
+        line-height: 1.428571429;
+        word-break: break-all;
+        padding: var(--card-padding);
+        white-space: pre-wrap; //长代码自动换行适应页面
+        word-wrap: break-word; //允许长单词或 URL 地址换行到下一行
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;增加网站icon&#34;&gt;增加网站Icon&lt;/h2&gt;
+&lt;p&gt;参考了主题的issue：&lt;a class=&#34;link&#34; href=&#34;https://github.com/CaiJimmy/hugo-theme-stack/issues/272&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;配置favicon后，只有首页显示favicon&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;将Icon命名为&lt;code&gt;favicon.png&lt;/code&gt;，放在根目录的&lt;code&gt;/static/img&lt;/code&gt;文件夹中，主题没有自带这个文件夹，需要新建。&lt;/p&gt;
+&lt;p&gt;然后在&lt;code&gt;config.yaml&lt;/code&gt;修改&lt;code&gt;favicon&lt;/code&gt;参数&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;favicon: /img/favicon.png 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意路径的写法，如果写为&lt;code&gt;img/favicon.png&lt;/code&gt;就会出现只有首页显示Icon的情况。&lt;/p&gt;
+ 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;修改网站字体&#34;&gt;修改网站字体&lt;/h2&gt;
+&lt;h3 id=&#34;修改正文字体&#34;&gt;修改正文字体&lt;/h3&gt;
+&lt;p&gt;参考&lt;a class=&#34;link&#34; href=&#34;https://docs.stack.jimmycai.com/zh/modify-theme/example-custom-font-family.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;例子：给文章加上思源宋体&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在站点根目录新建文件 &lt;code&gt;layouts/partials/head/custom.html&lt;/code&gt;并放置代码，但作者给的字重非常不好，文字看起来让人很难受，把正文字重改到300会好很多，最终使用的代码是：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;style&amp;gt;
+    :root {
+        --article-font-family: &amp;quot;Noto Serif SC&amp;quot;, var(--base-font-family);
+    }
+&amp;lt;/style&amp;gt;
+
+&amp;lt;script&amp;gt; //正文字重300，标题字重700
+		(function () {
+		    const customFont = document.createElement(&#39;link&#39;);
+		    customFont.href = &amp;quot;https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&amp;amp;display=swap&amp;quot;; 
+		    customFont.type = &amp;quot;text/css&amp;quot;;
+		    customFont.rel = &amp;quot;stylesheet&amp;quot;;
+		
+		    document.head.appendChild(customFont);
+		}());
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt; 
+    &lt;br/&gt;
+
+&lt;h3 id=&#34;修改全站字体&#34;&gt;修改全站字体&lt;/h3&gt;
+&lt;p&gt;根据主题文档，修改&lt;code&gt;assets\scss\variables.scss&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    --sys-font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, &amp;quot;Droid Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;;
+    --zh-font-family: &amp;quot;Noto Serif SC&amp;quot;, &amp;quot;Hiragino Sans GB&amp;quot;, &amp;quot;Droid Sans Fallback&amp;quot;, &amp;quot;Microsoft YaHei&amp;quot;;
+    --base-font-family: &amp;quot;Noto Serif SC&amp;quot;, var(--sys-font-family), var(--zh-font-family), sans-serif;
+    --code-font-family: Menlo, Monaco, Consolas, &amp;quot;Courier New&amp;quot;, monospace;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;将&lt;code&gt;--zh-font-family:&lt;/code&gt;和&lt;code&gt;--base-font-family:&lt;/code&gt;都换成&lt;code&gt;&amp;quot;Noto Serif SC&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;……觉得很有意思，这部分起先我一直不知道怎么做，非常苦恼，后来灵光突现，去翻了自己在18年在Hexo Blog里记的修改全站字体笔记，一时豁然洞开。&lt;/p&gt;
+ 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;文章按年份分类&#34;&gt;文章按年份分类&lt;/h2&gt;
+&lt;p&gt;之前的文章都是放在Post文件夹中，文件名以年月日开头，这样文章多了就会比较乱，正好在整理Blog，顺便就改了一下。&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;config.yaml&lt;/code&gt;中修改&lt;code&gt;post&lt;/code&gt;参数&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;post: /:year/:slug/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;现在的链接格式为&lt;code&gt;mantyke.icu/2021/slug参数&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;配置站点图标&#34;&gt;配置站点图标&lt;/h2&gt;
+&lt;p&gt;根据&lt;a class=&#34;link&#34; href=&#34;https://docs.stack.jimmycai.com/zh/configuration/custom-menu.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;主题文档-配置图标&lt;/a&gt;，Stack主题使用&lt;a class=&#34;link&#34; href=&#34;https://tablericons.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Tabler Icons&lt;/a&gt;图标库，并使用&lt;code&gt;pre&lt;/code&gt; 字段来进行指定……一切都很好，但问题来了，Tabler Icons不提供SVG文件下载。&lt;/p&gt;
+&lt;p&gt;研究了一会，找了个&lt;a class=&#34;link&#34; href=&#34;https://www.svgviewer.dev/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;转换程序&lt;/a&gt;来解决这个问题。&lt;/p&gt;
+&lt;p&gt;暂时先改了Friends和字数统计，剩下的看心情之后慢慢改。&lt;/p&gt;
+ 
+    &lt;br/&gt;
+
+&lt;h2 id=&#34;修复代码出框&#34;&gt;修复代码出框&lt;/h2&gt;
+&lt;p&gt;在小尺寸屏幕上，如果单行代码过长，会出框一部分并无法显示。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;assets/partials/layout/article.scss&lt;/code&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    code {
+        color: var(--code-text-color);
+        background-color: var(--code-background-color);
+        padding: 2px 4px;
+        border-radius: var(--tag-border-radius);
+        font-family: var(--code-font-family);
+        word-wrap: break-word; //允许长单词或 URL 地址换行到下一行
+        
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h1 id=&#34;-headcontentpost20210924-修改stack主题md&#34;&gt;&amp;laquo;&amp;laquo;&amp;laquo;&amp;lt; HEAD:content/post/2021/0924-修改stack主题.md&lt;/h1&gt;
+&lt;p&gt;参考了&lt;a class=&#34;link&#34; href=&#34;https://immwind.com/google-analytics-for-hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;为 Hugo 配置 Google Analytics&lt;/a&gt;这篇文章来配置&lt;a class=&#34;link&#34; href=&#34;https://search.google.com/search-console&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Google Search Console&lt;/a&gt;，但前前后后试了好几遍都不能通过DNS验证，最后只能选择通过网址前缀来进行添加，用HTML 标记验证。&lt;/p&gt;
+&lt;p&gt;遇到了站点地图无法读取的情况，参考&lt;a class=&#34;link&#34; href=&#34;https://support.google.com/webmasters/thread/101172591/%E6%98%BE%E7%A4%BA%E6%97%A0%E6%B3%95%E8%AF%BB%E5%8F%96%E6%AD%A4%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE?hl=zh-Hans&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Search Console帮助&lt;/a&gt;，显示站长工具有一定延迟，过几天再看看。&lt;/p&gt;
+&lt;p&gt;另外，写在这儿好了，在装Google Analytics时出了点问题，无论如何无法屏蔽本地的计数——后来发现是因为Stack模板中预先写了一条&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{{- template &amp;quot;_internal/google_analytics.html&amp;quot; . -}}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;而我的文件名叫做&lt;code&gt;google_analytics_async.html&lt;/code&gt;…………至于不小心删了&lt;code&gt;{{- partial &amp;quot;head/custom.html&amp;quot; . -}}&lt;/code&gt;导致惊慌失措地找了半个点为什么字体失效这件事咱们当它没发生过，好吗？&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;0bb1590e8cc0864d8dc2f52f611f49b6bc6150db:content/post/2021/20210924-修改stack主题.md&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;站点总字数统计&#34;&gt;站点总字数统计&lt;/h2&gt;
+&lt;p&gt;放置位置在&lt;code&gt;layouts\partials\footer\footer.html&lt;/code&gt;，顺便一提，站点上线时间统计也放在这里——上个月前写“在合适位置放置”，这个月找到失去神智，是我坑我自己。&lt;/p&gt;
+&lt;p&gt;最终是这么写的，参数和代码参考的是&lt;a class=&#34;link&#34; href=&#34;https://immmmm.com/hugo-total-count/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo 总文章数和总字数&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;section class=&amp;quot;copyright&amp;quot;&amp;gt;
+    &amp;amp;copy; 
+    {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format &amp;quot;2006&amp;quot;))) }}
+        {{ .Site.Params.footer.since }} - 
+    {{ end }}
+    {{ now.Format &amp;quot;2006&amp;quot; }} 小球飞鱼·&amp;lt;i class=&amp;quot;fas fa-bell&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;a id=&amp;quot;days&amp;quot;&amp;gt;0&amp;lt;/a&amp;gt;Days&amp;lt;br&amp;gt;共嘟嘟了 {{$scratch.Get &amp;quot;total&amp;quot; }}字·共 {{ len (where .Site.RegularPages &amp;quot;Section&amp;quot; &amp;quot;post&amp;quot;) }}篇文章&amp;lt;/br&amp;gt;&amp;lt;span&amp;gt;&amp;lt;p&amp;gt;
+&amp;lt;/section&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;记得要在&lt;code&gt;layouts\partials\footer\footer.html&lt;/code&gt;里写上总字数参数&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{{$scratch := newScratch}}
+{{ range (where .Site.Pages &amp;quot;Kind&amp;quot; &amp;quot;page&amp;quot; )}}
+    {{$scratch.Add &amp;quot;total&amp;quot; .WordCount}}
+{{ end }}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;利用&lt;code&gt;&amp;lt;br/&amp;gt;&lt;/code&gt;和&lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;来进行换行调整，另外&lt;code&gt;小球飞鱼&lt;/code&gt;的地方本来是&lt;code&gt;{{ .Site.Title }}&lt;/code&gt;，但是我为了美观起见把站名中间加了空格，引用过来反而不美观了，于是删掉换成直接写，我好聪明。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>毛线球球 | 时间管理与资讯订阅：Toggl、iHour和Newsletter</title>
+        <link>https://mantyke.icu/2021/d85cb4bd/</link>
+        <pubDate>Wed, 22 Sep 2021 20:17:05 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/d85cb4bd/</guid>
+        <description>&lt;p&gt;纠结了一会这篇应该怎么起标题，换在少数派可能就要叫做“效率生活”、“工作流”，看起来蛮精英白领的，很数字服务生活——但我就很明白自己，我折腾这些玩乐的兴趣远远大于实际使用的兴趣，玩够了就得视惰性决定是不是要丢到一边，一开始觉得可能游乐场更形象一点，就好像游乐场总是有新的，也总有旧的游乐场就此被忘掉，后来反复看了几遍，觉得游乐场太大，应该还是毛线球较贴切：追逐、扑腾、有趣、容易搞得一团糟。&lt;/p&gt;
+      &lt;br/&gt; 
+&lt;h2 id=&#34;toggl和ihour&#34;&gt;Toggl和iHour&lt;/h2&gt;
+&lt;p&gt;时间记录的需求最早来自于我打算为每天的多邻国学习计时——我对排行榜没什么兴趣，也取消了大部分推送提醒，就只想每天雷打不动（但完成率很差）地学上半个小时。一开始是在滴答清单上记，现在还挺多TO-DO应用给每个任务加装计时功能的，从正计时到番茄计时无一不有，时间焦虑之深，人对其掌控欲之强，由此可见一斑。&lt;/p&gt;
+&lt;p&gt;而计时发展到最后似乎总膨胀成野心，早年看很多应用和文章号称“管理你的时间”，看起来就野心勃勃，恨不得给24小时56个周的8760小时525600分钟都颁一套未成年人管控条例，此种雄心发酵到最后又往往走味，和赌坊也差不许多，一次次地来，一次次地输光了回家去，还总觉得是差了两分运气。&lt;/p&gt;
+&lt;p&gt;我也是此种赌徒之一，深明其中滋味，不过话扯远了，讲回来怎么玩儿。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://track.toggl.com/timer&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Toggl&lt;/a&gt;是象友推荐的，写了&lt;a class=&#34;link&#34; href=&#34;https://akaito.xyz/post/toggl/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;安利文&lt;/a&gt;，我看中它全平台，免费版也足够使用，就注册一个试试，至今刚好一月整。&lt;a class=&#34;link&#34; href=&#34;https://sspai.com/post/64716&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;iHour&lt;/a&gt;则是最近两天我随手从APP STORE上下载来玩儿的，吸引力主要在于非同一般地长寿——看版本记录，1.0上线时间是2013年。八年啊，八年足够家门口的烧烤摊儿换上三五轮，足够新浪微博从删评论万众声讨到随便炸号见怪不怪，而它竟然一直还在，实在难得，安心又信赖。&lt;/p&gt;
+&lt;p&gt;来讲讲两个应用的妙处和搭配：&lt;/p&gt;
+&lt;p&gt;Toggl是纯粹的正计时应用，网页+客户端，很正统。我近来玩应用有个心得，就是不要汲汲营营地挖全“这个能干什么我学一下来用用”，和玩儿高科技多功能水枪类似，两三个功能用熟手了，先把眼前这场水仗打了再说。Toggl在这点上做得就很好，一方面支持“不管是什么先计个时”，不用写任何东西就可以打开一个计时器；另一方面又把多平台联动做得顺滑流畅，可以在任意一端打开，也能在任意一端按结束，十分提升使用体验；此外同题计时支持合并统计，一天内同一个计时项目会折叠并显示计时次数和总用时，有一个漂亮的Timeline视图，每周竟然还发个邮件报这周计时摘要——以上内容还都不收钱。&lt;/p&gt;
+&lt;p&gt;不过虽然Toggl很好，但缺点也挺明显，我非常反感它的统计报表，一个功能反直觉不要紧，可以靠爱来学，但做得繁琐就完全没救。Toggl查看每个Project下的小项报表需要点开Reports调整时间范围在Description里输入项目名称最后按回车，干一次我还能忍，每个小项都这么来一套，人类发明仓鼠轮子难道是为了要自己跨上去蹬个不亦乐乎吗？&lt;/p&gt;
+&lt;p&gt;于是这个时候，iHour就很适合和它打配合。&lt;/p&gt;
+&lt;p&gt;比起宣传上的“一万个小时投资计划”，iHour更像是个记账应用：它不计时——有个专注计时，但不用也行——也不管每件事儿是从几点几分开始做，又在几点几分停止。它就只管开个项目在这里，然后做完了把用掉的时间往里面一放——这就行了，只要有原始数据，一天存一次也行，一周存一次也行，一个月存一次选日期稍微有点麻烦了，但也不是不行——放完了时间它自己按Icon配色，生成一个好看好用又直观的统计报表，每天、每周、每年——不花钱也挺够用，买断制才只要三十块钱。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;说到这里再提两句数据备份处理。自打被新浪炸过油锅，对没法掌握在自己手里的数据我都没什么信任感。选服务优先选导出容易的，选导出优先选不是独有格式的，但有时候确实是没什么办法两全其美，怎么办呢？某天看了篇&lt;a class=&#34;link&#34; href=&#34;https://sspai.com/post/68200&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;记账文章&lt;/a&gt;，作者提到:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“以前朋友说要找那些大厂做的工具，如果是小厂的，一旦倒闭，数据的回溯，工具的更新等都会是问题。确实是这样，但是对于我，挖财只是作为数据记录和传递，一旦我汇总到 Numbers 上，这些明细数据对我已经没有太多价值了，就算第二天换另一个记账 App 也不影响。”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;作者利用挖财做原始数据积累，用Numbers做信息汇集整理。记账如此，想来其他类似数据也如此，Toggl是原始数据收集工具，iHour是报表生成工具，有兴趣再做周期归纳汇总总结。事情做到这一步，口味变易喜新厌旧都已经无所谓，APP厌烦了可以再换下一个，流程用腻了无妨调整一下试个新的，数据搬家究竟便利与否，其实也没那么重要了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;newsletter&#34;&gt;Newsletter&lt;/h2&gt;
+&lt;p&gt;喜报：我终于受不了每天每周每个月的邮件轰炸，开始想给Newsletter找个新地儿，和惰性打架就是这么艰苦卓绝，从动念头到付诸行动少说花了三个月。有时候还挺想问问达尔文的，都说物竞天择，这拖延症如此胜不骄败不馁，是否也是有利于人类生存和进化。&lt;/p&gt;
+&lt;p&gt;Newsletter听起来蛮时髦，其实也就是邮件订阅。创作者把内容写成通讯，再由邮件分发到各路订阅者的邮箱。从创作过程到阅读体验都颇为复古，像是往年订阅报刊杂志。这几年从微博一路退向RSS，再从RSS退向Newsletter，看上去是在拥抱新兴事物，其实是信息渠道越来越窄，写些什么越来越难，才不得不从旁处寻根芦管透气。话又说回来，这也算是一种”突破信息茧房”和“主动选择阅读方向”——和科技媒体在iPhone13还没上市就急匆匆开始报道iPhone14爆料一样，三分之一有点兴趣，三分之二纯属瞎扯淡。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;来讲新的Newsletter阅读方案。之前订Newsletter没多动脑子，直接在常用邮箱里做的订阅，效果很好也很惨烈，订阅通讯与垃圾邮件一色，每日早报与异常登录齐飞，在一大堆验证码和购物账单里找订阅实在艰辛，又真的没动力给邮件做过滤分类，在邮箱里读东西更令人感觉怪怪。新的方案要解决的就是这两点，首先最好不用费劲整理，其次它得像个读东西的地儿。&lt;/p&gt;
+&lt;p&gt;选择无非是三种：新开个邮箱专门订Newsletter、找找有没有专门解决Newsletter的方案、查一下哪家稍后读接入了转发邮件。第一种起意之初就被PASS，专门开个邮箱和现在全无区别，无非是屋子现在乱和之后乱；第二种还真有专门科，一个叫Stoop inbox，支持Android和IOS……客户端，没有网页端，不太实用，暂时存下，另一个叫Newslettrs，据说是只做了网页端，但我点进去一看：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Sorry. We are no longer supporting creation of new user accounts. We will be shutting down our newslettrs.app on &lt;strong&gt;March 13, 2022&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;As an alternate, you could try &lt;a class=&#34;link&#34; href=&#34;https://reader.substack.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;reader.substack.com&lt;/a&gt; or &lt;a class=&#34;link&#34; href=&#34;https://stoopinbox.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;stoopinbox.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;看上去只有第三种能解决问题，我把几家用过的全平台稍后读应用翻了翻，发现&lt;a class=&#34;link&#34; href=&#34;https://www.instapaper.com/u&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Instapaper&lt;/a&gt;的欢迎通讯里写了一条：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;• *&lt;em&gt;Email Articles*&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You can send links to articles and videos, &lt;strong&gt;or even the content of long emails&lt;/strong&gt;, directly to Instapaper via email. To get started, add your unique Instapaper email address to your contacts&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;好嘛，成了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;谈谈用Instapaper读Newsletter的优劣吧，Instapaper是我最喜欢的阅读应用之一，基本功就是阅读、分类、归档，使用体验相当良好。另外，不同于真实邮箱，想来Instapaper不会对“垃圾邮件”做相关限制，可以免去在垃圾箱里翻找之苦。此外，专门软件做专门事，通知也可以就此关掉了，或者配合IOS15的摘要功能（我喜欢死了）调整推送方案。劣势呢，劣势在于Instapaper没法做订阅源管理，我找了个曲径通幽的办法，建了个文件夹保存了每个订阅的欢迎邮件——就当成订阅源管理用了，好像也确实能行。&lt;/p&gt;
+&lt;p&gt;时代日新月异——这次倒腾Newsletter发现今日已然不同往昔，国内的Newsletter写作者似乎也开始像早期播客一样抱成了小圈子，不但做了&lt;a class=&#34;link&#34; href=&#34;https://www.notion.so/kfang/Newsletter-68ee46c0a4574f659fb8a873ead438c6&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;中文Newsletter导航&lt;/a&gt;，还做了&lt;a class=&#34;link&#34; href=&#34;https://zhiy.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;知园&lt;/a&gt;这样的Newsletter分发平台。互联网话题无非这么几种，科技圈子绕来绕去无非那么些人，我还挺期待有更多不同领域的朋友来写写Newsletter的，毕竟看杂志比看小报要快乐得多。&lt;/p&gt;
+      &lt;br/&gt; 
+</description>
+        </item>
+        <item>
+        <title>Anki | 填空、例句、录音-第N次重启的Anki学习笔记</title>
+        <link>https://mantyke.icu/2021/bbdc62bb/</link>
+        <pubDate>Mon, 20 Sep 2021 20:00:57 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/bbdc62bb/</guid>
+        <description>&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;前因&#34;&gt;前因&lt;/h2&gt;
+&lt;p&gt;上一次捣鼓Anki是给Anki改了一套美化模板，信心百倍，觉得有了好看衣服，我就能安安心心住下背单词了——想得美！很快我就发现这么背单词非常狼狈，首先记忆力明显大不如前，其次用的单词模组只有孤立的单词，缺乏例句语境，导致每天都有那么几个词死活背不下来，非常挫败，也非常困。&lt;/p&gt;
+&lt;p&gt;试图按老思维解决解决：记忆力下降这个没得救了，没有例句看看有没有带例句和例句发音的模组？——免费的没有，付费的翻了翻，好像也没有，很困扎扎自己能解决吗——不行，我又不是个王母娘娘，拆散不了这一对儿。&lt;/p&gt;
+&lt;p&gt;头疼着头疼着，注意力转移，而且年底的考试也没报上，干脆就玩儿别的去了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;车到山前&#34;&gt;车到山前&lt;/h2&gt;
+&lt;p&gt;不见了的东西不管它，过几天就会自己冒出来——有时觉得解决问题也一样，解决不了的问题不管它，隔个十天半个月，它竟然也就自己解决了。&lt;/p&gt;
+&lt;p&gt;放假第二天我又在研究怎么背日语单词的老问题，调研了几个APP：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;APP&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;优点&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;缺点&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;词道&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;真人发音，开了音效之后刷词体验很好，可以按照标日课本刷单词，背词时自动按十个一组进行分组。生词表和单词表都带有释义遮挡功能，方便快速复习&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;只有根据中文选日文、根据日文选中文两个题型，前者还不错，但后者的候选答案非常扯，测验功能做得也不好，就算选错了进度条也一样往前走。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;日语考级&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;有不同的题型（最多一词三题，可以调整题目数量）可以分词汇类型背，自带一个专注计时。我很喜欢这家的例句，难度都不大，刚好是可以看懂的程度。&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;机器TTS发音，选对不发音，也不能查选对的词，只能按N5-N1分类单词书，而且不知道为什么前几天的词表有巨多的片假名词汇，非常劝退。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;MOJitest&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;释义最全面完整，题型也最多（11种，可以自选），可以单背收藏的词/生词本，调整正序/乱序背单词以及不同的测试模式&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;机器发音，只能选择N5-N1单词书，题型太多选择困难，词意也太多，同样选对不发音，也无法追溯选对的词。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;日语单词&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;按单元按课背词，每课单词又分组背，五种题型，自带一个单词课文电台可以没事的时候听听&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;同样选对不发音，也无法追溯选对的词。不知道为什么我这里总不能自动发音，之前用了没两天他家推销电话就直接打过来，印象很不好。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;最最日语&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;按单元按课背词，两种模式，一种是普通的选日文选释义，另一种是输入模式，自带日语全键盘输入模式。例句非常好，真人发音&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;手机全键盘输入实在太困了！！！！！又难输又困，又困又难输，我睡过去三四次之后觉得它很好可是不适合我，我们只能分手。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;以上都只支持手机使用，只有MOJI支持IPAD，拿手机背单词也不是不行，只是对颈椎不太好，在试用各个APP的时候它就已经在报警了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;捣鼓到这里，应该做的就是总结需求：我实际上在需求什么？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;单词要抬着头背，也就是说纸笔很好但是不行，手机APP也不行——需求PC端。&lt;/li&gt;
+&lt;li&gt;最好有交互，输入单词或者输入释义都可以，一直单选或者回忆释义我都会困，背诵效率非常低。&lt;/li&gt;
+&lt;li&gt;不需要全部——但是部分难背的词要有例句，例句最好有发音。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;根据以上几条，又查了查Google和Github，确定既有产品都没办法满足，那么显而易见的就只能自己DIY，DIY最好的工具是什么，还是Anki。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;解决方案&lt;/h2&gt;
+&lt;h3 id=&#34;解决交互问题&#34;&gt;解决交互问题&lt;/h3&gt;
+&lt;p&gt;给Anki加互动很简单，好实现的有两种：完形填空和输入答案。前者复杂了一点我不打算用，后者修改起来更便捷一点，查了查竟然还有校对功能！&lt;/p&gt;
+&lt;p&gt;于是先看看官方的模板是怎么写的……&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{{正面}}
+{{type:背面}}
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{{正面}}
+
+&amp;lt;hr id=answer&amp;gt;
+
+{{type:背面}}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;照抄到自己的模板里，写成这样：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;center&amp;gt;
+	&amp;lt;div class=&amp;quot;slide&amp;quot;&amp;gt;
+		&amp;lt;div class=&amp;quot;card&amp;quot;&amp;gt;
+			&amp;lt;div class=&amp;quot;header&amp;quot; id=&amp;quot;HeaderColor&amp;quot;&amp;gt;&amp;lt;h1&amp;gt;{{假名}}{{type:解释}} {{音频}}&amp;lt;/h1&amp;gt;&amp;lt;/div&amp;gt;
+			&amp;lt;div class=&amp;quot;container&amp;quot;&amp;gt;                         
+				&amp;lt;br/&amp;gt;
+			&amp;lt;/div&amp;gt;
+		&amp;lt;/div&amp;gt;
+	&amp;lt;/div&amp;gt;   
+&amp;lt;/center&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;br/&amp;gt;
+&amp;lt;center&amp;gt;
+	&amp;lt;div class=&amp;quot;card&amp;quot;&amp;gt;
+		&amp;lt;div class=&amp;quot;header&amp;quot;&amp;gt;
+			&amp;lt;h1&amp;gt;{{日文}}&amp;lt;/h1&amp;gt; 
+		&amp;lt;/div&amp;gt;
+		&amp;lt;div class=&amp;quot;container&amp;quot;&amp;gt;
+			&amp;lt;p&amp;gt;{{type:解释}}&amp;lt;/p&amp;gt; 
+&amp;lt;div class=&amp;quot;container&amp;quot;&amp;gt;
+&amp;lt;p&amp;gt;{{例句}}&amp;lt;/p&amp;gt;  //不需要例句则可以删掉这一段
+&amp;lt;hr&amp;gt;
+{{类型}} {{音频}}{{录音}} //录音字段加在音频字段后面，朗读时先读单词音频，后播放自己的录音
+		&amp;lt;/div&amp;gt;
+	&amp;lt;/div&amp;gt;
+&amp;lt;br/&amp;gt;
+&amp;lt;/center&amp;gt;  
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;预览顺利到我都有点不习惯，仔细端详：输入框有点儿丑，不过也不要紧了，等我想好怎么改得好看再改。&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1632143637/20210920-1_czxmdr.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;解决例句问题&#34;&gt;解决例句问题&lt;/h3&gt;
+&lt;p&gt;例句遵循了以下两个原则：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;要能看得懂，不能用不认识的词/语法，否则我就不会去看&lt;/li&gt;
+&lt;li&gt;一定要有发音，发音跟在单词发音之后，优先真人发音，其次才是TTS。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;例句一开始找的是&lt;a class=&#34;link&#34; href=&#34;https://www.mojidict.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;MOJI辞书&lt;/a&gt;，发现不太行，后来想到了，既然要求单词语法都能看懂，那么最好的出处其实就在眼前，就是新标日的课本。正好我之前下过一份EPUB格式的标日初级课本，可以用calibre打开并搜索，完美解决。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;发音有两种选择，一种是和以前一样，用课本真人发音/日语老师读的语音，把例句的段落剪出来拖进卡里，由于有准确的课文定位，我也写过裁音频比较方便的流程笔记，做起来不是很麻烦（真的很麻烦），但也要完整走一遍找时间点-裁切音频的流程，先当成备用选项。另一种是用TTS发音，只要下插件配置好，打TTS标签就可以了，Anki上有非常成熟的解决方案，于是我去试了试：&lt;/p&gt;
+&lt;p&gt;参考文章是这三篇：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/74618062&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【Anki插件篇】（02）插件介绍：让卡片发音: AwesomeTTS - 知乎&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.douban.com/group/topic/80062932/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;[常见问题]如何发音之AwesomeTTS插件使用&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://awesome-zh.nocode.site/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AwesomeTTS中文站&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;试用过后发现AwesomeTTS和想象的不太一样……摸到的几个音源读起来都很刻板，似乎不那么刻板的提示需要API，多了一道手续我就不太乐意，另外我只需要发音例句字段，怎么做到还得研究一下设置，想想就好复杂，最后这个插件没有中文化，显然也不能直接Google翻译，那我只是想发个音又不是要天上的星星，真的不想看英语面板……&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;9.21补充，
+象友提醒说：“TTS 可以用 Google Cloud，注册一下 Google 的云服务就可以无限生成了，效果无限接近真人语音。”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;想不出来怎么办，拽了一份Anki中文手册左戳戳右戳戳，一眼看到了“录制自己的发音”……好主意！！显然自己录音不用裁音频也不用研究英语参数，还能练习日文发音熟读课文，好处多多，一举多得。高高兴兴翻了下，Anki自己就支持录音功能，增加一个字段并在编辑卡片时点击录音就OK，好了，这个问题也解决了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;需要注意的是：Anki有两种录制发音的方法，一种是点击卡片右下角更多，选择录音，这种情况下，录音是临时的，只能保留很短的一段时间，并且不会被加到卡片当中。如果要把自己的录音加进卡片，应该先在模板内增加一个字段，录音时点选卡片左下角编辑，选中录音字段，再点上方麦克风录制音频（快捷键为F5）。录制完毕后可以看到字段当中出现类似&lt;code&gt;[sound:rec1632147119.mp3]&lt;/code&gt;的标记。如果想让它在卡片中自动发音，那么这个字段必须加入卡片的正面或背面（根据需要决定）。放置的位置决定它的朗读顺序，即如果放在单词发音之前，那么卡片自动发音时就会先播放例句录音，相反，则会先播放单词发音。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;总结加一点点细节&#34;&gt;总结，加一点点细节&lt;/h2&gt;
+&lt;p&gt;最后整理的背诵流程如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;看日文假名（并听音频），在卡面输入释义。&lt;/li&gt;
+&lt;li&gt;Anki自动对比答案并显示，选择熟悉程度。&lt;/li&gt;
+&lt;li&gt;熟到完全不用背的词，用@快捷键予以暂停。&lt;/li&gt;
+&lt;li&gt;背了很多次也背不熟的单词，在新标日课本找（或者自己写）例句，标注假名，录音发音，并在这个过程中努力背下来。&lt;/li&gt;
+&lt;li&gt;完整过完一遍词库之后倒过来，看释义输入假名。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;目前来看成果斐然：至少刷了一百个词我没有很困了，超绝大胜利。&lt;/p&gt;
+&lt;p&gt;一点点细节：发现Anki支持在汉字上标注假名，于是找了个&lt;a class=&#34;link&#34; href=&#34;https://www.jcinfo.net/zh-hant/tools/kana&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;自动给汉字标假名&lt;/a&gt;的网站，给例句标上了假名，最终成品如下。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1632146891/20210920-2_hnk3if.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Hugo | 也没那么靠谱的子Blog搭建烹饪流程</title>
+        <link>https://mantyke.icu/2021/f6e051c7/</link>
+        <pubDate>Wed, 15 Sep 2021 14:04:31 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/f6e051c7/</guid>
+        <description>&lt;p&gt;初入静态博客是2018年，当时看了一系列“小白半个小时搭建出自己的个人Blog”文章，热情一时勃发，充满了想当然的自信，没想到前方大坑，一跳多年，终于每次更新都刷一屏半的Warning。&lt;/p&gt;
+&lt;p&gt;今年换Hugo重建，倒倒腾腾玩儿了半个多月，感觉摸出一点门道。又看上了新的Blog主题，找了个想要试试子域名的借口，重走了一遍新的搭建流程，比之前搭主站要简洁很多，暂且记录在这里。&lt;/p&gt;
+&lt;p&gt;子Blog在这里：&lt;a class=&#34;link&#34; href=&#34;https://ink.mantyke.icu/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Mantyke-杂货铺与仓储间&lt;/a&gt;，以&lt;a class=&#34;link&#34; href=&#34;https://vercel.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Vercel&lt;/a&gt;进行搭建并自动部署，使用&lt;a class=&#34;link&#34; href=&#34;https://github.com/spf13/hyde&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hyde&lt;/a&gt;主题。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1631342244/20210911-1_pq1q5k.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;准备锅碗瓢盆&#34;&gt;准备锅碗瓢盆&lt;/h2&gt;
+&lt;p&gt;事先需要准备的东西是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一个Github账号，注册即可&lt;/li&gt;
+&lt;li&gt;安装&lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Git&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;https://code.visualstudio.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;VScode&lt;/a&gt;，一路按下一步装好备用，VScode插件推荐可以参考&lt;a class=&#34;link&#34; href=&#34;https://sspai.com/post/64639&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;使用 Hugo 从 0 到 1 搭建个人博客 - 少数派&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;生成SSH密钥并链接，具体过程参考&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/posts/f185ce41/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Alola World | 暨简明麻瓜快速念咒 Hugo 搭建笔记 | 小球飞鱼&lt;/a&gt;默写甘普基本变形定律部分。大部分名词解释和原理个人理解我也写在了它里面，今天这篇就不赘述了，仅讲流程。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;捋清菜谱思路&#34;&gt;捋清菜谱思路&lt;/h2&gt;
+&lt;p&gt;捋一下上面几项的基本作用：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Github用于代码管理，负责储藏Blog代码，以Vercel进行搭建的话，储存Blog代码的仓库可以被设置为私密，仓库不会被其他人看到并复制。&lt;/li&gt;
+&lt;li&gt;Git用于版本控制，暂时只需要知道它负责推送代码到Github、同时也可以用来做版本回滚（万一搞砸了可以用它救命）。&lt;/li&gt;
+&lt;li&gt;VScode是个代码管理软件，我主要是用它偷懒进行主题自定义，它的搜索功能可以直接搜到需要修改的部分，省去在文件夹里找文件的痛苦。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;锅里加一点油&#34;&gt;锅里加一点油&lt;/h2&gt;
+&lt;p&gt;总而言之，言而总之，先把Blog搭起来。&lt;/p&gt;
+&lt;p&gt;打开&lt;a class=&#34;link&#34; href=&#34;https://vercel.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Vercel&lt;/a&gt;，点Continue with Github，用之前准备好的Github账号登录，流程上可以参考&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/posts/68390745/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo | 用 Vercel 完成 blog 自动化部署 | 小球飞鱼&lt;/a&gt;，但&lt;strong&gt;稍作改变&lt;/strong&gt;：自动化部署这篇文章里，由于我已经事先搭建好了自己的Blog，所以采取的是导入自己的Github仓库的方式。而现在，我想让Vercel帮忙我搭一个Blog出来，所以直接在Let&amp;rsquo;s build something new界面点击&lt;a class=&#34;link&#34; href=&#34;https://vercel.com/new/templates&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Browse All Templates&lt;/a&gt;，往下拉找到Hugo，点它打开搭建页面。接下来在Create Git Repository处点Github图标，按流程进行授权，REPOSITORY NAME处填写想要的Github仓库名字，点Create，直接跳过Create a Team环节，等Vercel自己跑一会儿，新的Blog就搭好了。&lt;/p&gt;
+&lt;p&gt;图中画圈部分就是Vercel分配给Blog的网址，可以直接以这个网址进行访问，也可以进一步自己购买域名使用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1631677532/20210915-1_vtgqhk.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;站在风火轮上原来是这种感觉……&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;闭眼煎炸炖炒&#34;&gt;闭眼煎炸炖炒&lt;/h2&gt;
+&lt;p&gt;整个后续布置流程大致如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将Vercel建立的Github仓库下载到本地&lt;/li&gt;
+&lt;li&gt;选择主题，将主题文件夹复制到Blog文件夹中&lt;/li&gt;
+&lt;li&gt;对主题进行一定修改和自定义&lt;/li&gt;
+&lt;li&gt;将修改后的Blog文件夹上传到Github&lt;/li&gt;
+&lt;li&gt;触发Vercel自动部署，并发布到网上&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;其中修改主题会用到VScode（其实比较熟的话直接改文件也行，但是VScode可以跨文件搜索修改关键字，很方便），修改上传后的Blog文件夹会用到Git操作，都是很入门的东西，一样一样来。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;将github仓库下载到本地&#34;&gt;将Github仓库下载到本地&lt;/h3&gt;
+&lt;p&gt;打开Github，找到Vercel搭建的仓库（一个偷懒的方式，在网址栏输入&lt;code&gt;https://github.com/账号名/仓库名&lt;/code&gt;），选择Download ZIP，将整个仓库下载到本地，找一个本地盘解压。解压后最好保持这个文件夹地址不发生变化，之后的一系列修改和上传都基于它完成。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;选一个主题然后加载&#34;&gt;选一个主题，然后加载&lt;/h3&gt;
+&lt;p&gt;这次我选的主题是&lt;a class=&#34;link&#34; href=&#34;https://www.gohugo.org/theme/hyde/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hyde&lt;/a&gt;，一个基础两栏式主题，文件写得很精简，需要自定义的部分不多，也很容易改，非常适合快速布置一下就直接拿来用。&lt;/p&gt;
+&lt;p&gt;Hugo配置主题非常简单：先看一眼Blog文件夹里有没有&lt;code&gt;themes&lt;/code&gt;这个文件夹，如果没有，新建一个，再在主题的Github仓库里下载主题文件，把解压后的文件夹放进&lt;code&gt;themes&lt;/code&gt;文件夹，最后修改根目录下的&lt;code&gt;config.toml&lt;/code&gt;文件（可以用VScode打开），将&lt;code&gt;config.toml&lt;/code&gt;文件中&lt;code&gt;theme&lt;/code&gt;一行改为&lt;code&gt;theme = &amp;quot;hyde&amp;quot;&lt;/code&gt;，就算是大功告成了。&lt;/p&gt;
+&lt;p&gt;注意，&lt;code&gt;&amp;quot;hyde&amp;quot;&lt;/code&gt;是主题文件夹的名字，需要和放在&lt;code&gt;themes&lt;/code&gt;文件夹里的主题文件夹名称保持一致，也就是说如果主题文件夹叫&lt;code&gt;Hyde-master&lt;/code&gt;，那么相应也需要改成&lt;code&gt;theme = &amp;quot;Hyde-master&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;检查这一步是不是成功了？在Blog根目录下右键，点击Git Bash Here，在弹出的命令行窗口中输入&lt;code&gt;Hugo server&lt;/code&gt;，顺利的话，会弹出如下回复：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo v0.87.0-B0C541E4 windows/amd64 BuildDate=2021-08-03T10:57:28Z VendorInfo=gohugoio
+WARN 2021/09/15 12:19:27 Page.URL is deprecated and will be removed in a future release. Use .Permalink or .RelPermalink. If what you want is the front matter URL value, use .Params.url //这是一个报错，看起来像是Hugo版本升级后和老模板有哪里不太适应，我不确定是不是人人都有，但是我用到现在感觉它并不影响使用，暂时先不管它，回头再修。
+
+                   | EN
+-------------------+-----
+  Pages            | 15
+  Paginator pages  |  0
+  Non-page files   |  0
+  Static files     |  6
+  Processed images |  0
+  Aliases          |  5
+  Sitemaps         |  1
+  Cleaned          |  0
+
+Built in 58 ms
+Watching for changes in E:\Hugo\Mantyke-ink\{archetypes,content,layouts,static,themes}
+Watching for config changes in E:\Hugo\Mantyke-ink\config.toml //这里会根据选择的Blog文件夹路径有所不同
+Environment: &amp;quot;development&amp;quot;
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1) //本地预览地址，会随着本地修改不断刷新
+Press Ctrl+C to stop //按Ctrl+C关闭本地预览，当然也可以直接把命令行窗口关掉。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在浏览器中打开&lt;code&gt;http://localhost:1313/&lt;/code&gt; ，这时候就可以在本地预览Blog现在的样子了——理论上它应该和Hyde示例长成一样。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;进行主题自定义&#34;&gt;进行主题自定义&lt;/h3&gt;
+&lt;p&gt;加载模板后肯定不能马上就用，至少得改改网页名字吧！——在这里我列出我对自己的Blog做出的一系列修改，改之前，推荐先把官网文档完整看一遍。&lt;/p&gt;
+&lt;p&gt;修改过程中会用到VScode，请保证安装了它，并且也装了之前文章中提到的几个插件。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;修改网站标题描述和底部版权行&#34;&gt;修改网站标题、描述，和底部版权行&lt;/h4&gt;
+&lt;p&gt;下面的内容我直接给出了应该修改的文件，但实际上，大量修改都可以通过直接在VScode中搜索来找到位置，搜索前，需要用VScode先打开Blog文件夹。&lt;/p&gt;
+&lt;p&gt;另外，如果修改的是themes文件夹里面的内容，推荐先把相应子文件夹复制一份到根目录下，修改根目录下的对应文件——Hugo会优先读取根目录下的设置——万一搞砸了，把根目录里这个文件夹删掉，从themes文件夹里再复制一份出来，重新改就行了。
+&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;修改网站标题&lt;/strong&gt;：  修改根目录中&lt;code&gt;config.toml&lt;/code&gt;文件，将&lt;code&gt;title = &amp;quot;Hyde&amp;quot;&lt;/code&gt;改成想要的名字，我改成了&lt;code&gt;title = &amp;quot;Mantyke&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;修改标题下描述&lt;/strong&gt;：  修改&lt;code&gt;layouts\partials&lt;/code&gt;中的&lt;code&gt;sidebar.html&lt;/code&gt;文件&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;aside class=&amp;quot;sidebar&amp;quot;&amp;gt;
+  &amp;lt;div class=&amp;quot;container sidebar-sticky&amp;quot;&amp;gt;
+    &amp;lt;div class=&amp;quot;sidebar-about&amp;quot;&amp;gt;
+      &amp;lt;a href=&amp;quot;{{ .Site.BaseURL }}&amp;quot;&amp;gt;&amp;lt;h1&amp;gt;{{ .Site.Title }}&amp;lt;/h1&amp;gt;&amp;lt;/a&amp;gt;
+      &amp;lt;p class=&amp;quot;lead&amp;quot;&amp;gt;
+      {{ with .Site.Params.description }} {{.}} {{ else }}An elegant open source and mobile first theme for &amp;lt;a href=&amp;quot;http://hugo.spf13.com&amp;quot;&amp;gt;hugo&amp;lt;/a&amp;gt; made by &amp;lt;a href=&amp;quot;http://twitter.com/mdo&amp;quot;&amp;gt;@mdo&amp;lt;/a&amp;gt;. Originally made for Jekyll.{{end}}//修改这一段内容，从{{ else }}开始，到{{end}}结束
+      &amp;lt;/p&amp;gt;
+    &amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我修改后的内容为：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{{ with .Site.Params.description }} {{.}} {{ else }}档案库与仓储间{{end}}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;修改底部版权行&lt;/strong&gt;：  在同一个文件的下半部分，修改&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    &amp;lt;nav&amp;gt;
+      &amp;lt;ul class=&amp;quot;sidebar-nav&amp;quot;&amp;gt;
+        &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;{{ .Site.BaseURL }}&amp;quot;&amp;gt;Home&amp;lt;/a&amp;gt; &amp;lt;/li&amp;gt;
+        {{ range .Site.Menus.main -}}
+          &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;{{.URL}}&amp;quot;&amp;gt; {{ .Name }} &amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+        {{- end }}
+      &amp;lt;/ul&amp;gt;
+    &amp;lt;/nav&amp;gt;
+
+    &amp;lt;p&amp;gt;{{ with .Site.Params.copyright }}{{.}}{{ else }}&amp;amp;copy; {{ now.Format &amp;quot;2006&amp;quot;}}. All rights reserved. {{end}}&amp;lt;/p&amp;gt; //修改这一段
+  &amp;lt;/div&amp;gt;
+&amp;lt;/aside&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我修改后的内容为：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;p&amp;gt;{{ with .Site.Params.copyright }}{{.}}{{ else }}&amp;amp;copy; {{ now.Format &amp;quot;2006&amp;quot;}}. Reading for pleasure. {{end}}&amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;修改日期样式&#34;&gt;修改日期样式&lt;/h4&gt;
+&lt;p&gt;修改&lt;code&gt;layouts/index.html&lt;/code&gt;中下面这一段&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  &amp;lt;time datetime=&amp;quot;{{ .Date.Format &amp;quot;2006-01-02T15:04:05Z0700&amp;quot; }}&amp;quot; class=&amp;quot;post-date&amp;quot;&amp;gt;{{ .Date.Format &amp;quot;Mon, Jan 2, 2006&amp;quot; }}&amp;lt;/time&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其中&lt;code&gt;Mon, Jan 2, 2006&lt;/code&gt;可以按照自己喜欢的方式进行修改，它会显示在Blog主页，以及文章页面的下方。&lt;/p&gt;
+&lt;p&gt;（比较偷懒的方式修改思路是也可以在VScode中搜索&lt;code&gt;Mon, Jan 2, 2006&lt;/code&gt;然后逐个文件进行替换，这种替换式的修改思路适用于很多部分的自定义，如果懒得学更多的话）&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;删掉read-more&#34;&gt;删掉Read More…&lt;/h4&gt;
+&lt;p&gt;如果觉得每篇文章下面的Read More不好看，可以删掉，位置同样在&lt;code&gt;layouts/index.html&lt;/code&gt;文件中，修改&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  &amp;lt;div class=&amp;quot;read-more-link&amp;quot;&amp;gt;
+    &amp;lt;a href=&amp;quot;{{ .RelPermalink }}&amp;quot;&amp;gt;Read More…&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;直接删除&lt;code&gt;Read More…&lt;/code&gt;就不会再显示在页面上——觉得这么删不干净？万一哪天想再加回来呢？&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;紧急插入先写个文章&#34;&gt;紧急插入：先写个文章！&lt;/h3&gt;
+&lt;p&gt;理论上下一步应该是把Blog上传到Github……但是这还一篇文章都没有呢！先写一篇！&lt;/p&gt;
+&lt;p&gt;指令是：&lt;code&gt;Hugo new posts/新文章名.md&lt;/code&gt;，在根目录下输入，就会在&lt;code&gt;content\posts&lt;/code&gt;里看到新建的md文件。其中比较需要注意的是Front Matter&lt;/p&gt;
+&lt;p&gt;Front Matter是文章最上方以&amp;mdash; 分隔的区域，用于指定个别文件的变量，简单来说，它负责指定每篇文章的日期、目录、Tag等等属性。每次使用&lt;code&gt;Hugo new posts/新文章名.md&lt;/code&gt;指令生成一篇新文章，它都会在最上方出现。可以通过编辑&lt;code&gt;archetypes&lt;/code&gt;文件夹中的&lt;code&gt;default.md&lt;/code&gt;来指定 Front Matter模板&lt;/p&gt;
+&lt;p&gt;我的Front Matter一般长这个样子：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;---
+title: &amp;quot;{{ replace .Name &amp;quot;-&amp;quot; &amp;quot; &amp;quot; | title }}&amp;quot; //文章标题
+date: {{ .Date }} //自动生成日期
+toc: true //打开目录：有的主题有，比如Eureka。但Hyde似乎没有目录
+tags:
+  - Hugo //文章tag
+categories:
+  - 麻瓜快速念咒互助小组  //文章分类
+series:  //系列，我用得很少
+draft: true //是否为草稿，如果不是，把true改成false
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;通过这个可以玩一些比较投机取巧的花招，比如以Hyde的设计，在侧栏做标签归档或者分类归档会有点麻烦，我用了一个简单点的办法：一般分类的页面地址格式是&lt;code&gt;https://网站域名/categories/分类名/&lt;/code&gt;，于是我们指定每篇文章的其中一个分类为2021，再修改根目录下config.toml文件中的这一段：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Menus]
+
+  main = [
+      {Name = &amp;quot;2021&amp;quot;, URL = &amp;quot;http://ink.mantyke.icu/categories/2021/&amp;quot;}
+  ]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;铛铛铛铛，一个2021年的文章归档页就这么出现了。&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;另一个类似思路的偷奸耍滑小技巧：Hugo支持以Markdown语法来写文章，而Markdown语法又支持html语言，于是我们可以用&lt;code&gt;&amp;lt;!-more--&amp;gt;&lt;/code&gt;来解决首页文章预览的问题，在内容最上方写一个&lt;code&gt;&amp;lt;!-more--&amp;gt;&lt;/code&gt;，首页就会只显示文章标题。&lt;/p&gt;
+&lt;p&gt;以及，可以用&lt;code&gt;&amp;lt;br /&amp;gt;&lt;/code&gt;和&lt;code&gt;&amp;amp;emsp;&lt;/code&gt;来写空白行，但在不同主题里适用范围不一样，Hyde主题似乎只适用后一个。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;上传到github&#34;&gt;上传到Github&lt;/h3&gt;
+&lt;p&gt;这个部分之前写的文章里有，可以参考：&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/posts/f185ce41/#%E7%BE%BD%E5%8A%A0%E8%BF%AA%E5%A7%86-%E5%8B%92%E7%BB%B4%E5%A5%A5%E8%90%A8&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Alola World | 暨简明麻瓜快速念咒 Hugo 搭建笔记 | 小球飞鱼&lt;/a&gt; 中的过程来操作，需要注意的是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;由于使用Vercel进行自动部署，因此不需要输入&lt;code&gt;Hugo&lt;/code&gt;命令生成静态页面，也不需要&lt;code&gt;cd public&lt;/code&gt;，这一步可以跳过。&lt;/li&gt;
+&lt;li&gt;由于这次搭建是从Github上先下载仓库到本地，再在本地进行修改，最终上传回Github，有可能出现推不上去的情况，可以在第一次推送时使用&lt;code&gt;git push -f orgin master&lt;/code&gt;指令，强制让本地端内容覆盖远程端。&lt;/li&gt;
+&lt;li&gt;自动部署可以达成的效果是：在线编辑Github中的仓库内容，自动更新到网站中。所以如果之后只更新文章，不再修改网站主题等设置的话，之后的文章可以直接在Github中写，或者只上传md文件到相应目录，本地端推送流程只需要一开始做一次就行（但最好还是掌握一下）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以及以下是我经常会用到的Git教程：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/book/zh/v2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Git | Git Book&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitbook.tw/chapters/branch/using-branch.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;開始使用分支 - 為你自己學 Git | 高見龍&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitbook.tw/chapters/github/push-to-github.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Push 上傳到 GitHub - 為你自己學 Git | 高見龍&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitbook.tw/chapters/github/fail-to-push.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【狀況題】怎麼有時候推不上去&amp;hellip; - 為你自己學 Git | 高見龍&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;葱花蒜末起锅&#34;&gt;葱花蒜末起锅&lt;/h2&gt;
+&lt;p&gt;一开始写这篇觉得它有点像期末作业，半个月来，从几乎什么都不懂，到多多少少学了一些，再重头再走一遍建站流程，我自己还挺感慨的。&lt;/p&gt;
+&lt;p&gt;建站笔记系列前前后后写了两万多字，到这里应该也可以告一段落了。我将写过的相关文章索引于下，如果有人打算跟着这篇文章学着建立自己的Hugo站点，又因为这篇文章里简写了一些内容而疑惑不解，那么也许可以从这几篇（尤其是其中引用的教程）中找到思路：&lt;/p&gt;
+&lt;p&gt;最初的建站笔记：&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/posts/f185ce41/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Alola World | 暨简明麻瓜快速念咒 Hugo 搭建笔记&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;后续的陆续修改：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/posts/a1af34e4/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo | 在 Hugo-Eureka 模板中加入字数统计&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/posts/2f0f8e23/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo | 一系列基于 Eureka 模板进行的 Blog 自定义&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/posts/7e64c334/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo | 为 Blog 添加自定义域名 &lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;有关于自动部署：&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu/posts/68390745/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo | 用 Vercel 完成 blog 自动化部署&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;差不多就这样，嘟嘟！&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Hugo | 用Vercel完成blog自动化部署</title>
+        <link>https://mantyke.icu/2021/68390745/</link>
+        <pubDate>Sun, 05 Sep 2021 16:21:05 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/68390745/</guid>
+        <description>&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;一些没必要的起因&#34;&gt;一些没必要的起因&lt;/h2&gt;
+&lt;p&gt;一开始其实没想装自动化，一是Hugo更新比Hexo快得多，也没有很麻烦，当我弄明白可以不删除Public文件夹之后，更是只剩下复制粘贴一下命令行的步骤；二是搜索“Hugo 自动化部署”出来的文章太多，工具也太多，偏偏也都没怎么太说明白，我看自动化部署犹如雾里看花越看越暗香浮动月黄昏，美则美矣，一头雾水；三是我总对自己的校对能力有不切实际的自信，怎么会有人天天写错别字呢！！&lt;/p&gt;
+&lt;p&gt;——有啊，我。&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;一篇文章连改六回还是有错别字和格式问题之后我跌跌撞撞地又打开了Google，这次学乖了，既然Hugo这边没有能把我教明白的，那我去隔壁Hexo偷偷师嘛！这一偷还真给我偷到了，隔壁Hexo还真的有一篇把原理讲得非常好的文章（&lt;a class=&#34;link&#34; href=&#34;https://juejin.cn/post/6943895271751286821&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何使用 GitHub Actions 自动部署 Hexo 博客&lt;/a&gt;），仔细读了七八遍之后有了一些没来由的膨胀，感觉可以动手了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;自动化部署是什么&#34;&gt;自动化部署是什么&lt;/h2&gt;
+&lt;p&gt;上面那篇文章已经讲得很好，总体而言，就是使用一系列自动化工具，实现“在Github上修改Blog源文件”→“工具自动进行编译和部署”→“打开网站，发现已经更新到了Blog上”这个过程。&lt;/p&gt;
+&lt;p&gt;其中第二步是不需要人来参与的，因此整体流程非常舒服，不但改个错别字（只需要打开Github改一下MD）很方便，也解决了在非常用电脑环境下想更新Blog的问题，嘛，比如出去旅游当晚想写个游记，又发现没带笔记本电脑。&lt;/p&gt;
+&lt;p&gt;目前我看到的自动化部署工具有好几种，最常见的是Github Action，利用Github自己的工作流进行部署，需要两个仓库或者两个分支，一个储存Blog源文件（根目录下所有的文件），另一个作为静态页面仓库（Public文件夹）。除此之外比较常见的有Travis CI、Webhook、Nginx等等，我没都看，但猜想应该都是一些自动化部署服务。我最后选用了Vercel，性质上应该和这几个很类似。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;为什么选vercel&#34;&gt;为什么选Vercel&lt;/h2&gt;
+&lt;p&gt;最直接的原因是写了半天没写对Github Action的配置，花样跑不动，愤而放弃了Github Action。&lt;del&gt;但是这么说也太逊了&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;另外一个原因是之前做Blog文章字数统计的时候请教过的&lt;a class=&#34;link&#34; href=&#34;https://imnerd.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;怡红院落&lt;/a&gt;给我推荐了Vercel，我研究过一阵子，也大概走了走流程，非常简单。所以感情上也比较偏向于用Vercel而不是更陌生的服务来解决问题。哇他人真的好好，这次出错的原因特别刁钻，也多亏了他帮忙找到问题所在，不然我可能还要想十个小时……&lt;/p&gt;
+&lt;p&gt;最后就是我始终还是不太喜欢公开Blog仓库的感觉，Vercel可以在授权的情况下读取隐私仓库。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;使用vercel进行自动部署&#34;&gt;使用Vercel进行自动部署&lt;/h2&gt;
+&lt;p&gt;这部分想直接引用几篇我参考的文章，因为实在没什么好说的——如果不是像我一样报了那么多错的话，大概五分钟就解决问题了。&lt;/p&gt;
+&lt;p&gt;流程上的话，我自己用的方法是这样的&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在Github上新建一个仓库，Push Hugo Blog的源文件上去。这里我为了方便起见分支和服务器节点名字都用了新的&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git init
+git remote add vercel github仓库地址 //这里的vercel是服务器简称，可以随便换一个
+git push vercel main //用main分支的目的是和push public文件夹的分支（master）区别分开，记得提前在Github上设置好
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用Github登录Vercel，在Vercel上新建一个项目，在Let&amp;rsquo;s build something new页面左边的Import Git Repository，直接Import仓库。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;跳过Create a Team，Configure Project选项中选择FRAMEWORK PRESET为Hugo，Build and Output Settings里覆盖BUILD COMMAND为&lt;code&gt;hugo --gc&lt;/code&gt;（官方的默认命令会编译草稿文件），同时Vercel的Hugo版本比较老，所以需要在Environment Variables选项卡里指定环境变量，在NAME栏中填写&lt;code&gt;HUGO_VERSION&lt;/code&gt;，&lt;code&gt;VALUE (WILL BE ENCRYPTED)&lt;/code&gt;栏填写版本号（我填写的是0.78.1），点击添加&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点Deploy，等它走完一系列流程&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630839455/20210905_tiku1z.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;结束了，接下来可以去Github仓库试试看自动编译部署能不能运行，随便修改一个posts文件夹里的MD文章，然后刷新Vercel分配的网址看看是不是已经修改了。成功的话Go to Dashboard，点击Setting-Domains绑定一下自己的域名就可以了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://imnerd.org/hugo-start.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo 之旅&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://segmentfault.com/a/1190000040063325&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Vercel 上自动部署你的个人博客 Hugo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;妈妈我登上月球了&#34;&gt;妈妈，我登上月球了&lt;/h2&gt;
+&lt;p&gt;直接控诉我报过的错的话这篇文章就会充满了涕下沾襟的哭诉，但是我不想每次回顾这篇文章都被从前的自己折磨一遍，所以还是长话短说。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;无法找到模板&#34;&gt;无法找到模板&lt;/h3&gt;
+&lt;p&gt;Deploy时在Buliding阶段报错，报错为：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Error: module &amp;quot;eureka&amp;quot; not found; either add itas a Hugo Module or store it in&amp;quot;/verce1/path0/themes &amp;quot;.: module does not exist
+Error:Command &amp;quot;hugo -D --gc&amp;quot; exited with 255
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;原因&lt;/strong&gt;：这是由于之前采用了&lt;code&gt;git submodule&lt;/code&gt;的方式下载了主题的原因，如果使用&lt;code&gt;git submodule&lt;/code&gt;，将Blog源代码上传到Github仓库的时候，Github会识别主题文件自动跳转到作者的主题仓库，或者识别为一个子模块（文件夹上显示一个白色箭头）。这时候Vercel会无法识别。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：删除原来的主题文件夹，直接下载主题文件并复制到&lt;code&gt;themes/主题文件名&lt;/code&gt;里面。（所以之前自定义Blog的时候直接在根目录下进行设置非常重要，否则只能哭着重新来一遍了），注意&lt;code&gt;themes/主题文件名&lt;/code&gt;这里的名称要和&lt;code&gt;\config\_default\config.yaml&lt;/code&gt;里的theme名保持一致。比如如果&lt;code&gt;config.yaml&lt;/code&gt;里是&lt;code&gt;theme: eureka&lt;/code&gt;，那么文件夹就要建立为&lt;code&gt;themes/eureka&lt;/code&gt;。最后重新push一遍到仓库。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;站点依赖项&#34;&gt;站点依赖项&lt;/h3&gt;
+&lt;p&gt;Deploy时在Buliding阶段报错，报错为：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Error: add site dependencies: load resources: loading templates: &amp;quot;/vercel/path0/layouts/docs/doc_list.html:3:1&amp;quot;: parse failed: template: docs/doc_list.html:3: function &amp;quot;warnf&amp;quot; not defined
+
+Error: Command &amp;quot;hugo -D --gc&amp;quot; exited with 255
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;原因&lt;/strong&gt;：这是最坑的地方…………这里是环境变量设置问题，Vercel本身默认的Hugo版本比较老，与我使用的Eureka模板不兼容，因此要在Environment Variables选项卡里指定环境变量。但指定了环境变量之后就会发现，不管是指定我安装时候的0.88.0版本，还是指定目前Hugo最新的&lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/news/0.88.1-relnotes/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;0.88.1&lt;/a&gt;版本，都还是会报这个错！！还是会报这个错！！！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：这是因为……版本太新了……指定个……老一点的……版本……就……好……了……比如我们可以用……0.78.1！……就能用……就不会报错了……怎么会这样……怎么会这样啊…………&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;绑定域名&#34;&gt;绑定域名&lt;/h2&gt;
+&lt;p&gt;完成了以上步骤以后，Vercel会给新的Blog分配一个很长很难看的新地址，所以下一步就是绑定我自己购买的域名。&lt;/p&gt;
+&lt;p&gt;进入项目，点击Setting-Domains，输入自己的域名（记得之前把它和github.io解绑），点击添加，然后它会提供两个重定向的选择，我都用不上，所以只选了最下面一个Add mantyke.icu。之后在域名商那里绑定它提供的DNS。&lt;/p&gt;
+&lt;p&gt;这时候视情况，网站会显示&lt;code&gt;lnvalid Configuration&lt;/code&gt;报错。这个不用管，它需要一点时间来生效。我这边大概前后过了半个小时的样子就可以用了。当然也可以用ping地址的方式来检查，如果数据还是从之前的github.io地址来走，就是没生效，等等就好。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;最后我恍然大悟&#34;&gt;最后，我恍然大悟&lt;/h2&gt;
+&lt;p&gt;我折腾Blog装修这么起劲，究其原因，还是要追溯到小时候都在玩论坛和不老歌等等，没有充分享受过QQ空间的装修乐趣，因此需要一定心理补偿。&lt;/p&gt;
+&lt;p&gt;……一定就是这样没错啦！&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Hugo | 为Blog添加自定义域名</title>
+        <link>https://mantyke.icu/2021/7e64c334/</link>
+        <pubDate>Tue, 31 Aug 2021 19:19:29 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/7e64c334/</guid>
+        <description>&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;在哪儿买&#34;&gt;在哪儿买&lt;/h2&gt;
+&lt;p&gt;一开始挑域名是跑去了著名的去你爸爸……咳，不是，是GoDaddy，当时是看中它有繁中，语言上没障碍，比较好浏览和比价，结果挑着挑着忽然发现，原来只有第一年有优惠，第二年价格飞速上涨……我大受震撼并且放弃了一些打算。&lt;/p&gt;
+&lt;p&gt;顺便：GoDaddy算是个什么名字啊！！！！&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;晨星：我去搜了它为啥叫GoDaddy，说是一开始是想致敬喜剧电影Big Daddy（冒牌老爹），但Big Daddy的名字被占了，所以……&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最终是选了&lt;a class=&#34;link&#34; href=&#34;https://www.dynadot.com/?s8i71Cx8U6h9W8u&amp;amp;fbclid=IwAR0IuR9hQp_qV-xo0sTKW7lxEkJDnwD8jSiAq1dYrPFqmIT8K8woL0wrq68&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Dynadot&lt;/a&gt;，相比而言，网站内部自带中文（太好了我就不爱看英文），价格比较透明（明确列出首年和次年续费价格），支持以人民币显示价格，甚至可以用支付宝付款。&lt;/p&gt;
+&lt;p&gt;好！鼓掌！就它了！&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;一些象群朋友的推荐&#34;&gt;一些象群朋友的推荐~&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.domcomp.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Domain Availability and Price&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zh-hans.tld-list.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;另一个比价网站&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;逛菜市场&#34;&gt;逛菜市场&lt;/h2&gt;
+&lt;p&gt;不得不说，逛Dynadot的体验真的有点像逛菜市场。&lt;/p&gt;
+&lt;p&gt;一长串域名整整齐齐乖乖巧巧地罗列在那儿，身上贴好首年优惠价和次年续期价，不由自主地就会让人联想到新鲜，水灵，和超市折扣大减价。&lt;/p&gt;
+&lt;p&gt;而我尽看一些稀奇古怪的东西，比如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;.date，首年34，续费也是34，.dating，首年104，续费284。足以说明很多问题了，朋友们，千金难买正在进行时啊。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;又比如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;.sexy，首年222，次年218，.porn和.sex都是588，甚至.adult也是588，怎么说呢，只好说人类真是一种直接的生物。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;而日本人总是剑走偏锋的，.moe后面标着用途是日本粉丝网站，你说这刻板印象，上哪儿说理去。&lt;/p&gt;
+&lt;p&gt;挑挑选选到后来（.club好可爱，.life我也喜欢，.cafe超绝无敌可爱），在决赛轮征求了一下朋友们的意见&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我：决赛轮，mantyke.cc还是mantyke.icu&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我的H1：icu&lt;/p&gt;
+&lt;p&gt;我：我也喜欢，含义丰富，但是总觉得哪里怪怪。&lt;/p&gt;
+&lt;p&gt;我的H1：抢救你的心？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;shioko：icu&lt;/p&gt;
+&lt;p&gt;shioko：你是学者。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;域名商：icu也可以是I SEE YOU&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;完全被说服了。&lt;/p&gt;
+&lt;p&gt;好，那就icu了，现代人谁不需要一个便携icu呢？&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;设置域名&#34;&gt;设置域名&lt;/h2&gt;
+&lt;h3 id=&#34;注册账号&#34;&gt;注册账号&lt;/h3&gt;
+&lt;p&gt;注册账号的时候会索要很详细的资料包括手机号码什么的，手机号不会用来验证，shioko说可能快到期了会发个短信通知一下，地址随便填也可以，精确到省份似乎就OK，总之看上去很凶其实还蛮随意的&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;配置github&#34;&gt;配置github&lt;/h3&gt;
+&lt;p&gt;买好后打开博客的&lt;code&gt;Github&lt;/code&gt;仓库，进入&lt;code&gt;setting&lt;/code&gt;设置，点开倒数第二项&lt;code&gt;Pages&lt;/code&gt;，在&lt;code&gt;Custom domain&lt;/code&gt;处输入购买的域名，点&lt;code&gt;save&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;回到github仓库，新建一个文件，标题写&lt;code&gt;CNAME&lt;/code&gt;，里面写上域名，不需要加https://，只需要填后面的部分。&lt;/p&gt;
+&lt;p&gt;开始菜单点击运行，输入&lt;code&gt;cmd&lt;/code&gt;，打开&lt;code&gt;cmd&lt;/code&gt;，在命令行窗口里输入&lt;code&gt;ping “你的blog地址”&lt;/code&gt;，这里注意是之前的Blog地址，比如&lt;code&gt;xxx.github.io&lt;/code&gt;，把网站IP记下来。&lt;/p&gt;
+&lt;p&gt;打开Dynadot域名设置，找到DNS设置，打开，在域名设置部分填写刚刚Ping出的IP地址，记录类型选A。保存后网页底部会跳出“自定义DNS已更改”，这就改好了。&lt;/p&gt;
+&lt;p&gt;做完上面几步之后理论上域名就设置好了，这个时候需要等一段时间的DNS缓存，Github会自动帮忙申请Https证书。我是过了四五分钟就可以用新的域名打开Blog了，可能视情况也有等的久的。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;一些惊慌失措&#34;&gt;一些惊慌失措&lt;/h3&gt;
+&lt;p&gt;刚刚配置好的域名，很可能会在浏览器上显示警告“不安全”，我猜是由于Https证书还没到位，稍等一段时间就可以。需要的话可以在Github仓库的&lt;code&gt;page&lt;/code&gt;页勾选最下面的&lt;code&gt;Enforce HTTPS&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;我还碰见了刚申请完的半个小时域名一直无法使用Https，只能用http打开的情况，也是等一等就好了，非常神秘。&lt;/p&gt;
+&lt;p&gt;github page可能会显示一条黄色警告&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;www.站点域名 is improperly configured
+Domain&#39;s DNS record could not be retrieved. For more information, see Learn more (InvalidDNSError). We recommend you change this to a CNAME record pointing to 站点名称.github.io
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这时候可以把Dynadot域名设置里的DNS设置换一下，改成“站点名称.github.io”，类型选择CNAME，注意CNAME类型不能与A类型共存，两者只能有一个。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;shioko：A对应IP，cname对应跳转域名&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;虽然我感觉好像不管也没什么问题……&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;善后工作&#34;&gt;善后工作&lt;/h2&gt;
+&lt;p&gt;配置完自定义域名后Blog本地仓库推送到远程仓库就出现了一点问题，输入&lt;code&gt;git push -u origin master&lt;/code&gt;时显示&lt;img src=&#34;https://i.loli.net/2021/08/31/hf4mcaCqXvT8Fe9.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;应该是由于Github仓库多了一个CNAME文件，和本地库不同步导致的。读了读&lt;a class=&#34;link&#34; href=&#34;https://gitbook.tw/chapters/github/fail-to-push.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【狀況題】怎麼有時候推不上去…&lt;/a&gt;找到了解决方案，我用了先拉后推的选项，先输入&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git pull --rebase
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;這裡加了 &lt;code&gt;--rebase&lt;/code&gt; 參數是表示「內容抓下來之後請使用 Rebase 方式合併」，當然你想用一般的合併方式也沒問題。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然后再用&lt;code&gt;git push -u origin master&lt;/code&gt;推送。&lt;/p&gt;
+&lt;p&gt;另外一个问题是采用原来的推送部署方法就会一直多需要这一步，挺麻烦的，我的解决方案是不再删除&lt;code&gt;Public&lt;/code&gt;文件夹下的文件，用&lt;code&gt;Hugo&lt;/code&gt;构建网站后直接推送，就能够解决了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Hugo | 一系列基于Eureka模板进行的Blog自定义</title>
+        <link>https://mantyke.icu/2021/2f0f8e23/</link>
+        <pubDate>Sun, 29 Aug 2021 11:15:09 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/2f0f8e23/</guid>
+        <description>&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;修改目录渲染层级&#34;&gt;&lt;strong&gt;修改目录渲染层级&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;这事儿比较尴尬，因为模板本身提供的目录渲染就是从H2开始，但我总觉得写起来怪怪，就给它改成了从H1开始渲染。&lt;/p&gt;
+&lt;p&gt;……后来发现是怎么回事了，这个H1标题字号，它比标题要大啊！！！！！&lt;/p&gt;
+&lt;p&gt;于是又哭着准备给它改回来……&lt;/p&gt;
+&lt;p&gt;修改地址在根目录的&lt;code&gt;config\_default&lt;/code&gt;下，修改&lt;code&gt;markup&lt;/code&gt;参数。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;markup:
+  # Do not modify markup.highlight
+  highlight:
+    codeFences: false
+    noClasses: false
+  tableOfContents:
+    startLevel: 1  ##从一级标题开始渲染
+    endLevel: 6  ##最多支持六级标题
+    ordered: false
+  goldmark:
+    renderer:
+      unsafe: true
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;添加归档界面&#34;&gt;添加归档界面&lt;/h2&gt;
+&lt;p&gt;这个界面是学习为&lt;a class=&#34;link&#34; href=&#34;https://xbc.me/how-to-create-an-archives-page-with-hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hugo添加归档页面&lt;/a&gt;的步骤做的，放在了blog 的关于栏里，对应根目录下的&lt;code&gt;content\docs\example-doc&lt;/code&gt;文件夹。先新建一个md文件，然后Front Matter部分这么写：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;---
+title: &amp;quot;文章归档&amp;quot;
+layout: archives
+hidden: true
+type: posts
+summary: 历史文章按照年月归档.
+url: /archives/
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;打开&lt;code&gt;themes\eureka\layouts\_default&lt;/code&gt;文件夹，找到&lt;code&gt;single.html&lt;/code&gt;，再打开根目录下&lt;code&gt;layouts\_default&lt;/code&gt;文件夹，新建一个&lt;code&gt;archives.html&lt;/code&gt;。把之前&lt;code&gt;single.html&lt;/code&gt;的所有内容都复制到&lt;code&gt;archives.html&lt;/code&gt;里，接下来主要修改&lt;code&gt;archives.html&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;找到&lt;code&gt;{{ .Content }}&lt;/code&gt; 字段，删除以下代码段&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;        &amp;lt;/div&amp;gt;
+        {{ with .GetTerms &amp;quot;tags&amp;quot; }}
+        {{ partial &amp;quot;components/post-tags&amp;quot; . }}
+        {{ end }}
+        
+        {{ partial &amp;quot;components/post-edit&amp;quot; . }}
+        
+        {{ with .GetTerms &amp;quot;authors&amp;quot; }}
+        {{ partial &amp;quot;components/post-author&amp;quot; . }}
+        {{ end }}
+        
+        {{ partial &amp;quot;components/post-footer&amp;quot; . }}
+        {{ partial &amp;quot;comment.html&amp;quot; . }}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;再在&lt;code&gt;{{ .Content}}&lt;/code&gt;的下方加入这么一段&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{{ range (.Site.RegularPages.GroupByDate &amp;quot;2006&amp;quot;) }}
+    &amp;lt;h3&amp;gt;{{ .Key }}&amp;lt;/h3&amp;gt;
+
+        &amp;lt;ul class=&amp;quot;archive-list&amp;quot;&amp;gt;
+        {{ range (where .Pages &amp;quot;Type&amp;quot; &amp;quot;post&amp;quot;) }}
+            &amp;lt;li&amp;gt;
+            {{ .PublishDate.Format &amp;quot;2006-01-02&amp;quot; }}
+            -&amp;gt;
+            &amp;lt;a href=&amp;quot;{{ .RelPermalink }}&amp;quot;&amp;gt;{{ .Title }}&amp;lt;/a&amp;gt;
+            &amp;lt;/li&amp;gt;
+        {{ end }}
+    &amp;lt;/ul&amp;gt;
+{{ end }}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;打开hugo server预览，已经能看到归档页面了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;这里主要踩到的坑是下面这句&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;找到{{ .Content }} 这段内容替换为下面的内容:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我当时误解为只需要替换&lt;code&gt;{{ .Content}}&lt;/code&gt;，但实际操作发现，只替换这一段也可以生成归档界面，但会在年月日的归档下方再生成一个Previous栏。经过两边复制粘贴对比大法检验，Previous栏是原&lt;code&gt;single.html&lt;/code&gt;文件内容带过来的，这才找到应该删除哪部分内容。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;另外：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;{{ .PublishDate.Format &amp;quot;2006-01-02&amp;quot; }}&lt;/code&gt;可以自行配置，如果只想归档显示年-月，改成&lt;code&gt;2006-01&lt;/code&gt;。我改成了&lt;code&gt;01月02日&lt;/code&gt;，这样可以显示出中文，注意不能改成01月01日或者01月03日什么的，都会导致没法正确读取。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;把&lt;code&gt;archives.html&lt;/code&gt;放在根目录的&lt;code&gt;layouts\_default&lt;/code&gt;文件夹下主要是以备后续模板更新，这一步是Zero教我的，赞美她！&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;忍不住插个嘴，不建议直接改人家的主题，更好的做法是复制到主目录下进行修改. 比如这篇文章说新建 themes/xxx/layouts/_default/archives.html，那你就可以直接新建到 layouts/_default/archives.html，这个 layouts 和 themes、content 都是平级的. hugo 会用你主目录下的东西去覆盖主题里的东西，这样主题更新的时候也能跟着更新，不用担心主题把你自己的东西覆盖没了.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;添加不蒜子统计&#34;&gt;添加不蒜子统计&lt;/h2&gt;
+&lt;p&gt;这个很简单，参考的是不蒜子自己的&lt;a class=&#34;link&#34; href=&#34;http://ibruce.info/2015/04/04/busuanzi/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我只添加了全站统计，放在页面最底部，使用了喜欢的图标来代替“访客数”和“阅览数”。按照文档要求，先引入&lt;code&gt;busuanzi.js&lt;/code&gt;，位置在layouts\partials\head.html，一路拉到最下面，粘贴文档提供的代码：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;script async src=&amp;quot;//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&amp;quot;&amp;gt;
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后开始做自定义修改，具体修改的是&lt;code&gt;layouts\partials\footer.html&lt;/code&gt;文件，把之前的内容替换如下即可&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;text-center p-6 pin-b&amp;quot;&amp;gt;
+    &amp;lt;p class=&amp;quot;text-sm text-tertiary-text&amp;quot;&amp;gt;{{ with .Site.Copyright }}{{ replace . &amp;quot;{year}&amp;quot; now.Year | safeHTML }} &amp;amp;middot; {{ end }} &amp;lt;i class=&amp;quot;fas fa-hat-wizard&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;span id=&amp;quot;busuanzi_value_site_uv&amp;quot;&amp;gt;&amp;lt;/span&amp;gt; &amp;amp;middot; &amp;lt;/a&amp;gt; &amp;lt;i class=&amp;quot;fas fa-cloud-meatball&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;span id=&amp;quot;busuanzi_value_site_pv&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其中，&lt;code&gt;&amp;lt;i class=&amp;quot;fas fa-hat-wizard&amp;quot;&amp;gt;&lt;/code&gt;样式的，是图标名称，使用&lt;a class=&#34;link&#34; href=&#34;https://fontawesome.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Font Awesome&lt;/a&gt;图标库，选择喜欢的图标，点开，在网页上copy html，再粘贴到文件里就可以使用了。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;span id=&amp;quot;busuanzi_value_site_pv&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;&lt;/code&gt;指总访问量，一名访客点击多个页面，统计多次。&lt;code&gt;&amp;lt;span id=&amp;quot;busuanzi_value_site_uv&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;&lt;/code&gt;指访客数，即一名访客点击多次页面，只统计一次。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;amp;middot&lt;/code&gt;是间隔号的意思。&lt;/p&gt;
+&lt;p&gt;（注：hugo server预览的时候，计数部分显示八位数是正确的，我刚开始搞以为不对，还折腾了一会……）&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;补充优化内容&#34;&gt;补充优化内容&lt;/h3&gt;
+&lt;p&gt;一开始我是让页面统计完全替代原有的版权信息的，后来还是觉得不太好，思来想去还是有罪恶感，所以爬起来又修了一下。&lt;/p&gt;
+&lt;p&gt;现在的效果：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/08/31/Isk7lHZ2pEQ6tzM.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;把代码改成了：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;text-center p-6 pin-b&amp;quot;&amp;gt;
+    &amp;lt;p class=&amp;quot;text-sm text-tertiary-text&amp;quot;&amp;gt;{{ with .Site.Copyright }}{{ replace . &amp;quot;{year}&amp;quot; now.Year | safeHTML }} &amp;amp;middot; {{ end }} &amp;lt;i class=&amp;quot;fas fa-hat-wizard&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;span id=&amp;quot;busuanzi_value_site_uv&amp;quot;&amp;gt;&amp;lt;/span&amp;gt; &amp;amp;middot; &amp;lt;/a&amp;gt; &amp;lt;i class=&amp;quot;fas fa-cloud-meatball&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;span id=&amp;quot;busuanzi_value_site_pv&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+    &amp;lt;p class=&amp;quot;text-sm text-tertiary-text&amp;quot;&amp;gt;{{ with .Site.Copyright }}{{ end }} Powered by the &amp;lt;a href=&amp;quot;https://github.com/wangchucheng/hugo-eureka&amp;quot; class=&amp;quot;hover:text-eureka&amp;quot;&amp;gt;Eureka&amp;lt;/a&amp;gt; theme for &amp;lt;a href=&amp;quot;https://gohugo.io&amp;quot; class=&amp;quot;hover:text-eureka&amp;quot;&amp;gt;Hugo&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;使手机端标题居中&#34;&gt;使手机端标题居中&lt;/h2&gt;
+&lt;p&gt;这一段完全是zero教我的，录她的教程如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;将&lt;code&gt;themes/eureka/layouts/partials/widgets/about.html&lt;/code&gt;复制到&lt;code&gt;Mantyke\layouts\partials\widgets/about.html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在第九行加入id=a-little-change（id后面的可以自己改下）&lt;/li&gt;
+&lt;li&gt;下面加入一段style，具体见图&lt;img src=&#34;https://i.loli.net/2021/08/31/Pd45t7z2a9ID1ZE.png&#34; alt=&#34;style&#34;  /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;吐槽：有一阵子明明没写错但是怎么都不生效，后来怒从心头起把文件删了，从主题文件夹里复制了一个新的过来改——然后它就成了。&lt;/p&gt;
+&lt;p&gt;实在令人摸不着头脑.JPG&lt;/p&gt;
+&lt;p&gt;另外这个文件下面的&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;   &amp;lt;div class=&amp;quot;flex items-center pt-4&amp;quot;&amp;gt;
+      {{ with or (.Params.role) (.Params.organizations)}}
+        &amp;lt;i class=&amp;quot;fas fa-map-marker-alt&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+      {{ end }}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;控制的是首页“艾欧泽亚 格里达尼亚”前的小符号，我改成了自己喜欢的地点标志。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;配置永久链接&#34;&gt;配置永久链接&lt;/h2&gt;
+&lt;p&gt;东看看西看看，觉得每篇文章的链接直接使用文件夹+文件名的格式，例如&lt;code&gt;https://mantyke.icu/posts/20210826-alola-world-暨简明麻瓜快速念咒hugo搭建笔记&lt;/code&gt;的格式很丑，于是考虑给每篇文章添加一个永久链接。&lt;/p&gt;
+&lt;p&gt;参考的教程是：&lt;a class=&#34;link&#34; href=&#34;https://blog.lxdlam.com/post/9cc3283b/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo 永久链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;过程倒是很简单，就不赘述了。中间倒是碰到一个小问题，即文中给出的&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;---
+#...
+slug: {{ substr (md5 (printf &amp;quot;%s%s&amp;quot; .Date (replace .TranslationBaseName &amp;quot;-&amp;quot; &amp;quot; &amp;quot; | title))) 4 8 }}
+#...
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;直接复制进相应文件，无法生成slug。&lt;/p&gt;
+&lt;p&gt;怎么办呢，我现在也学聪明了，我把前后包裹的行删了，只留下：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;slug: {{ substr (md5 (printf &amp;quot;%s%s&amp;quot; .Date (replace .TranslationBaseName &amp;quot;-&amp;quot; &amp;quot; &amp;quot; | title))) 4 8 }}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;非常好，成了。&lt;/p&gt;
+&lt;p&gt;要注意的是，配置过后，想要新文章自动生成永久链接，只能使用&lt;code&gt;hugo new posts/文章名.md&lt;/code&gt;的方式来新建文章，旧文章也不会自动生成slug，还好我旧文少，我吭哧吭哧新建了六篇新文章，把新文章的slug复制进了旧的（……）&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;调整每页文章数&#34;&gt;调整每页文章数&lt;/h2&gt;
+&lt;p&gt;模板默认的是每页4篇，我觉得太少了，改成了10篇&lt;/p&gt;
+&lt;p&gt;参数在&lt;code&gt;config\default\config.yaml&lt;/code&gt;，修改&lt;code&gt;paginate&lt;/code&gt;参数即可。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;加入盘古之白&#34;&gt;加入盘古之白&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://yihui.org/cn/2017/05/pangu/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;盘古之白：中英文之间自动加空格&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;路径为&lt;code&gt;layouts\partials\footer.html&lt;/code&gt;，加入以下代码：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;script&amp;gt;
+(function(u, c) {
+  var d = document, t = &#39;script&#39;, o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  o.src = u;
+  if (c) { o.addEventListener(&#39;load&#39;, function(e) { c(e); }); }
+  s.parentNode.insertBefore(o, s);
+})(&#39;//cdn.bootcss.com/pangu/3.3.0/pangu.min.js&#39;, function() {
+  pangu.spacingPage();
+});
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;google--analytics&#34;&gt;Google  Analytics&lt;/h2&gt;
+&lt;p&gt;这件事情其实有一些些尴尬，因为我也不是很清楚自己到底成功了没有，也不是很知道自己到底干了什么，更不知道到底准确不准确。&lt;/p&gt;
+&lt;p&gt;……但是我的&lt;a class=&#34;link&#34; href=&#34;https://analytics.google.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Google Anayltics&lt;/a&gt;上确实也出现数据了。&lt;/p&gt;
+&lt;p&gt;所以我先把我做了什么和参考的文章放在这里，总有一天我会弄明白的。&lt;/p&gt;
+&lt;p&gt;首先我参考了&lt;a class=&#34;link&#34; href=&#34;https://yurepo.tw/2021/03/hugo-%E6%B7%BB%E5%8A%A0-google-analytics-4-%E7%AD%86%E8%A8%98/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo 添加 Google Analytics 4 筆記&lt;/a&gt;，这篇非常有用，它指出了Hugo的0.82.0版本内置了&lt;a class=&#34;link&#34; href=&#34;https://support.google.com/analytics/answer/10089681?hl=zh-Hant&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Google Analytics 4&lt;/a&gt;支持，可以支持&lt;code&gt;G-&lt;/code&gt;开头的评价ID，现在网上很多类似的文章写的其实都是GA3，因此上来就让人找&lt;code&gt;UA&lt;/code&gt;-开头的追踪ID，这点挺烦恼的，因为我找了半天也没在现在的系统上找到追踪ID。&lt;/p&gt;
+&lt;p&gt;其次它也很明确地谈到了GA3和GA4的区别，并给出了设定流程。&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;具体的设定流程我则参考了这三篇文章：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://coreychen71.github.io/posts/2019-05/hugoaddgoogleanalytics/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo 加入 Google Analytics&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://immwind.com/google-analytics-for-hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;为 Hugo 配置 Google Analytics&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.uncletony.tw/2021/03/hugo_%E5%8A%A0%E5%85%A5google_analytics/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo 加入 Google Analytics 統計分析工具 與 SEO&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这几篇在我看来都是比较相似，所以我互相参照着来了，做了以下几步：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;以防万一，先去Vercel调整了环境变量，把变量从0.7.81改成0.82.0（我还挺担心不能用的，但是竟然能用，那为什么0.88.0不行啊……其实也可以再试试能不能0.88.0，但我有心理阴影了，我不敢试……）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;code&gt;config.toml&lt;/code&gt;里加入&lt;code&gt;googleAnalytics = &amp;quot;G-XXXXXXXXX&amp;quot;&lt;/code&gt;（这里有人说是&lt;code&gt;config.yml&lt;/code&gt;，但因为我看的其他文章都指名是&lt;code&gt;config.toml&lt;/code&gt;，按我最近倒腾Blog的理解，&lt;code&gt;config.toml&lt;/code&gt;也靠谱一点，就写了&lt;code&gt;config.toml&lt;/code&gt;）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;按教程新建&lt;code&gt;layout/_internal/google_analytics_async.html&lt;/code&gt;，加入代码段，这段代码段我就不PO了，实际上可以在Google Anayltics的管理-数据流-点击网站-全局网站代码 (gtag.js)界面中直接找到。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;最后在&lt;code&gt;partials/head/head.html&lt;/code&gt;里加入&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{{ if not .Site.IsServer }} //这一行用来防止它计入本地服务器的数据
+    {{ template &amp;quot;_internal/google_analytics_async.html&amp;quot; . }}
+{{ end }}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;总体流程大概就是这样，之后按照文章说明F12审查元素，其实我没有找到它说的&lt;code&gt;google_analytics_async.html&lt;/code&gt;，只有一行类似的，但是显示是红色，应该是报错……但是过了半个小时随手刷了一下Google Anayltics，它竟然有数据了。&lt;/p&gt;
+&lt;p&gt;再F12一下看到了这个&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;link rel=&amp;quot;preconnect&amp;quot; href=&amp;quot;https://www.google-analytics.com&amp;quot; crossorigin=&amp;quot;&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;猜想可能是需要花一点时间才能运行吧，总之还蛮玄学的。现在比较奇怪的一个问题是哪怕只查看一次页面，实时-查看次数里也会把次数计为三次，总之琢磨不明白就先这样了，整一个是乱七八糟。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;稍晚更新：我明白了是因为摸索的时候把代码反复写了几次，导致会重复计数。我重装了——花费两个小时。&lt;/p&gt;
+&lt;p&gt;以及很玄学的，这次重装后，网页F12审查看不到&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;link rel=&amp;quot;preconnect&amp;quot; href=&amp;quot;https://www.google-analytics.com&amp;quot; crossorigin=&amp;quot;&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;只能看到&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag(&#39;js&#39;, new Date());
+
+gtag(&#39;config&#39;, &#39;G-xxxxxxxx&#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;但是拿手机刷了刷，它又确实计入手机的浏览情况，并且报数正确了——网页好像又不计入进去。总之整个安装过程就笼罩在一些神秘的气氛里，我准备交给时间来解决一下。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;顺便在这里记一个很莫名其妙的BUG，往&lt;code&gt;config.toml&lt;/code&gt;里写代码的时候，&lt;code&gt;git add -A&lt;/code&gt;报错&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;warning: LF will be replaced by CRLF in 出错的文件名.
+The file will have its original line endings in your working directory.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;具体成因参照  &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/taiyangdao/article/details/78629107&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Git中的“LF will be replaced by CRLF”警告详解&lt;/a&gt;，说下最后怎么解决的：一般我用Sublime写代码，换了一下，用了VS，VS最下方可以选择使用CRLF标识或LF标识。&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;站点运行时间统计&#34;&gt;站点运行时间统计&lt;/h2&gt;
+&lt;p&gt;哇这么多统计，我玩Hexo都没有加过…………我好像在玩奇迹暖暖啊！&lt;/p&gt;
+&lt;p&gt;这个也没什么难度，遇见的最大挫折是在抄代码的时候觉得这代码写得好丑不想抄。&lt;/p&gt;
+&lt;p&gt;最后参考了这篇&lt;a class=&#34;link&#34; href=&#34;https://www.xlovett.com/553.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;WordPress小技巧 为自己的博客添加运行时间&lt;/a&gt;，并进行了一点点修改，如果想达成小球飞鱼的页尾数据显示效果，可以按如下步骤操作：&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;layouts\partials\footer.html&lt;/code&gt;文件尾部增加&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;script&amp;gt;
+var s1 = &#39;2021-08-24&#39;;//设置为建站时间
+s1 = new Date(s1.replace(/-/g, &amp;quot;/&amp;quot;));
+s2 = new Date();
+var days = s2.getTime() - s1.getTime();
+var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+document.getElementById(&#39;days&#39;).innerHTML = number_of_days;
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​	之后在合适的位置写：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;i class=&amp;quot;fas fa-bell&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;a id=&amp;quot;days&amp;quot;&amp;gt;0&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Hugo | 在Hugo-Eureka模板中加入字数统计</title>
+        <link>https://mantyke.icu/2021/a1af34e4/</link>
+        <pubDate>Sat, 28 Aug 2021 11:06:09 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/a1af34e4/</guid>
+        <description>&lt;p&gt;其实功能本身一点都不难实现，经过查询，发现是Hugo自带，需要引入的变量是WordCount，只要在相应配置文件中加入代码就可以了。&lt;/p&gt;
+&lt;p&gt;问题是！！这个模板！！它！！到底写在了哪儿！！啊！！&lt;/p&gt;
+&lt;p&gt;我东奔西跑，F12找变量，找可能有关系的html文件，找了个焦头烂额，对自己产生极大不自信，一度以为真的没有这个，可能它就是不支持呢？&lt;/p&gt;
+&lt;p&gt;但我又想，有这个需求的，不可能独我一家对吧？就算作者真的很不喜欢字数统计，也该有人提啊，我就又跑到主题仓库里去翻提问和讨论，最后神奇地解决了：&lt;/p&gt;
+&lt;p&gt;在Issues区翻找的时候，看到一个标题为“A search bar”的问题，最后一名回复者贴出了&lt;a class=&#34;link&#34; href=&#34;https://imnerd.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;他的Blog地址&lt;/a&gt;，我好好奇地点进去一看，发现他对Eureka模板做了非常高度的自定义，很酷——往下拉了拉看他之前的文章，在一些南京游记中间发现了&lt;a class=&#34;link&#34; href=&#34;https://imnerd.org/custom-hugo-theme-eureka.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo 主题 Eureka 自定义&lt;/a&gt;，点开这篇文章，发现文章下添加了字数统计。&lt;/p&gt;
+&lt;p&gt;知道事儿能成就简单多了嘛！&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;查阅了这篇博文，文章中提到：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;2021-03-13 更新：&lt;/strong&gt; 更新后的 Eureka 统一使用了 &lt;code&gt;components/post-metadata.html&lt;/code&gt; 显示文章的 metadata，代码和之前的 &lt;code&gt;layouts/partials/post_metadata.html&lt;/code&gt; 是一致的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;因此相关样式作者是放在了&lt;code&gt;themes\eureka\layouts\partials\components&lt;/code&gt;文件夹当中，名称是&lt;code&gt;post-metadata.html&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;我想把字数统计加在阅读时间之前，于是搜索&lt;code&gt;readingTime&lt;/code&gt;，在相应代码前加入&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;  &amp;lt;div class=&amp;quot;mr-6 my-2&amp;quot;&amp;gt;
+    &amp;lt;a href=&amp;quot;{{ .Permalink }}&amp;quot;&amp;gt;
+      &amp;lt;i class=&amp;quot;fas fa-pen mr-1&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+      &amp;lt;span&amp;gt;{{ .WordCount }} 字&amp;lt;/span&amp;gt;
+    &amp;lt;/a&amp;gt;
+  &amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;刷新，锵锵~&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;顺便，用一种歪门邪道的方式改了右边的目录标题显示，它本来显示的是&lt;code&gt;On This Page&lt;/code&gt;，和下面的中文很不搭调，我一直想换，但把网站语言从“en”换成“zh”后总不生效，还把字数统计改坏了（对应的参数是&lt;code&gt;config.yaml&lt;/code&gt;下的&lt;code&gt;hasCJKLanguage: true&lt;/code&gt;），修好后怒从心头起干脆把英文词典（能这么叫吗？）给改了，步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;首先我之前已经知道这个模板写了多种语言的对应模板，正常来说，切换语言后，就会切换对应的词典。所以如果想要换成自己喜欢的显示，可以直接进行修改，问题是我不知道它在哪儿&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开VS，加载Blog文件夹，搜索&lt;code&gt;On This Page&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;把每个搜索结果挨个看一遍，发现路径在&lt;code&gt;themes\erueka\i18n\!en.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;改掉对应的显示，Over。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Alola World | 暨简明麻瓜快速念咒Hugo搭建笔记</title>
+        <link>https://mantyke.icu/2021/f185ce41/</link>
+        <pubDate>Thu, 26 Aug 2021 02:06:09 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/f185ce41/</guid>
+        <description>&lt;p&gt;本次小组作业使用的基本教材为：&lt;a class=&#34;link&#34; href=&#34;https://www.gohugo.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo中文文档&lt;/a&gt;，教辅资料见文中涉及部分。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;起始&#34;&gt;起始&lt;/h2&gt;
+&lt;p&gt;2018年自己搭过Hexo blog，爱不释手，零零散散写过二十来篇文章（大部分是de很蠢的bug），后来因为倒腾插件加上各种新旧版本问题，导致每次修改和部署都要面对一串溢出屏幕的警告，速度也慢，慢慢就不爱用了。&lt;/p&gt;
+&lt;p&gt;前段时间有了发长文章的需求，四处寻觅平台后发了notion，总觉得有几分不得劲。重新打开旧blog来看，发现里面掺了几篇月度总结，过去太久，彼时心情全数忘怀，读起来倒有几分意思。立刻想起这段时间里听说过的诸多新平台，折腾之心蹿起，从WP开始一路试到Gridea，最后定下来用Hugo重新搭一个站。&lt;/p&gt;
+&lt;p&gt;站点名字是从宝可梦图鉴里选的，小球飞鱼是亲近人类的宝可梦，人们会组成观光团，在海上观赏它们与朋友之间互相嬉戏的情景，这一幕又甜美又浪漫，我很喜欢。&lt;/p&gt;
+&lt;p&gt;这篇文章主要是讲一下搭建过程和搭建过程里踩过的坑，JK罗琳的魔法世界中曾经描述哑炮们想要通过学习快速念咒函授教程来掌握魔法能力，如今来看，编程知识（可以这么说吗？）就像是麻瓜们的魔法，因而如此取名。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;流程&#34;&gt;流程&lt;/h2&gt;
+&lt;p&gt;Hugo搭站的流程在我看来是比Hexo简单很多的，分为如下几个步骤&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;默写甘普基本变形定律：&lt;/strong&gt; 申请Github账号、建立Blog仓库，下载Git，配置SHH密钥，并找到一个喜欢的Hugo主题&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;一挥一抖，记住，一挥一抖&lt;/strong&gt;：下载Hugo，设置环境变量，通过命令启动Hugo搭建blog，为Blog载入主题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;羽加—迪姆 勒维—奥—萨：&lt;/strong&gt; 部署Blog至github仓库，尝试打开。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;接下来我会逐条记录我在每个过程中做了什么，这些步骤是我从各个教程当中阅读并学习的，我本人没有任何相关知识基础，仅凭着直觉进行理解和使用，因此一定会有错漏之处，如果有朋友发现了它，欢迎指出或者帮忙改正。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;默写甘普基本变形定律&#34;&gt;&lt;strong&gt;默写甘普基本变形定律&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;搭建之前，首先需要理解：Hugo是什么？为什么需要先准备一个Github仓库？&lt;/p&gt;
+&lt;p&gt;阅读各个教程和文档后，我尝试描述如下：&lt;/p&gt;
+&lt;p&gt;Hugo是一个&lt;strong&gt;静态网页生成器&lt;/strong&gt;，它可以将本地储存的内容经过一定编译后生成数个静态网页。生成之后，我们就需要将静态网站推送到某个服务器，使用服务器提供的静态托管服务来通过域名直接打开它，提供这种静态网站托管服务的，就是Github。&lt;/p&gt;
+&lt;p&gt;静态网站托管服务并不唯一，腾讯云、码云、Gitlab等托管平台都可以实现这个功能。相比较而言，我使用的程度比较轻，倾向于免费服务，Github免费，且我比较熟悉操作，因此成为了最终选择。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;申请账号建立github仓库&#34;&gt;申请账号，建立Github仓库&lt;/h4&gt;
+&lt;p&gt;打开&lt;a class=&#34;link&#34; href=&#34;https://github.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Github&lt;/a&gt;网页，注册一个账号。如果不打算自己购买域名的话，最终Blog域名会和Github账号名保持一致，因此比较推荐注册一个新的Github账号。&lt;/p&gt;
+&lt;p&gt;注册之后，点击创建一个新的repository，这里比较需要注意两个地方&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;Repository name的格式为 &lt;strong&gt;“github账号名.github.io”&lt;/strong&gt; ，这也是之后访问Blog的链接。例如我的Github账号是“Mantyke”，我就在repository name处写下“Mantyke.github.io”，剩下的不用管，直接点Create repository。&lt;/li&gt;
+&lt;li&gt;创建repository之后，在&lt;strong&gt;Quick setup&lt;/strong&gt;的部分，将网址换成SSH网址（以git@github.com开头）。之后部署的时候要用到。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;下载git&#34;&gt;下载Git&lt;/h4&gt;
+&lt;p&gt;Github注册告一段落，然后来配置Git，Git是一种分布式版本控制系统，用来对文件进行版本管理，看不懂也没关系，只需要知道之后一部分命令要通过“Git bash Here”来进行执行就行了。&lt;/p&gt;
+&lt;p&gt;如果有进一步学习的需求，我读了两个帮助比较大的指南：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-Git-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1.3 起步-Git是什么&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://backlog.com/git-tutorial/tw/intro/intro1_1.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;连猴子都能懂的Git指南&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;囫囵吞枣能用就行的话，在&lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Git官网&lt;/a&gt;下载相应的程序，然后闭着眼一路下一步，安装完成就可以了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;生成ssh密钥&#34;&gt;生成SSH密钥&lt;/h4&gt;
+&lt;p&gt;用麻瓜理解来解释的话，SSH密钥的作用是链接本地和Git服务器，它成对生成，分别是”公钥“和”私钥“，我们将其中的”公钥“保存到Git仓库后，就可以在电脑上向这个Git仓库提交代码。正经靠谱的解释可以看这个：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/hsd2012/article/details/79469747&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SSH 秘钥Key的简介以及生成和使用&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装Git之后，在桌面点开Git图标，或者右键任意地方，选择“Git Bash Here”，在弹出的命令行窗口里输入&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$ ssh-keygen -t rsa -C &amp;quot;这里我输入的是github账号注册时使用的邮箱&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;之后系统会提示是否需要指定密钥位置、是否输入密码，这里可以按需输入，也可以直接一路回车，之前配置Hexo blog的时候我是输入了密码的，后来想想，我的电脑只有我一个人会使用，好像也没什么使用密码的必要。一路回车过后，系统会显示一系列语句，其中看到&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Your identification has been saved in id_rsa.
+Your public key has been saved in id_rsa.pub.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;就是密钥已经生成成功了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;这里我其实遇见到了两个问题，一个是我之前在这台电脑上搭过Hexo blog，曾经生成过一次密钥——但是！我设置了密码！！还忘记了！！密码是什么！！！不仅是这个，我的直觉告诉我，一个本地仓库对应两个Github的仓库，可能要出事……所以我去找了下怎么让多个SSH密钥分别链接不同的Github仓库：&lt;a class=&#34;link&#34; href=&#34;https://kangzhiheng.top/post/11-more-ssh-in-one-laptop/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;多个SSH密钥并存且连接到Github&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;但显而易见，我研究半晌，发现自己没有这个脑子……最后只好暴力解决，一想左右Hexo那个Blog该存的修改我也存了，之后想再用也能轻松复制一个出来，我就直接把之前的密钥删了。&lt;/p&gt;
+&lt;p&gt;删除密钥的办法也很暴力，在&lt;code&gt;C:\Users\用户名\.ssh&lt;/code&gt;文件夹找到之前的密钥文件，右键删除，然后再输入检查是否存在SSH密钥的命令&lt;code&gt;ls -al ~/.ssh&lt;/code&gt;确认一下。&lt;/p&gt;
+&lt;p&gt;另一个问题是，生成密钥后，遇见了报错&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;The authenticity of host &#39;github.com (192.30.255.112)&#39; can&#39;t be established.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这是因为密钥文件应当是三个，分别是公钥&lt;code&gt;id_rsa.pub&lt;/code&gt;，私钥&lt;code&gt;id_rsa&lt;/code&gt;，另外一个叫做&lt;code&gt;known_hosts&lt;/code&gt;，可能是因为之前的解决方法比较暴力，这个文件没有被生成出来，或者连带着被我删掉了。&lt;/p&gt;
+&lt;p&gt;解决方法也很简单，报错时会一并显示&lt;code&gt;Are you sure you want to continue connecting (yes/no)?&lt;/code&gt;，输入yes即可。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;将公钥与服务器链接&#34;&gt;将公钥与服务器链接&lt;/h4&gt;
+&lt;p&gt;首先要找到公钥，公钥的地址是&lt;code&gt;C:\Users\用户名\.ssh\id_rsa.pub&lt;/code&gt;，邮件用记事本打开，复制里面的全部内容。&lt;/p&gt;
+&lt;p&gt;打开Github账号，右上角头像-Settings，在左边找到&lt;code&gt;SSH and GPG keys&lt;/code&gt;选项，新建一个SSH密钥，标题可以随便填，把之前复制的密钥内容粘贴进去，保存。&lt;/p&gt;
+&lt;p&gt;验证是否绑定成功可以用这个命令：&lt;code&gt;ssh -T git@github.com&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;之后使用的时候，第一次可能会跳出窗口，询问Github用户名等信息，应该只会出现一次。或者直接在命令行中输入&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git config --global user.name &amp;quot;账号名&amp;quot;
+git config --global user.email &amp;quot;邮箱&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;进行绑定。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;一挥一抖记住一挥一抖&#34;&gt;&lt;strong&gt;一挥一抖，记住，一挥一抖&lt;/strong&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;下载hugo&#34;&gt;下载Hugo&lt;/h3&gt;
+&lt;p&gt;做了这么多，其实都是事先准备的工作，准备充分之后，进入网站搭建的过程，Hugo安装起来相当容易，点击下面的下载地址往下拖，下载自己适合的安装包，现在最新的版本是V0.87.0。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio/hugo/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;配置环境变量&#34;&gt;配置环境变量&lt;/h4&gt;
+&lt;p&gt;下载并解压后，打开文件夹，把其中&lt;code&gt;Hugo.exe&lt;/code&gt;这个文件拖到你想建立Blog文件夹的地方，推荐是单独建立一个文件夹，里面只放&lt;code&gt;Hugo.exe&lt;/code&gt;这一个文件，然后开始配置环境变量。&lt;/p&gt;
+&lt;p&gt;这里为什么要配置环境变量我其实没太明白，似乎是和Hugo本身是个二进制文件有关系。但不求甚解也可以，这一步很简单，只要跟着做就好了。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;8.30更新：我明白这里为什么要设置环境变量了，参见&lt;a class=&#34;link&#34; href=&#34;https://ripple-zjw.github.io/2019/%E6%90%AD%E5%BB%BAhugo%E6%97%B6%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9D%91/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;搭建Hugo时需要注意的坑&lt;/a&gt;，我理解这就像一个默认设置，告诉系统每次输入&lt;code&gt;hugo&lt;/code&gt;指令的时候，启动的是&lt;code&gt;hugo.exe&lt;/code&gt;这个程序&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;点开&lt;code&gt;控制面板&lt;/code&gt;，在控制面板中找到&lt;code&gt;系统&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;点击&lt;code&gt;高级系统设置&lt;/code&gt;，在&lt;code&gt;高级&lt;/code&gt;分页中最下面，找到&lt;code&gt;环境变量&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;找到&lt;code&gt;Path&lt;/code&gt;变量，编辑变量，在弹出的窗口中选择新建，输入之前放置&lt;code&gt;Hugo.exe&lt;/code&gt;文件的文件夹路径&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最后打开Git Bash Here输入&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo version
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回Hugo版本号信息，说明配置成功。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo v0.87.0-B0C541E4 windows/amd64 BuildDate=2021-08-03T10:57:28Z VendorInfo=gohugoio
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;建站大功告成&#34;&gt;建站！大功告成！&lt;/h4&gt;
+&lt;p&gt;到了这一步，已经可以建站了！&lt;/p&gt;
+&lt;p&gt;打开之前Blog文件夹，右键打开Git Bash Here，输入&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Hugo new sit 随便给站点文件夹起一个名字
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;返回如下代码就大功告成。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Congratulations! Your new Hugo site is created in 你blog的地址
+
+Just a few more steps and you&#39;re ready to go:
+
+1. Download a theme into the same-named folder.
+Choose a theme from https://themes.gohugo.io/ or
+create your own with the &amp;quot;hugo new theme &amp;lt;THEMENAME&amp;gt;&amp;quot; command.
+2. Perhaps you want to add some content. You can add single files
+with &amp;quot;hugo new &amp;lt;SECTIONNAME&amp;gt;\&amp;lt;FILENAME&amp;gt;.&amp;lt;FORMAT&amp;gt;&amp;quot;.
+3. Start the built-in live server via &amp;quot;hugo server&amp;quot;.
+
+Visit https://gohugo.io/ for quickstart guide and full documentation.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;等等真的大功告成了吗&#34;&gt;等等，真的大功告成了吗？&lt;/h4&gt;
+&lt;p&gt;是不是少了点什么？少了一点，花里胡哨的东西……&lt;/p&gt;
+&lt;p&gt;Hugo建站是不自带主题的，我们得自己找一个出来。我使用的主题是&lt;a class=&#34;link&#34; href=&#34;https://www.wangchucheng.com/zh/docs/hugo-eureka/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo Eureka&lt;/a&gt;，主题文档内说明了下载主题的方式，下载了&lt;a class=&#34;link&#34; href=&#34;https://golang.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GO&lt;/a&gt; 之后，在Blog文件夹内执行&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git submodule add https://github.com/wangchucheng/hugo-eureka.git themes/eureka
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;程序自动就会下载主题到文件夹，之后按照文档说明，将e&lt;code&gt;xampleSite&lt;/code&gt;中的&lt;code&gt;config&lt;/code&gt;文件夹复制到项目根目录下，就安装好了主题。&lt;/p&gt;
+&lt;p&gt;（但其实我观察了一下，安装主题的办法五花八门，自己新建一个&lt;code&gt;themes&lt;/code&gt;文件夹然后从Github上直接下载主题文件复制进去搞不好也行……）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;2021-9-5更新：&lt;/p&gt;
+&lt;p&gt;参考《HUGO | 用Vercel完成blog自动化部署》，我更建议用直接下载项目文件然后复制到&lt;code&gt;themes&lt;/code&gt;文件夹的方式来完成Blog主题安装，原因是如果使用&lt;code&gt;git submodule&lt;/code&gt;，将Blog源代码上传到Github仓库的时候，Github会识别主题文件自动建立跳转到作者的主题仓库，或者识别为一个子模块（文件夹上显示一个白色箭头）。如果之后用Vercel等类似的服务来进行自动部署，会导致报错。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我比较喜欢的其他Hugo主题：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/laozhu/hugo-nuo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hugo-theme-nuo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/spf13/hyde&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hugo-theme-hyde&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/joway/hugo-theme-yinyang&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hugo-theme-yinyang&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/varkai/hugo-theme-zozo&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hugo-theme-zozo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/xiaoheiAh/hugo-theme-pure&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hugo-theme-pure&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;来看看我们的主题是否安装成功了吧！打开Git，输入：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo server
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;顺利的话，会返回：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Start building sites …
+hugo v0.87.0-B0C541E4 windows/amd64 BuildDate=2021-08-03T10:57:28Z VendorInfo=gohugoio
+
+                   | EN
+-------------------+-----
+  Pages            | 32
+  Paginator pages  |  0
+  Non-page files   |  0
+  Static files     |  0
+  Processed images | 14
+  Aliases          |  6
+  Sitemaps         |  1
+  Cleaned          |  0
+
+Built in 137 ms
+Watching for changes in 你的blog文件夹{archetypes,content,data,layouts,static,themes}
+Watching for config changes in 你的blog文件夹\config.toml, E:\Hugo\Mantyke\config\_default
+Environment: &amp;quot;development&amp;quot;
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at //localhost:1313/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在浏览器中键入&lt;code&gt;localhost:1313&lt;/code&gt;，可以打开预览界面，看到Blog的雏形。预览页面会实时反映对Blog的修改，如果要停止预览，按下&lt;code&gt;Ctrl+C&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;羽加迪姆-勒维奥萨&#34;&gt;&lt;strong&gt;羽加—迪姆 勒维—奥—萨&lt;/strong&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;千万别忘了巴鲁费奥巫师，他把‘f’说成了‘s’，结果发现自己躺在地板上，胸口上站着一头野牛。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;强烈建议安装主题成功后复制一份Blog文件夹作为备份，接下来要进行的是Blog的部署，也就是将本地文件推送到Github服务器，是我踩坑最多的地方。在实际操作中，前面的一整套流程我只花了大约一小时梳理和实践，部署花费的时间则是前期工作的三倍以上。其中大部分的时间都消耗在寻找问题所在和寻求补救办法，最终炸站重来上。及时备份可以省去大量不必要的精力花费。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;强调！！&lt;/strong&gt; 这一部分我还有非常大的疑惑和不确定（前面也有，但这一部分尤其不确定），因此以下内容都是我自己的理解笔记，它并不很靠得住，请以这样的认知继续阅读。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;大致流程&#34;&gt;大致流程&lt;/h4&gt;
+&lt;p&gt;部署之前来说一下我理解的大致流程：&lt;/p&gt;
+&lt;p&gt;Hugo生成网页的流程是：输入&lt;code&gt;Hugo&lt;/code&gt;指令，Hugo开始生成静态页面，静态页面被生成在&lt;code&gt;public&lt;/code&gt;文件夹中。&lt;/p&gt;
+&lt;p&gt;部署时，我们首先使用&lt;code&gt;git add&lt;/code&gt;指令，设定服务器节点，加入索引，接着使用&lt;code&gt;git commit -m&lt;/code&gt;指令提交更新，最后通过&lt;code&gt;git push -u origin master&lt;/code&gt;指令将更新推送到指定服务器的指定分支。在推送过程中尤其需要注意的是，与Hexo不同，Hugo 不应当推送整个Blog文件夹的文件，&lt;strong&gt;只需要推送Public文件夹中被生成出来的部分。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;接下来一步一步操作：&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;切换到public&#34;&gt;切换到Public&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cd public
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;将目录切换到Public这个文件夹中，非常重要，我以Hexo的做法，习惯性以为推送到Github的是整个Blog文件夹，忽略了这一步，浪费了两三个小时。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;初始化git仓库&#34;&gt;初始化Git仓库&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git init  //只输入这一行
+Reinitialized existing Git repository in blog文件夹地址 //返回的结果
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;git init是一个初始化Git仓库命令，之后如果搞砸了不妨先初始化看看，有很大概率可以直接重来。&lt;/p&gt;
+&lt;p&gt;然后可以回到Github仓库看一眼，这里涉及到一个分支问题，进入Github中之前建立的Blog仓库，点击Setting，选择左边的Branches，看右边的Default branch是否为“Master”，这里的意思是，之后推送的内容，会默认推送到“Master”这个预设分支当中，需要和之后的推送命令对应。（有一部分教程为了之后做自动化方便，会设置这里推送到main或其他分支，我没看懂自动化怎么做，暂时先按下不谈，就用默认的分支）&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;添加远端服务器&#34;&gt;添加远端服务器&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git remote add blog 你github仓库的地址
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这一步的作用应该是（我不太确定）将Github仓库作为远端服务器进行添加。有一部分教程中写这一句是&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git remote add origin https://github.com/&amp;lt;使用者名稱&amp;gt;/&amp;lt;使用者名稱&amp;gt;.github.io.git
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我疑惑了很久，其实两者在这里并没有区别，git remove add的意思是是添加远端服务器，origin这个位置是指代远端服务器的名称，origin是Git默认的名字。&lt;/p&gt;
+&lt;p&gt;另一个需要特别注意的点是，在origin后应当跟Github仓库的链接，这里理论上无论使用Https链接还是使用SSH链接都可以，但实际操作中，（由于我还不清楚的原因），Https链接无法使用，我在这里只能使用SSH链接（就是建好仓库后在Quick setup部分显示的链接），以git@github.com开头&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;建立索引&#34;&gt;建立索引&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git add .
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;一定记住后面那个点，后面有个点（瘫倒）&lt;/p&gt;
+&lt;p&gt;也有人写&lt;code&gt;git add -A&lt;/code&gt;，加上-A就是指一次性加入所有变更，我研究了下，和&lt;code&gt;git add .&lt;/code&gt;应该没什么区别&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;提交更新&#34;&gt;提交更新&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git commit -m &amp;quot;first commit&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这部分的&amp;quot;first commit&amp;quot;写什么都可以，只是一个自定义信息，说明这次提交了什么。git commit -m是指”提交信息“，这里一定要加上-m，否则会启动一个提交修改信息的编辑器。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;當完成了這個動作後，對 Git 來說就是「把暫存區的東西存放到儲存庫（Repository）裡」，翻譯成白話文就是「我完成一個存檔（或備份）的動作了」&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;推送到github&#34;&gt;推送到Github&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git push -u orgin master
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个指令是告诉Git，把之前存储的内容推送到远端服务器，origin是Git默认远端服务器的名字，master是默认的分支名字。&lt;/p&gt;
+&lt;p&gt;到了这一步，顺利的话，它会顿一下然后告诉你推送成功，刷新Github仓库会看到之前在Public文件夹的文件已经被推送到Github仓库，过一会在浏览器中输入Blog链接，就可以顺利看到Blog的内容。这回是真的大功告成了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;参考链接&#34;&gt;参考链接&lt;/h4&gt;
+&lt;p&gt;这里大概罗列一下我查过的一些页面，以供日后学习&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://yurepo.tw/2021/03/%E5%A6%82%E4%BD%95%E5%B0%87hugo%E9%83%A8%E8%90%BD%E6%A0%BC%E9%83%A8%E7%BD%B2%E5%88%B0github%E4%B8%8A/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;手把手教學: 將Hugo部落格佈署到Github上&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ianjustin39.github.io/ianlife/build-blog/deploy_hugo_on_github/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;部署Hugo個人網頁至GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://w3c.hexschool.com/git/b9be5b1e&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;git add、git commit - 提交版本&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://w3c.hexschool.com/git/fd426d5a&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;git remote add - 添加遠端數據庫&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://awdr74100.github.io/2020-04-18-git-remote/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Git 版本控制系統 - 遠端數據庫託管與操作&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.jaycetyle.com/2018/02/git-commit/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Git 版本控制筆記 - 在 Git 提交(commit)檔案&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://wen00072.github.io/blog/2016/01/24/talk-more-about-git-remote/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;再談 Git Remote&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitbook.tw/chapters/github/push-to-github.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Git教學：如何 Push 上傳到 GitHub？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitbook.tw/chapters/using-git/add-to-git.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;把檔案交給 Git 控管&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/a35eb329fcfd&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;十分钟学会git基础&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/book/zh-tw/v2/Git-%E5%9F%BA%E7%A4%8E-%E8%88%87%E9%81%A0%E7%AB%AF%E5%8D%94%E5%90%8C%E5%B7%A5%E4%BD%9C&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2.5 Git 基礎 - 與遠端協同工作&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2.5 Git 基础 - 远程仓库的使用&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.coder.work/article/190667&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;git - “git push”和 “git push origin master”有什么区别？&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;一些小撇步&#34;&gt;一些小撇步&lt;/h4&gt;
+&lt;p&gt;其实这段本来应该是“踩过的坑”，记录一下在部署Github的过程中遇见过的Bug，但休息了一会后回看上面的部分，发现基本都有强调，单开一段来说犯错过程显得有些多余了。&lt;/p&gt;
+&lt;p&gt;我主要遇见的问题就是错误地认为Hugo的推送和Hexo一样，都是推送整个Blog文件夹，在找问题和补救的过程中，又把根目录和Public文件夹同时链接到了远端服务器，导致推送失败。&lt;/p&gt;
+&lt;p&gt;这部分求助朋友之后，发现其实可以通过本地文件检查出来。打开根目录或者Public目录的&lt;code&gt;.git&lt;/code&gt;文件夹，找到&lt;code&gt;config&lt;/code&gt;文件打开，检查代码中的&lt;code&gt;remote&lt;/code&gt;和&lt;code&gt;branch&lt;/code&gt;部分，实在不行直接把根目录中的指向删掉也可以。&lt;/p&gt;
+&lt;p&gt;另一个解决办法是使用&lt;code&gt;git remote rm origin&lt;/code&gt;来移除本地分支，但我用起来感觉比较玄学，不太好用……&lt;/p&gt;
+&lt;p&gt;所有问题的终极解决办法是使用&lt;code&gt;git init&lt;/code&gt;和之前备份好的文件包，更终极的解决办法是删掉本地Blog文件夹重新建站，同时删掉Github仓库重建一个。&lt;/p&gt;
+&lt;p&gt;不得不说，这也是我喜欢这种静态网页生成器的一大原因：重启永远是解决问题的良好手段。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;最后&#34;&gt;最后&lt;/h2&gt;
+&lt;p&gt;最后当然就是售后服务，学一下之后怎么更新blog，说起来我一直很奇怪，这部分大部分教程里都没有提到，是所有人都在用自动部署吗？&lt;/p&gt;
+&lt;p&gt;但是我实在没搞懂怎么自动部署，读了半天只大致理解了在做什么，实际操作上还是不太开窍，搞砸几次之后就手动着来了，这部分是毛象朋友Suica教我的，在建站和装修过程中得到过好多人的帮助，我真的非常幸运。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;删除public文件夹中，除了&lt;code&gt;.git&lt;/code&gt;之外的所有文件（.git是一个隐藏的文件夹，没有进行相关设置的话，也可能看不到）（Suica说如果使用了自己的域名的话，也可能有&lt;code&gt;_config.yml&lt;/code&gt;、&lt;code&gt;CNAME&lt;/code&gt;、&lt;code&gt;README.md&lt;/code&gt;这些文件，如果有的话，也不要删掉。）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;hugo server&lt;code&gt;确认本地效果，之后&lt;/code&gt;Ctrl+C`退出。依次输入以下代码，引号内内容可以随便改。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo 
+cd public
+git add -A
+git commit -m &amp;quot;new blog added&amp;quot; 
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;没问题的话，过一会儿刷新，就可以看到内容被更新到了网页上。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;好了就写到这里，呱唧呱唧！&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Anki | 为随机渐变色卡片模板添加纹理并重新配色</title>
+        <link>https://mantyke.icu/2021/87b489b2/</link>
+        <pubDate>Sat, 21 Aug 2021 18:28:09 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/87b489b2/</guid>
+        <description>&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2021/08/29/ORVj5lovF3faWqg.jpg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;原模板&#34;&gt;原模板&lt;/h2&gt;
+&lt;p&gt;Anki模板：&lt;a class=&#34;link&#34; href=&#34;https://xn--wnu387i.cn/?p=88&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;设计界黑马——渐变色&lt;/a&gt;，修改过程中非常感谢模板原作者的帮助&lt;/p&gt;
+&lt;p&gt;示例图片中所用的牌组：&lt;a class=&#34;link&#34; href=&#34;https://ankiweb.net/shared/info/1939635284&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;新标准日本语 · 初级 (假名到释义) 教材原版发音&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;修改部分&#34;&gt;修改部分&lt;/h2&gt;
+&lt;p&gt;在模板头部部分添加纹理图片，并修改卡片底色，使卡片更具质感&lt;/p&gt;
+&lt;p&gt;在原模板的基础上，为卡片重新配色，正面卡片随机显示七种配色&lt;/p&gt;
+&lt;p&gt;修改卡片字体为开源&lt;a class=&#34;link&#34; href=&#34;https://github.com/lxgw/LxgwWenKai&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;霞鹜文楷体&lt;/a&gt; （注：IOS系统无法使用，PC使用需下载安装字体）&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;下载方式&#34;&gt;下载方式&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1KvTheAm05mYBpuKWurMOUQ&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ANKI美化模板-渐变色并加入纹理-20210820.rar&lt;/a&gt;  提取码：x7a5&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;进一步自定义指北&#34;&gt;进一步自定义指北：&lt;/h2&gt;
+&lt;h3 id=&#34;修改图片纹理&#34;&gt;修改图片纹理：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;下载喜欢的纹理图片，并重命名，在文件名前加入下划线。如&lt;code&gt;page&lt;/code&gt;修改为&lt;code&gt;_page&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;找到Anki的媒体库，地址一般为&lt;code&gt;\\我的电脑\\Documents\\Anki\\用户1\\collection.media&lt;/code&gt;，放入之前下载的纹理图片。&lt;/li&gt;
+&lt;li&gt;打开Anki，点开模板牌组，选择浏览-卡片，打开卡片样式编辑器，在正面模板一栏中找到&lt;code&gt;document.getElementById(&amp;quot;HeaderColor&amp;quot;).style.background =color+ &amp;quot;, url(_type.png)&amp;quot;&lt;/code&gt;，修改&lt;code&gt;url(_type.png)&lt;/code&gt;为新下载的纹理图片名。&lt;/li&gt;
+&lt;li&gt;在样式栏中找到卡片头部样式部分，修改&lt;code&gt;background-image:&lt;/code&gt;一行，同样修改&lt;code&gt;url(_type.png)&lt;/code&gt;为新下载的纹理图片名。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;修改卡片颜色&#34;&gt;修改卡片颜色&lt;/h3&gt;
+&lt;p&gt;卡片正面控制颜色的部分如下，修改括号中的颜色代码即可改变卡片颜色&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-jsx&#34; data-lang=&#34;jsx&#34;&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;color&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;linear-gradient(to right bottom, #f3f9f1, #f0f9f6, #f1f8f9, #f5f7f8, #f6f6f6)&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#75715e&#34;&gt;//如果x==0,则使用这个颜色(茶白)
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;color&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;linear-gradient(to right bottom, #a1afc9, #b9c0d4, #cfd1df, #e3e3ea, #f6f6f6)&amp;#34;&lt;/span&gt;;&lt;span style=&#34;color:#75715e&#34;&gt;//如果x==1,则使用这个颜色(蓝灰)
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;卡片背面与修改图片纹理方式类似，修改样式中的&lt;code&gt;background-image:&lt;/code&gt; 一行中的颜色代码&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;将模板套用到其他牌组中&#34;&gt;将模板套用到其他牌组中&lt;/h3&gt;
+&lt;p&gt;这里主要会碰到的问题是不同卡片对于字段的命名不同。比较简单的卡片可以使用Anki自身的“改变卡片模板”功能，将卡片字段进行逐一对应，或是浏览卡片样式，修改正面/背面的卡片字段为自己卡片的相应字段。如果卡片本身就设计得比较复杂，读一下模板中的涉及到卡片样式的段落，挑选想要的复制到原卡片中，再进行适配调整可能是比较好的方式。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;修改过程中参考的网站&#34;&gt;修改过程中参考的网站&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;CSS混合模式学习&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://acgtofe.com/posts/2016/01/blending-modes-adventure&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;更丰富的网页多图层效果：css混合模式&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;透明素材纹理库&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.transparenttextures.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Transparent Textures&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;配色网站：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://color.uisdc.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;中国、日本传统色色卡网站&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://coolors.co/033f63-28666e-7c9885-b5b682-fedc97&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;随机生成配色网站&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://mycolor.space/gradient&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;生成渐变色，可直接复制CSS代码&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Mastodon | 我流长毛象中文使用指北</title>
+        <link>https://mantyke.icu/2021/386276df/</link>
+        <pubDate>Sat, 27 Feb 2021 17:19:29 +0800</pubDate>
+        
+        <guid>https://mantyke.icu/2021/386276df/</guid>
+        <description>&lt;h2 id=&#34;一些前情提要&#34;&gt;一些前情提要&lt;/h2&gt;
+&lt;p&gt;本指北为我个人安利（极少数、信得过、很熟悉的）朋友使用，本意是减少同样的话对不同朋友来回讲的次数，&lt;strong&gt;如有任何其他情况导致的看法或解释等不同，以此刻正在使用本指北者观点为准&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;此指北仅简单介绍 Mastodon 本身，我写作时设想的情景，是朋友已经注册好了账号，正在疑惑如何调整设置并使用它。其他部分是决定放出后才加上的。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;那么进入正文&#34;&gt;那么进入正文&lt;/h2&gt;
+&lt;p&gt;长毛象是一个&lt;strong&gt;去中心化的SNS平台&lt;/strong&gt;。它的使用逻辑和推特类似，区别在于，推特只有一个，而 Mastodon 允许用户用它的代码建立不同的站点，各个站点内信息相对互通，你可以随意挑选一个站点住下来，关注本站和其他站的用户，也可以随意在不同站点内注册、注销账号或者搬家，&lt;strong&gt;但行为需要符合各个站点自行设立的使用条款&lt;/strong&gt;，如果有相关技术实力，更可以建立一个属于自己的站点，并且和其他站点互通。&lt;/p&gt;
+&lt;p&gt;如果有进一步了解的需要，可以阅读&lt;a class=&#34;link&#34; href=&#34;https://docs.joinmastodon.org/zh-cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;长毛象中文文档&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;由于长毛象宇宙自身的性质，你完全拥有你的数据，即便某个站点被墙，你也可以打包自己的信息转移到其他站点，这些信息包括一键导入关注列表和引导他人关注你的新账号，当然还有你的嘟文内容文件和媒体文件。&lt;/p&gt;
+&lt;p&gt;像微博叫微博，发微博叫发微博一样，我们称呼长毛象宇宙里发送的内容叫嘟文，而发嘟文叫作嘟嘟——&lt;strong&gt;嘟嘟！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;我该如何注册&#34;&gt;我该如何注册？&lt;/h2&gt;
+&lt;p&gt;直接放出可供注册的站点列表是&lt;strong&gt;不礼貌并具有风险&lt;/strong&gt;的，找朋友私下问一问可能是更好的方式。或者可以先注册一些较为官方性质的实例，比如由长毛象开发者运营的mastodon.social等。等到对中文实例有所了解之后，再搬家至自己心仪的实例。&lt;/p&gt;
+&lt;p&gt;注意一些基础的&lt;strong&gt;安全措施&lt;/strong&gt;：使用非国内平台的邮箱账号或者临时邮箱，在账号信息、自我介绍乃至嘟文内容上，最好与其他平台相隔离：不要使用和微博一模一样的账号信息包括头像，也不要在微博上直接放出你的长毛象账号。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;截图长毛象内容（哪怕码掉发布人的信息）发送到微博上是被抵制的行为&lt;/strong&gt;，反过来，安全起见，也请尽量避免在两个平台发送同样的内容。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;注册了然后呢&#34;&gt;注册了，然后呢？&lt;/h2&gt;
+&lt;p&gt;我们来调整一些（我注册新账号后习惯调整的）设置，并在调整设置的过程中认识一些长毛象方便的功能。&lt;/p&gt;
+&lt;p&gt;长毛象本身是&lt;strong&gt;网页平台&lt;/strong&gt;，移动设备上，虽然也有层出不穷的 APP，但&lt;strong&gt;直接将网页发送到手机&lt;/strong&gt;使用，体验最好，介绍也会全部以网页端为基础进行讲解。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471685/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx1_sn14xp.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt; 修改个人资料是我比较习惯的进入设置页面路径。除此之外，也可以点击齿轮图标，或者（自己稍微找一下在哪儿的）首选项进入。 自己主页也有很多入口可以进设置页面，条条大路都通罗马。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;第一步锁不锁嘟&#34;&gt;第一步：锁不锁嘟？&lt;/h2&gt;
+&lt;p&gt;进入路径：个人资料-外观&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471685/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx2_lsjuvd.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;勾选“&lt;strong&gt;保护你的账户（锁嘟）&lt;/strong&gt;”后，他人关注你需要经过你审核同意，配合嘟文发布范围中的“仅关注者-只有关注你的用户能看到”选项，可以实现一些嘟文的被阅读范围筛选。&lt;/p&gt;
+&lt;p&gt;锁嘟&lt;strong&gt;并不代表&lt;/strong&gt;你在长毛象世界无法被搜索或他人无法看到你的公开嘟文，除了关注你需要同意，和不锁嘟没有更大的区别。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;第二步调整外观界面&#34;&gt;第二步：调整外观界面&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;路径：首选项-外观&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471686/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx3_avrpdr.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;高级web界面&#34;&gt;高级web界面&lt;/h3&gt;
+&lt;p&gt;高级 web 界面是更适宜电脑用户进行浏览的界面，它允许用户将不同的信息轴固定在页面上，实现更好的浏览体验。&lt;/p&gt;
+&lt;p&gt;这是我设置后的高级 web 界面，可以看到它分别固定了发送框、主页轴、本站轴、跨站轴、开始使用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471686/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx4_dtpdod.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;一些名词解释&#34;&gt;一些名词解释&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;信息轴&lt;/strong&gt;：长毛象没有所谓的“广场”概念，同时极大弱化搜索功能（简单地说，只能搜索附加相应话题tag、或自己发布过、或互动过的嘟文），与此相对，所有发布范围为“公开-所有人可见，并会出现在公共时间轴上”的嘟文，都会进入以纯时间顺序进行排列的信息轴当中，你不需要关注任何人就可以看到它们。而根据接收信息的来源不同，分为主页轴、本站轴和跨站轴。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主页轴&lt;/strong&gt;：你关注用户发布的内容，包括原创嘟文、转嘟（类似转推）、以及评论（如果双方你都关注了的话）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;本站轴&lt;/strong&gt;：本站用户的内容，只包括原创嘟文，另外，如果嘟文发布者自己回复了自己，也会显示在本站轴上。&lt;/p&gt;
+&lt;p&gt;跨站轴：其他站点用户所发布的嘟文，具体能看到哪些站点，根据所注册的站点有所不同（规则相当复杂，有兴趣可以自行了解长毛象的跨站逻辑和站点中继）。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;嘟文发送范围&#34;&gt;嘟文发送范围&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471686/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx5_tgauba.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;如果我回复时勾选了“仅关注者”，但被我回复的人没有关注我怎么办？&lt;/p&gt;
+&lt;p&gt;没关系，只要回复时@了TA，TA就可以看到你的信息。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;为什么长毛象极大弱化搜索功能&#34;&gt;*为什么长毛象极大弱化搜索功能？&lt;/h4&gt;
+&lt;p&gt;以下摘自 bgme 的《谈谈长毛象那些奇怪的设计——写给长毛象新用户》&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“这样的设计同样也是为了&lt;strong&gt;防止欺凌与骚扰&lt;/strong&gt;。
+不知你是否在使用新浪微博的过程中经历过这样的事情，在自己没几个人关注的帐号里自言自语评论了一下某明星或大 V，然后莫名其妙的就有一些人跑到你的自言自语下面评论甚至辱骂。这些人怎么过来的呢？其中一个重要的途径就是搜索。搜索一些关键词，然后顺着搜索结果挨个评论轰炸。
+长毛象将搜索功能限制为只能在自己发出的嘟文以及自己互动过的嘟文中进行搜索，彻底杜绝了通过搜索某些关键词，不请自来的对用户进行骚扰或欺凌的可能。”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;搜索功能的补充&#34;&gt;*搜索功能的补充&lt;/h4&gt;
+&lt;p&gt;如果需要自己的嘟文被搜索到，可以给嘟文加上相应&lt;strong&gt;tag&lt;/strong&gt;，其他用户可以通过搜索tag来读到它（例如#中文长毛象使用指南。&lt;/p&gt;
+&lt;p&gt;以及，长毛象有类似转发bot的&lt;strong&gt;群组&lt;/strong&gt;功能，在发布框输入【&lt;strong&gt;组名@gup.pe&lt;/strong&gt;】，即可建成一个群组主页，此后只要在嘟文内附带艾特这个组名，主页就会&lt;strong&gt;转发&lt;/strong&gt;你发布的内容。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;自动播放gif动画&#34;&gt;自动播放GIF动画&lt;/h3&gt;
+&lt;p&gt;大部分站点都允许用户使用透明背景头像和 GIF 动画头像，因此勾选自动播放 GIF 动画以后，你会快乐地发现许多用户的头像——还有TA们使用的表情——都欢快地动了起来！&lt;/p&gt;
+&lt;p&gt;我超喜欢这个功能的！&lt;/p&gt;
+&lt;p&gt;（顺便一提，只要复制一下站点表情的代码，前面插入一个空格，昵称里也可以使用表情图标）&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;敏感媒体展示&#34;&gt;敏感媒体展示&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471686/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx6_ye1otw.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;默认选择第一项，长毛象允许标记媒体为&lt;strong&gt;敏感内容&lt;/strong&gt;（NSFW-Not Safe For Work），标记后，&lt;strong&gt;点击图片才会显示图片内容&lt;/strong&gt;，应对色情或暴力信息，或者干脆就是嘟嘟时觉得没必要直接对外展示的内容而言非常好用。&lt;/p&gt;
+&lt;p&gt;但——如果有些账户就是不对媒体进行敏感内容标记怎么办呢？跨站轴颇有一些发色图的机器账号，这些内容显然不太适合在公开场合出现。&lt;/p&gt;
+&lt;p&gt;此时选择“&lt;strong&gt;总是隐藏所有媒体&lt;/strong&gt;”，就可以解决这一忧虑。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;始终展开具有内容警告的嘟文&#34;&gt;始终展开具有内容警告的嘟文&lt;/h4&gt;
+&lt;p&gt;默认不选择。CW 内容警告是长毛象针对文字信息推出的折叠功能，一般用于折叠色情或暴力内容，也可以用来折叠黑泥、剧透等不太想被直接看到的内容，如果嘟文太长（一些站点单条嘟文字数限制相当宽松，有的高达2000字以上），折叠起来避免影响版面是很不错的选择。&lt;/p&gt;
+&lt;p&gt;如果点选“始终展开具有内容警告的嘟文”，那么所有被折叠的嘟文都会自动打开，我不太推荐这么做。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;如何标记敏感媒体及打nsfw标记&#34;&gt;*如何标记敏感媒体及打NSFW标记？&lt;/h4&gt;
+&lt;p&gt;如果选择CW嘟文，那么同时插入的图片就会自动被标记为敏感内容 。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471686/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx7_tjvmdm.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;第三步调整隐私设置&#34;&gt;第三步：调整隐私设置&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;路径：首选项-其他&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471686/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx8_ert0vs.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;这几项都是字面意思，可以根据个人需要勾选。需要讲一下的是，勾选“禁止搜索引擎建立索引”后，能极大减少自身内容直接被百度/google 到的概率——并不是杜绝，如果有所互动的朋友没有勾选，那么还是有几率被检索到互动内容——总比完全不勾选好多了。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;第四步过滤器mute和block&#34;&gt;第四步：过滤器、mute和block&lt;/h2&gt;
+&lt;p&gt;过滤器路径：设置界面-过滤器-点击：添加新的过滤器&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471686/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx9_kobpya.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;过滤器&lt;/strong&gt;相当于“屏蔽关键词”，只是长毛象对关键词的屏蔽做得更细致也更好。用户可以自由选择失效时间（在短期屏蔽热门讨论时非常有用），斟酌是否“丢弃而非隐藏”（不勾选时，信息轴上对于过滤信息会显示“已过滤”占位），也可以对屏蔽的生效场景进行筛选，避免误伤。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;mute-和-block&#34;&gt;MUTE 和 BLOCK&lt;/h3&gt;
+&lt;p&gt;路径：某篇具体嘟文/嘟主个人主页菜单&lt;/p&gt;
+&lt;p&gt;与屏蔽关键词相对的，是隐藏/屏蔽某个具体的用户。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mute=隐藏&lt;/strong&gt;：选择 mute 后，将看不到被隐藏账户发布的嘟文出现在信息轴。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Block=屏蔽&lt;/strong&gt;：选择 block 后，信息轴上不仅看不到被屏蔽账户发布的嘟文，同时，被屏蔽账户也无法在信息轴上看到你的嘟文。这两项设置只针对信息轴中的嘟文，如果专门点进去主页还是能看到的。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;有关书签点赞和转发&#34;&gt;有关书签，点赞和转发&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471686/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx12_ivegtw.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;回复转发逻辑类似推特：回复会在个人主页“嘟文以及回复”页面中列出，转发仅转发原嘟文，无法添加转评。&lt;/p&gt;
+&lt;p&gt;星星是点赞的意思，但不局限于“你说得很好”，在实际使用过程中，当有人给你的嘟文点星星，TA们也有可能是在表达“抱抱”“鼓励”“安慰”等情绪。一些长毛象用户也有在一段回复讨论结束后点赞对方的最后一句表示对话结束的习惯。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h2 id=&#34;最后存档迁移或者注销&#34;&gt;最后：存档、迁移、或者注销&lt;/h2&gt;
+&lt;p&gt;长毛象支持用户对自己的数据进行储存和迁移，通过迁移功能，可以方便地更换不同站点的账号（嘟文无法带走，但关注列表和被关注列表都可以一键导入），也可以简单地注销账号，注销后，使用过的用户 ID（不是昵称）不能再被注册。&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;h3 id=&#34;存档&#34;&gt;存档&lt;/h3&gt;
+&lt;p&gt;路径：设置-导出-请求你的存档&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471686/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx10_iwotuj.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;导出的数据为 ActivityPub 格式，可以使用存档阅读工具进行阅读。&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;迁移&#34;&gt;迁移&lt;/h3&gt;
+&lt;p&gt;关于迁移，我之前写过一篇详细说明迁移操作和机制的嘟文：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;长毛象的账号迁移功能，实质上是将新旧两个账号链接，从而把旧账号的关注者移动到新账号。&lt;/p&gt;
+&lt;p&gt;所以要完成长毛象的一键搬家，所需要的步骤应该是【一键迁移】+【导出关注者/屏蔽列表csv，在新账号中导入】。&lt;/p&gt;
+&lt;p&gt;详细如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在新账号中，打开【首选项-账号-从其它帐号迁移】
+它会引导你创建用户别名，这个用户别名实际上就是旧账号的地址，便于后续将新旧账号关联。&lt;/li&gt;
+&lt;li&gt;在旧账号中，打开【首选项-账号-迁移到另一个帐户】
+在【处理新账号】一栏中输入新账号的地址。&lt;/li&gt;
+&lt;li&gt;在旧账号中，打开【首选项-导入与导出-导出】，下载需要导入到新账号的csv文件。&lt;/li&gt;
+&lt;li&gt;在新账号中，打开【首选项-导入与导出-导入】，导入刚刚下载的csv文件。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;嘟文无法转移至新账号，因此推荐事先对旧账号的嘟文档案进行导出*&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;导入关注列表实际上是向csv文件中的账号重新发送关注申请，因此如果有朋友锁嘟，需要锁嘟的朋友重新通过新账号的关注申请。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;迁移账号30天的CD。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h3 id=&#34;注销&#34;&gt;注销&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;路径：设置-账户-账户设置-删除账户&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://res.cloudinary.com/mantyke/image/upload/v1630471686/210227%E9%95%BF%E6%AF%9B%E8%B1%A1%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/20210227cmx11_bcfdg4.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;需要注意的是，由于长毛象去中心化的机制，嘟文一经发出便有可能被别的服务器缓存，因此删除账户后，可能&lt;strong&gt;仍有服务器留存有被删除的嘟文数据&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;致谢&#34;&gt;致谢&lt;/h2&gt;
+&lt;p&gt;感谢千遥帮忙找了许多资料，您就是哆啦A梦(&lt;em&gt;^▽^&lt;/em&gt;)&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;p align=&#34;right&#34;&gt;  \那么，嘟嘟愉快！！/  &lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='众里寻他千百度，蓦然回首，Vercel却在，版本太新处'><title>Hugo | 用Vercel完成blog自动化部署</title>
+
+<link rel='canonical' href='https://mantyke.icu/2021/68390745/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Hugo | 用Vercel完成blog自动化部署'>
+<meta property='og:description' content='众里寻他千百度，蓦然回首，Vercel却在，版本太新处'>
+<meta property='og:url' content='https://mantyke.icu/2021/68390745/'>
+<meta property='og:site_name' content='小 球 飞 鱼'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Hugo' /><meta property='article:published_time' content='2021-09-05T16:21:05&#43;08:00'/><meta property='article:modified_time' content='2021-09-28T20:22:14&#43;08:00'/>
+<meta name="twitter:title" content="Hugo | 用Vercel完成blog自动化部署">
+<meta name="twitter:description" content="众里寻他千百度，蓦然回首，Vercel却在，版本太新处">
+    <link rel="shortcut icon" href="/img/favicon.png" />
+<style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+        
+    }
+</style>
+
+<script>
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap";
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QSQ229TQWS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QSQ229TQWS');
+</script>
+
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+     
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://mantyke.icu" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>Back</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu7b9faf6856e04b248c8a3ba454d6b6d2_166319_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+            </figure>
+            
+        
+        <h1 class="site-name"><a href="https://mantyke.icu">小 球 飞 鱼</a></h1>
+        <h2 class="site-description">我们会一起遇见鲸鱼吗？</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/friends/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-confetti" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h2" />
+  <path d="M5 4v2" />
+  <path d="M11.5 4l-.5 2" />
+  <path d="M18 5h2" />
+  <path d="M19 4v2" />
+  <path d="M15 9l-1 1" />
+  <path d="M18 13l2 -.5" />
+  <path d="M18 19h2" />
+  <path d="M19 18v2" />
+  <path d="M14 16.518l-6.518 -6.518l-4.39 9.58a1.003 1.003 0 0 0 1.329 1.329l9.579 -4.39z" />
+</svg>
+                
+                <span>Friends</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E9%BA%BB%E7%93%9C%E5%BF%AB%E9%80%9F%E5%BF%B5%E5%92%92%E4%BA%92%E5%8A%A9%E5%B0%8F%E7%BB%84/" style="background-color: #839b5c; color: #fff;">
+                麻瓜快速念咒课堂笔记
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/2021/68390745/">Hugo | 用Vercel完成blog自动化部署</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        众里寻他千百度，蓦然回首，Vercel却在，版本太新处
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 05, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                <time class="article-words">
+                    2966字
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <p>​</p>
+<h2 id="一些没必要的起因">一些没必要的起因</h2>
+<p>一开始其实没想装自动化，一是Hugo更新比Hexo快得多，也没有很麻烦，当我弄明白可以不删除Public文件夹之后，更是只剩下复制粘贴一下命令行的步骤；二是搜索“Hugo 自动化部署”出来的文章太多，工具也太多，偏偏也都没怎么太说明白，我看自动化部署犹如雾里看花越看越暗香浮动月黄昏，美则美矣，一头雾水；三是我总对自己的校对能力有不切实际的自信，怎么会有人天天写错别字呢！！</p>
+<p>——有啊，我。</p>
+<p><br /></p>
+<p>一篇文章连改六回还是有错别字和格式问题之后我跌跌撞撞地又打开了Google，这次学乖了，既然Hugo这边没有能把我教明白的，那我去隔壁Hexo偷偷师嘛！这一偷还真给我偷到了，隔壁Hexo还真的有一篇把原理讲得非常好的文章（<a class="link" href="https://juejin.cn/post/6943895271751286821"  target="_blank" rel="noopener"
+    >如何使用 GitHub Actions 自动部署 Hexo 博客</a>），仔细读了七八遍之后有了一些没来由的膨胀，感觉可以动手了。</p>
+<p>​</p>
+<h2 id="自动化部署是什么">自动化部署是什么</h2>
+<p>上面那篇文章已经讲得很好，总体而言，就是使用一系列自动化工具，实现“在Github上修改Blog源文件”→“工具自动进行编译和部署”→“打开网站，发现已经更新到了Blog上”这个过程。</p>
+<p>其中第二步是不需要人来参与的，因此整体流程非常舒服，不但改个错别字（只需要打开Github改一下MD）很方便，也解决了在非常用电脑环境下想更新Blog的问题，嘛，比如出去旅游当晚想写个游记，又发现没带笔记本电脑。</p>
+<p>目前我看到的自动化部署工具有好几种，最常见的是Github Action，利用Github自己的工作流进行部署，需要两个仓库或者两个分支，一个储存Blog源文件（根目录下所有的文件），另一个作为静态页面仓库（Public文件夹）。除此之外比较常见的有Travis CI、Webhook、Nginx等等，我没都看，但猜想应该都是一些自动化部署服务。我最后选用了Vercel，性质上应该和这几个很类似。</p>
+<p>​</p>
+<h2 id="为什么选vercel">为什么选Vercel</h2>
+<p>最直接的原因是写了半天没写对Github Action的配置，花样跑不动，愤而放弃了Github Action。<del>但是这么说也太逊了</del></p>
+<p>另外一个原因是之前做Blog文章字数统计的时候请教过的<a class="link" href="https://imnerd.org/"  target="_blank" rel="noopener"
+    >怡红院落</a>给我推荐了Vercel，我研究过一阵子，也大概走了走流程，非常简单。所以感情上也比较偏向于用Vercel而不是更陌生的服务来解决问题。哇他人真的好好，这次出错的原因特别刁钻，也多亏了他帮忙找到问题所在，不然我可能还要想十个小时……</p>
+<p>最后就是我始终还是不太喜欢公开Blog仓库的感觉，Vercel可以在授权的情况下读取隐私仓库。</p>
+<p>​</p>
+<h2 id="使用vercel进行自动部署">使用Vercel进行自动部署</h2>
+<p>这部分想直接引用几篇我参考的文章，因为实在没什么好说的——如果不是像我一样报了那么多错的话，大概五分钟就解决问题了。</p>
+<p>流程上的话，我自己用的方法是这样的</p>
+<ol>
+<li>
+<p>在Github上新建一个仓库，Push Hugo Blog的源文件上去。这里我为了方便起见分支和服务器节点名字都用了新的</p>
+<pre tabindex="0"><code>git init
+git remote add vercel github仓库地址 //这里的vercel是服务器简称，可以随便换一个
+git push vercel main //用main分支的目的是和push public文件夹的分支（master）区别分开，记得提前在Github上设置好
+</code></pre></li>
+<li>
+<p>用Github登录Vercel，在Vercel上新建一个项目，在Let&rsquo;s build something new页面左边的Import Git Repository，直接Import仓库。</p>
+</li>
+<li>
+<p>跳过Create a Team，Configure Project选项中选择FRAMEWORK PRESET为Hugo，Build and Output Settings里覆盖BUILD COMMAND为<code>hugo --gc</code>（官方的默认命令会编译草稿文件），同时Vercel的Hugo版本比较老，所以需要在Environment Variables选项卡里指定环境变量，在NAME栏中填写<code>HUGO_VERSION</code>，<code>VALUE (WILL BE ENCRYPTED)</code>栏填写版本号（我填写的是0.78.1），点击添加</p>
+</li>
+<li>
+<p>点Deploy，等它走完一系列流程<img src="https://res.cloudinary.com/mantyke/image/upload/v1630839455/20210905_tiku1z.png" alt=""  /></p>
+</li>
+<li>
+<p>结束了，接下来可以去Github仓库试试看自动编译部署能不能运行，随便修改一个posts文件夹里的MD文章，然后刷新Vercel分配的网址看看是不是已经修改了。成功的话Go to Dashboard，点击Setting-Domains绑定一下自己的域名就可以了。</p>
+</li>
+</ol>
+<p>​</p>
+<p>参考文章：</p>
+<p><a class="link" href="https://imnerd.org/hugo-start.html"  target="_blank" rel="noopener"
+    >Hugo 之旅</a></p>
+<p><a class="link" href="https://segmentfault.com/a/1190000040063325"  target="_blank" rel="noopener"
+    >Vercel 上自动部署你的个人博客 Hugo</a></p>
+<p>​</p>
+<h2 id="妈妈我登上月球了">妈妈，我登上月球了</h2>
+<p>直接控诉我报过的错的话这篇文章就会充满了涕下沾襟的哭诉，但是我不想每次回顾这篇文章都被从前的自己折磨一遍，所以还是长话短说。</p>
+<p>​</p>
+<h3 id="无法找到模板">无法找到模板</h3>
+<p>Deploy时在Buliding阶段报错，报错为：</p>
+<pre tabindex="0"><code>Error: module &quot;eureka&quot; not found; either add itas a Hugo Module or store it in&quot;/verce1/path0/themes &quot;.: module does not exist
+Error:Command &quot;hugo -D --gc&quot; exited with 255
+</code></pre><p><strong>原因</strong>：这是由于之前采用了<code>git submodule</code>的方式下载了主题的原因，如果使用<code>git submodule</code>，将Blog源代码上传到Github仓库的时候，Github会识别主题文件自动跳转到作者的主题仓库，或者识别为一个子模块（文件夹上显示一个白色箭头）。这时候Vercel会无法识别。</p>
+<p><strong>解决方案</strong>：删除原来的主题文件夹，直接下载主题文件并复制到<code>themes/主题文件名</code>里面。（所以之前自定义Blog的时候直接在根目录下进行设置非常重要，否则只能哭着重新来一遍了），注意<code>themes/主题文件名</code>这里的名称要和<code>\config\_default\config.yaml</code>里的theme名保持一致。比如如果<code>config.yaml</code>里是<code>theme: eureka</code>，那么文件夹就要建立为<code>themes/eureka</code>。最后重新push一遍到仓库。</p>
+<p>​</p>
+<h3 id="站点依赖项">站点依赖项</h3>
+<p>Deploy时在Buliding阶段报错，报错为：</p>
+<pre tabindex="0"><code>Error: add site dependencies: load resources: loading templates: &quot;/vercel/path0/layouts/docs/doc_list.html:3:1&quot;: parse failed: template: docs/doc_list.html:3: function &quot;warnf&quot; not defined
+
+Error: Command &quot;hugo -D --gc&quot; exited with 255
+</code></pre><p><strong>原因</strong>：这是最坑的地方…………这里是环境变量设置问题，Vercel本身默认的Hugo版本比较老，与我使用的Eureka模板不兼容，因此要在Environment Variables选项卡里指定环境变量。但指定了环境变量之后就会发现，不管是指定我安装时候的0.88.0版本，还是指定目前Hugo最新的<a class="link" href="https://gohugo.io/news/0.88.1-relnotes/"  target="_blank" rel="noopener"
+    >0.88.1</a>版本，都还是会报这个错！！还是会报这个错！！！</p>
+<p><strong>解决方案</strong>：这是因为……版本太新了……指定个……老一点的……版本……就……好……了……比如我们可以用……0.78.1！……就能用……就不会报错了……怎么会这样……怎么会这样啊…………</p>
+<p>​</p>
+<h2 id="绑定域名">绑定域名</h2>
+<p>完成了以上步骤以后，Vercel会给新的Blog分配一个很长很难看的新地址，所以下一步就是绑定我自己购买的域名。</p>
+<p>进入项目，点击Setting-Domains，输入自己的域名（记得之前把它和github.io解绑），点击添加，然后它会提供两个重定向的选择，我都用不上，所以只选了最下面一个Add mantyke.icu。之后在域名商那里绑定它提供的DNS。</p>
+<p>这时候视情况，网站会显示<code>lnvalid Configuration</code>报错。这个不用管，它需要一点时间来生效。我这边大概前后过了半个小时的样子就可以用了。当然也可以用ping地址的方式来检查，如果数据还是从之前的github.io地址来走，就是没生效，等等就好。</p>
+<p>​</p>
+<h2 id="最后我恍然大悟">最后，我恍然大悟</h2>
+<p>我折腾Blog装修这么起劲，究其原因，还是要追溯到小时候都在玩论坛和不老歌等等，没有充分享受过QQ空间的装修乐趣，因此需要一定心理补偿。</p>
+<p>……一定就是这样没错啦！</p>
+<p>​</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/hugo/">Hugo</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Sep 28, 2021 20:22 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/2021/a08f1963/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo | 增加Google Search Console及其他修改</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2021/e7cf079c/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo | 在博文中显示豆瓣条目</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2021/ca2e5cb6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo | 为Blog增加Valine评论区</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    <script src='https://cdn.jsdelivr.net/gh/bigs3cir/picture/blog/files/2021/03/02/Valine.min.js'></script>
+
+<div id="vcomments"></div>
+
+<style>
+    #vcomments .vcards .vcard {
+        background-color: var(--card-background);
+	    padding: 25px 25px 5px 25px;
+        box-shadow: var(--shadow-l2);
+	    border-radius: 10px;
+	    margin-bottom: 15px;
+	    transition: all .3s
+        
+    
+    }
+
+    #vcomments .vcards .vh .vquote .vcard {
+	    padding: 10px 25px 0px 0px;
+    }
+
+    #vcomments .vcards .vcard .vh .vcard {
+        border: none;
+        box-shadow: none;
+    }
+
+    #vcomments .vcards .vcard .vquote .vimg {
+        width: 50px;
+        height: 50px;
+    }
+
+    #vcomments .vcards .vcard .vimg {
+        width: 60px;
+        height: 60px;
+        float: left;
+        border-radius: 5px;
+        margin-right: 18px;
+        border: 0px;
+        padding: 0px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    }
+
+    #vcomments .vcards .vcard .vcontent p{
+        font-size: 1.6rem;
+        color: var(--card-text-color-main);
+    }
+
+    #vcomments .vcards .vcard .vcontent{
+        padding-top: 0px;
+    }
+    
+    #vcomments .vcount {
+        padding: 0px;
+        margin-bottom: 5px;
+        margin-top: 20px;
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: var(--body-text-color);
+        text-transform: uppercase;
+    }
+
+    #vcomments .vwrap .cancel-reply-btn {
+        position: relative;
+        
+    }
+
+    #vcomments .vreply-wrapper .vwrap {
+        box-shadow: var(--shadow-l2);
+        border: 1px solid rgba(143, 143, 143, 0.3);
+        width: 95%;
+    }
+
+    #vcomments .vquote .vreply-wrapper .vwrap {
+        width: 93%;
+    }
+
+    #vcomments .vwrap {
+        background-color: var(--card-background);
+        border: 0px solid #f0f0f0;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        overflow: hidden;
+        position: relative;
+        padding: 0px 0px 0px 0px;
+        font-family: inherit;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--shadow-l2);
+    }
+
+    #vcomments .vwrap .cancel-reply {
+        position: absolute;
+        z-index:999;
+        float: right;
+        top: -20px;
+        right: 0px;
+    }
+
+    #vcomments .vwrap .vheader.item3{
+        order: 0;
+    }
+
+    #vcomments .vwrap .edit{
+        order: 1;
+    }
+
+    #vcomments .vwrap .vinput.vpreview{
+        order: 2;
+    }
+
+    #vcomments .vwrap .vemojis{
+        order: 3;
+    }
+
+    #vcomments .vwrap .vrow{
+        order: 4;
+    }
+
+    #vcomments .vwrap .vmark{
+        order: 5;
+    }
+
+    #vcomments .vpanel {
+        order: 0;
+    }
+
+    #vcomments .vload-top.text-center {
+        padding-top: 20px;
+        order: 1;
+    }
+
+    #vcomments .vcount {
+        order: 2;
+    }
+
+    #vcomments .vcards {
+        order: 3;
+    }
+
+    #vcomments .vload-bottom.text-center {
+        order: 4;
+    }
+
+    #vcomments .vempty {
+        order: 5;
+    }
+
+    #vcomments .vpage.txt-center {
+        order: 6;
+    }
+
+    #vcomments .vpower.txt-right {
+        order: 7;
+    }
+    
+    #vcomments {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #vcomments .vcards .vcard .vhead .vnick {
+        color: var(--accent-color);
+        position: relative;
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-right: .875em;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+    #vcomments .vcards .vcard .vh .vtime {
+        color: var(--card-text-color-secondary);
+        font-weight: lighter;
+        font-size: 1.3rem;
+        margin-right: .875em;
+    }
+
+    #vcomments .veditor {
+        font-size: 1.6rem;
+        color: var(--card-text-color-main);
+        padding: 20px;
+        max-height: 350px;
+        resize: none;
+    }
+    
+    #vcomments .vedit {
+        border-bottom: 1px solid rgba(143, 143, 143, 0.3);
+        background-color: rgba(255, 255, 255, 0.08);
+        padding-top: 0px;
+    }    
+
+    #vcomments .vrow {
+        padding: 20px;
+    }
+
+    #vcomments .vedit .vrow {
+        padding: 0px 20px 5px 20px;
+    }
+
+    #vcomments .vicon.vemoji-btn {
+        fill: var(--card-text-color-tertiary);
+    }
+
+    #vcomments .vicon.vpreview-btn {
+        display:none !important;
+    }
+
+    #vcomments .vwrap .vemojis {
+        padding: 20px;
+    }
+
+    #vcomments .vquote .vmeta .vat {
+        right: 30px;
+    }
+
+    #vcomments .vmeta .vat {
+        background: 0 0;
+        cursor: pointer;
+        border: 0;
+        border-radius: 5px;
+        text-transform: uppercase;
+        color: DarkGray;
+        transition: box-shadow .3s ease;
+        height: 60px;
+        width: 60px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -20px;
+        right: 10px;
+    }
+
+    #vcomments .vmeta .vat svg {
+        stroke-width: 1.33;
+    }
+    
+    #vcomments .vmeta .vat:hover {
+        outline: 0;
+        box-shadow: var(--shadow-l2);
+    }
+
+    #vcomments .vheader {
+        display: flex;
+    }
+
+    #vcomments .vheader p {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1;
+        position: relative;
+        margin: 0;
+    }
+
+    #vcomments .vheader label {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        color: var(--card-text-color-tertiary);
+        margin-top: -4px;
+        font-size: 14px;
+    }
+
+    #vcomments .vheader input {
+         
+        color: var(--card-text-color-main);
+        border: 0;
+        background: 0 0;
+        padding: 35px 20px 15px;
+        width: 100%;
+        line-height: 1;
+        transition: border .3s ease;
+        font-size: 100%;
+    }
+
+    #vcomments .vheader p:not(:last-of-type) {
+        border-right: 1px solid rgba(143, 143, 143, 0.3);
+    }
+    
+
+    #vcomments .vh .vhead {
+        padding-top: 5px;
+    }
+
+    #vcomments .vh .vquote .vhead {
+        padding-top: 0px;
+    }
+
+    #vcomments .vbtn {
+        color: var(--card-text-color-main);
+        font-weight: 700;
+        font-size: 1.0em;
+        border-radius: 3px;
+        border-color: 1px solid #666666;
+    }
+
+    #vcomments .vmore.vbtn {
+        font-size: 13px;
+    }
+
+    #vcomments .vbtn:hover {
+        color: #bebebe;
+        border-color: #707070;
+    }
+
+    #vcomments .vbtn:active {
+        color: #bebebe;
+        border-color: #707070;
+    }
+
+    #vcomments .vcards .vcard .vcontent.expand {
+        cursor: auto;
+        max-height: none;
+        overflow: visible;
+    }
+
+    #vcomments .vcards .vcard .vcontent.expand::after {
+        display:none !important;
+    }
+
+    #vcomments .vcards .vcard .vcontent.expand::before {
+        
+        display:none !important;
+    }
+
+    #vcomments .vsys {
+        display:none !important;
+    }
+
+    #vcomments .vcards .vcard .vh {
+        padding-bottom: 0px;
+        border-bottom: 0px dashed #f5f5f5;
+    }
+
+    #vcomments .vcards .vcard .vquote {
+        padding-top: 5px;
+        padding-left: 15px;
+        border-left: 0px;
+        px solid rgba(187, 187, 187, 0.5);
+    }
+
+    #vcomments .vicon.actived {
+        fill: var(--card-text-color-main);
+    }
+
+
+</style>
+
+<script>
+    
+    let placeholder = `默认显示评论头像为随机小机器人，如果输入QQ邮箱，Valine会自动拉取QQ头像作为评论头像。\n如果想显示自定义头像，需要注册Gravatar并在Email处填写Gravatar的注册邮箱。`
+
+    var valine = new Valine();
+
+    valine.init({
+        el: '#vcomments',
+        appId: 'nBfkBawpQM7bU3fFJqvxdguo-MdYXbMMI',  
+        appKey: 'DxKwYQhldWXe2hKgvcxSrVR8', 
+        avatar: 'robohash',
+        placeholder: placeholder,
+        enableQQ: true,
+        lang:'en',
+        requiredFields: ['nick','mail'],
+        recordIP: false,
+        visitor: true
+    })
+
+    html = `<p><label>Author*</label><input name='nick' placeholder='Your name' class='vnick vinput' type='text'></p>
+            <p><label>Email*</label><input name='mail' placeholder='joe@example.com' class='vmail vinput' type='email'></p>
+            <p><label>Website</label><input name='link' placeholder='https://' class='vlink vinput' type='text'></p>`
+            
+    document.querySelector(".vheader").innerHTML = html
+    document.querySelector(".vpower.txt-right").innerHTML = ""
+
+    if(window.location.hash){
+        var checkExist = setInterval(function() {
+           if (document.getElementById(window.location.hash.substring(1))) {
+              document.getElementById(window.location.hash.substring(1)).scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
+              clearInterval(checkExist);
+           }
+        }, 100);
+    }
+
+</script>
+
+
+    
+
+    <footer class="site-footer">
+  
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<script>
+(function(u, c) {
+  var d = document, t = 'script', o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  o.src = u;
+  if (c) { o.addEventListener('load', function(e) { c(e); }); }
+  s.parentNode.insertBefore(o, s);
+})('//cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function() {
+  pangu.spacingPage();
+});
+</script>
+
+    <section class="copyright">
+        &copy; 
+        
+        2021 小球飞鱼·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>嘟嘟了 40404字·共 14篇文章</br><span><p>
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+<script>
+var s1 = '2021-08-24';
+s1 = new Date(s1.replace(/-/g, "/"));
+s2 = new Date();
+var days = s2.getTime() - s1.getTime();
+var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+document.getElementById('days').innerHTML = number_of_days;
+
+</script>
+    
+</footer>
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一些没必要的起因">一些没必要的起因</a></li>
+    <li><a href="#自动化部署是什么">自动化部署是什么</a></li>
+    <li><a href="#为什么选vercel">为什么选Vercel</a></li>
+    <li><a href="#使用vercel进行自动部署">使用Vercel进行自动部署</a></li>
+    <li><a href="#妈妈我登上月球了">妈妈，我登上月球了</a>
+      <ol>
+        <li><a href="#无法找到模板">无法找到模板</a></li>
+        <li><a href="#站点依赖项">站点依赖项</a></li>
+      </ol>
+    </li>
+    <li><a href="#绑定域名">绑定域名</a></li>
+    <li><a href="#最后我恍然大悟">最后，我恍然大悟</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Archives</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2021">
+                        
+                            <span class="year">2021</span>
+                            <span class="count">14</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/hugo/" class="font_size_10">
+                Hugo
+            </a>
+        
+            <a href="/tags/anki/" class="font_size_2">
+                Anki
+            </a>
+        
+            <a href="/tags/mastodon/" class="font_size_1">
+                Mastodon
+            </a>
+        
+    </div>
+</section>
+        
+    </aside>
+
+
+        </div>
+        
+<script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
