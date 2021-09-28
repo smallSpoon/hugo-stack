@@ -19,6 +19,10 @@ permalinks:
     post: /:year/:slug/
     page: /:slug/
 
+frontmatter:
+  lastmod: [":fileModTime", "lastmod"]
+
+
 params:
     mainSections:
         - post
