@@ -13,14 +13,11 @@ googleAnalytics: G-QSQ229TQWS
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn, es, de, nl, it
-DefaultContentLanguage: zh-cn
+DefaultContentLanguage: en
 
 permalinks:
     post: /:year/:slug/
     page: /:slug/
-
-
-
 
 params:
     mainSections:
@@ -197,6 +194,5 @@ markup:
     goldmark:
         renderer:
             unsafe: true
-
 frontmatter:
   lastmod: [":fileModTime", "lastmod"]
