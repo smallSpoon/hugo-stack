@@ -20,7 +20,7 @@ permalinks:
     page: /:slug/
 
 frontmatter:
-  lastmod: [":fileModTime", "lastmod"]
+  lastmod: [":git", ":fileModTime", "lastmod"]
 
 
 params:
