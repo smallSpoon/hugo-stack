@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mastodon on 小 球 飞 鱼</title>
+    <link>https://mantyke.icu/tags/mastodon/</link>
+    <description>Recent content in Mastodon on 小 球 飞 鱼</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 27 Feb 2021 17:19:29 +0800</lastBuildDate><atom:link href="https://mantyke.icu/tags/mastodon/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mastodon | 我流长毛象中文使用指北</title>
+      <link>https://mantyke.icu/2021/386276df/</link>
+      <pubDate>Sat, 27 Feb 2021 17:19:29 +0800</pubDate>
+      
+      <guid>https://mantyke.icu/2021/386276df/</guid>
+      <description>一些前情提要 本指北为我个人安利（极少数、信得过、很熟悉的）朋友使用，本意是减少同样的话对不同朋友来回讲的次数，如有任何其他情况导致的看法或解</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='装修是一种健身运动，一天三次、少量多餐、一二三四、再来一次'><title>Hugo | 看中Stack主题的归档功能，搬家并做修改</title>
+
+<link rel='canonical' href='https://mantyke.icu/2021/f9f0ec87/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Hugo | 看中Stack主题的归档功能，搬家并做修改'>
+<meta property='og:description' content='装修是一种健身运动，一天三次、少量多餐、一二三四、再来一次'>
+<meta property='og:url' content='https://mantyke.icu/2021/f9f0ec87/'>
+<meta property='og:site_name' content='小 球 飞 鱼'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Hugo' /><meta property='article:published_time' content='2021-09-24T14:15:04&#43;08:00'/><meta property='article:modified_time' content='2021-09-27T23:39:31&#43;08:00'/>
+<meta name="twitter:title" content="Hugo | 看中Stack主题的归档功能，搬家并做修改">
+<meta name="twitter:description" content="装修是一种健身运动，一天三次、少量多餐、一二三四、再来一次">
+    <link rel="shortcut icon" href="/img/favicon.png" />
+<style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+        
+    }
+</style>
+
+<script>
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap";
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QSQ229TQWS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QSQ229TQWS');
+</script>
+
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+     
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://mantyke.icu" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>Back</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu7b9faf6856e04b248c8a3ba454d6b6d2_166319_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+            </figure>
+            
+        
+        <h1 class="site-name"><a href="https://mantyke.icu">小 球 飞 鱼</a></h1>
+        <h2 class="site-description">我们会一起遇见鲸鱼吗？</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/friends/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-confetti" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h2" />
+  <path d="M5 4v2" />
+  <path d="M11.5 4l-.5 2" />
+  <path d="M18 5h2" />
+  <path d="M19 4v2" />
+  <path d="M15 9l-1 1" />
+  <path d="M18 13l2 -.5" />
+  <path d="M18 19h2" />
+  <path d="M19 18v2" />
+  <path d="M14 16.518l-6.518 -6.518l-4.39 9.58a1.003 1.003 0 0 0 1.329 1.329l9.579 -4.39z" />
+</svg>
+                
+                <span>Friends</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E9%BA%BB%E7%93%9C%E5%BF%AB%E9%80%9F%E5%BF%B5%E5%92%92%E4%BA%92%E5%8A%A9%E5%B0%8F%E7%BB%84/" style="background-color: #839b5c; color: #fff;">
+                麻瓜快速念咒课堂笔记
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/2021/f9f0ec87/">Hugo | 看中Stack主题的归档功能，搬家并做修改</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        装修是一种健身运动，一天三次、少量多餐、一二三四、再来一次
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 24, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                <time class="article-words">
+                    4401字
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h2 id="to-do">TO-DO</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 调整文章页面的显示样式，在右侧栏显示归档和Tags</li>
+<li><input checked="" disabled="" type="checkbox"> 调整首页文章摘要字号</li>
+<li><input checked="" disabled="" type="checkbox"> 调整左侧栏Home链接，使之不打开新页面</li>
+<li><input checked="" disabled="" type="checkbox"> 修改文章、摘要字号</li>
+<li><input checked="" disabled="" type="checkbox"> 删除vibrant.js插件</li>
+<li><input checked="" disabled="" type="checkbox"> 调整相关文章数量，增加<a class="link" href="https://mantyke.icu/2021/2f0f8e23/#%E9%85%8D%E7%BD%AE%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5"  target="_blank" rel="noopener"
+    >永久链接</a></li>
+<li><input checked="" disabled="" type="checkbox"> 使文章中能够使用html</li>
+<li><input checked="" disabled="" type="checkbox"> 为分类配色</li>
+<li><input checked="" disabled="" type="checkbox"> 修改超链接显示</li>
+<li><input checked="" disabled="" type="checkbox"> 修改About页</li>
+<li><input checked="" disabled="" type="checkbox"> 增加左侧栏友情链接</li>
+<li><input checked="" disabled="" type="checkbox"> 加入每篇文章的字数统计</li>
+<li><input disabled="" type="checkbox"> 修改代码框、引用等样式</li>
+<li><input disabled="" type="checkbox"> 加入代码高亮</li>
+<li><input disabled="" type="checkbox"> 修改网站配色</li>
+<li><input checked="" disabled="" type="checkbox"> 增加网站icon</li>
+<li><input checked="" disabled="" type="checkbox"> 修改主题字体</li>
+<li><input checked="" disabled="" type="checkbox"> 增加<a class="link" href="https://mantyke.icu/2021/ca2e5cb6/"  target="_blank" rel="noopener"
+    >文章评论区</a></li>
+<li><input checked="" disabled="" type="checkbox"> 配置<a class="link" href="https://mantyke.icu/2021/2f0f8e23/#%E9%85%8D%E7%BD%AE%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5"  target="_blank" rel="noopener"
+    >永久链接</a>和<a class="link" href="https://mantyke.icu/p/2f0f8e23/#%E5%8A%A0%E5%85%A5%E7%9B%98%E5%8F%A4%E4%B9%8B%E7%99%BD"  target="_blank" rel="noopener"
+    >盘古之白</a></li>
+<li><input checked="" disabled="" type="checkbox"> 文章按年份分类</li>
+<li><input checked="" disabled="" type="checkbox"> 增加<a class="link" href="https://mantyke.icu/2021/2f0f8e23/#google--analytics"  target="_blank" rel="noopener"
+    >Google Analytics</a></li>
+<li><input checked="" disabled="" type="checkbox"> 增加<a class="link" href="https://mantyke.icu/2021/2f0f8e23/#%E7%AB%99%E7%82%B9%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E7%BB%9F%E8%AE%A1"  target="_blank" rel="noopener"
+    >站点运行时间统计</a></li>
+<li><input checked="" disabled="" type="checkbox"> 增加页尾站点总字数/篇目数统计</li>
+<li><input checked="" disabled="" type="checkbox"> Google Search Console</li>
+</ul>
+<p>​</p>
+<hr>
+<h2 id="调整文章页面的显示样式">调整文章页面的显示样式</h2>
+<p>在主题的Issue里找到了一套<a class="link" href="https://github.com/ShadowySpirits/hugo-theme-stack"  target="_blank" rel="noopener"
+    >开源修改</a>，套用了一下<code>_default</code>文件夹和<code>layouts\partials\widget</code>中的<code>toc.html</code>文件，以及<code>assets\scss</code>中的<code>custom.scss</code>文件，用以控制右侧栏独立滑动。</p>
+<p>套用后发现右侧toc栏消失了，后来发现是没加上toc组件，调整根目录下<code>config.yaml</code></p>
+<pre tabindex="0"><code>    widgets:
+        enabled: 
+            - search
+            - toc
+            - archives
+            - tag-cloud
+</code></pre><p>​</p>
+<h3 id="修改中栏阴影样式">修改中栏阴影样式</h3>
+<pre tabindex="0"><code>.article-page {
+    &amp;.hide-sidebar-sm .left-sidebar {
+        display: none;
+
+        @include respond(md) {
+            display: inherit;
+        }
+    }
+
+    .main-article {
+        background: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l2); //修改阴影样式
+        overflow: hidden;
+</code></pre><p>​</p>
+<h3 id="修改手机端目录卡片">修改手机端目录卡片</h3>
+<p>手机端目录卡片与文章卡片有很明显的不对称，修改一下</p>
+<pre tabindex="0"><code>.menu {
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-grow: 1;
+    font-size: 1.4rem;
+
+    background-color: var(--card-background);
+    padding: 15px ;
+    box-shadow: var(--shadow-l2); //改个阴影
+    display: none;
+    border-radius: 10px;  //加个圆角
+
+    margin: 0; //改为0
+</code></pre><p>​</p>
+<h2 id="调整字号">调整字号</h2>
+<h3 id="修改文章字号">修改文章字号</h3>
+<p>修改<code>hugo-theme-stack/assets/scss/variables.scss</code></p>
+<pre tabindex="0"><code>:root {
+    --article-font-family: var(--base-font-family);
+    --article-font-size: 1.6rem;
+
+    @include respond(md) {
+        --article-font-size: 1.65rem; //字号
+    }
+
+    --article-line-height: 1.6; //行距
+
+</code></pre> 
+    <br/>
+
+<h3 id="修改摘要字号">修改摘要字号</h3>
+<p><code>assets\scss\partials\article.scss</code></p>
+<pre tabindex="0"><code>.article-subtitle {
+    font-weight: normal;
+    color: var(--card-text-color-secondary);
+    margin: 5px 0;
+    line-height: 1.5;
+
+    font-size: 1.75rem; //改为1.5rem 应该是全局
+    @include respond(xl) {
+        font-size: 2rem; //改为1.5rem 应该是大尺寸屏幕适应？
+    }
+}
+</code></pre> 
+    <br/>
+
+<h2 id="调整左侧栏home链接">调整左侧栏Home链接</h2>
+<p>调整根目录下<code>config.yaml</code></p>
+<pre tabindex="0"><code>menu:
+    main:
+        - identifier: home
+          name: Home
+          url: /
+          weight: -100
+          pre: home
+          params:
+              ### For demonstration purpose, the home link will be open in a new tab
+              newTab: true //改为false
+</code></pre> 
+    <br/>
+
+<h2 id="删除vibrantjs插件">删除vibrant.js插件</h2>
+<p>vibrant.js插件是一个为分类图片加上相似色调滤镜的插件，我用不上，就删了。</p>
+<p>步骤上完全按照<a class="link" href="https://www.bigs3.com/article/modify-hugo-theme-stack-one/"  target="_blank" rel="noopener"
+    >Hugo Stack主題修改記錄 (瘦身篇)</a>的步骤进行</p>
+<p>另外同样根据这篇文章修改了页面样式</p>
+ 
+    <br/>
+
+<h3 id="删除categories的特色图片">删除Categories的特色图片</h3>
+<p><code>assets/scss/partials/layout/list.scss</code></p>
+<pre tabindex="0"><code>.subsection-list {
+    margin-bottom: var(--section-separation);
+    overflow-x: auto;
+
+    .article-list--tile {
+        display: flex;
+        padding-bottom: 15px;
+
+        article {
+            width: 200px; //改爲200px
+            height: 50px; //改爲50px
+            margin-right: 5px; //改爲5px
+            flex-shrink: 0;
+            box-shadow: var(--shadow-l2); //改个卡片阴影
+
+            .article-title {
+                margin: 0;
+                font-size: 1.5rem; //改爲1.5rem，調整字體尺寸
+            }
+
+            .article-details {
+                padding: 20px;
+                justify-content: center; //添加justify-content設定，保持字體居中
+            }
+
+        }
+    }
+}
+</code></pre> 
+    <br/>
+
+<h3 id="删除相关文章的特色图片">删除相关文章的特色图片</h3>
+<p><code>assets/scss/partials/layout/article.scss</code></p>
+<pre tabindex="0"><code>.related-contents {
+    overflow-x: auto;
+    padding-bottom: 15px;
+
+    &amp; &gt; .flex {
+        float: left;
+    }
+
+    article {
+        margin-right: 15px;
+        flex-shrink: 0;
+        overflow: hidden;
+        width: 250px;
+        height: 80px; //改为80
+        box-shadow: var(--shadow-l2); //加个卡片阴影
+
+        .article-title {
+            font-size: 1.4rem; //改为1.4
+            margin: auto;
+            justify-content: center; //居中
+        }
+</code></pre> 
+    <br/>
+
+<h2 id="调整相关文章数量">调整相关文章数量</h2>
+<p><code>layouts/partials/article/components/related-contents.html</code></p>
+<pre tabindex="0"><code> {{ $related := (where (.Site.RegularPages.Related .) &quot;Params.hidden&quot; &quot;!=&quot; true) | first 3 }}  //修改数字即可
+</code></pre> 
+    <br/>
+
+<h2 id="为markdown增加html支持">为Markdown增加Html支持</h2>
+<p>解决办法来源于<a class="link" href="https://d.cosx.org/d/421422-hugomdhtml"  target="_blank" rel="noopener"
+    >Hugo博客中.md文件中嵌入的html代码无法被渲染</a>，在<code>config.yaml</code>里加入</p>
+<pre tabindex="0"><code>markup:
+  goldmark:
+    renderer:
+      unsafe: true
+</code></pre><p>但是如果这么开启Html，目录就会跟着被渲染成非常难看的无序列表。大部分情况下，Html只被我用来写空白行，因此这牺牲未免太大了一点，所以换成了用Shortcode来解决。</p>
+<p>步骤参考<a class="link" href="https://yayapipi.com/posts/hugo%E5%A6%82%E4%BD%95%E5%9C%A8markdown%E4%B8%8A%E4%BD%BF%E7%94%A8html/"  target="_blank" rel="noopener"
+    >HUGO如何在Markdown上使用HTML | Yayapipi Site</a></p>
+<p>在<code>layout/shortcode/</code>里新增<code>codehtml.html</code>，内容为</p>
+<pre tabindex="0"><code>{{.Inner}}
+</code></pre><p>空白行的写法是：</p>
+<pre tabindex="0"><code>## codehtml前后包裹{{ }} 
+&lt; codehtml &gt;
+  &lt;br/&gt;
+&lt; /codehtml &gt;
+</code></pre><p>不过这样还有个问题在于，代码块里写HTML，代码不能被屏蔽……暂时找不到好的解决办法，先这样吧。</p>
+<blockquote>
+<p>新的空白行写法！发现换行后Tab+Enter可以写出空白行，再见吧Html标签！</p>
+</blockquote>
+<blockquote>
+<p>9.26更新：<a class="link" href="https://www.w3school.com.cn/cssref/pr_list-style-type.asp"  target="_blank" rel="noopener"
+    >解决了！</a>在assets/scss/partials/comments/disqusjs.scss中修改</p>
+<pre tabindex="0"><code>#dsqjs ol,#dsqjs ul {
+    list-style: none;
+    list-style-type: decimal // 定义为数字
+}
+</code></pre><div style="color:#F00">用红色表示欢欣鼓舞！</div>
+</blockquote>
+<p><a class="link" href="https://www.andbible.com/post/hugo-content-management-shortcodes/"  target="_blank" rel="noopener"
+    >Hugo短代码介绍文档</a></p>
+<p><a class="link" href="https://www.modb.pro/db/87166"  target="_blank" rel="noopener"
+    >Goldmark介绍</a></p>
+ 
+  <br/>
+
+<h2 id="头像与站点描述居中显示">头像与站点描述居中显示</h2>
+<p><code>assets\scss\partials\sidebar.scss</code></p>
+<pre tabindex="0"><code>	.site-avatar {
+        position: relative;
+        margin-left:auto; //站点头像居中
+		margin-right:auto; //站点头像居中
+        width: var(--sidebar-avatar-size);
+        height: var(--sidebar-avatar-size);
+
+	.site-name {
+        color: var(--accent-color);
+        text-align:center; //站点名称居中
+        font-size: 1.8rem;
+
+        @include respond(2xl) {
+            font-size: 2rem;
+        }
+    }
+
+	.site-description {
+        color: var(--body-text-color);
+        font-weight: normal;
+        text-align:center; //站点描述居中
+        font-size: 1.6rem;
+
+        @include respond(2xl) {
+            font-size: 1.7rem;
+        }
+    }
+</code></pre> 
+    <br/>
+
+<h2 id="修改分类颜色">修改分类颜色</h2>
+<p>这个东西众里寻他千百度找不到，结果就在<code>content\categories</code>里，像个冷笑话。</p>
+<p>在categories文件夹创建分类同名文件夹，创建<code>_index.md</code>文件</p>
+<pre tabindex="0"><code>title: &quot;做猫贵在折腾&quot; //分类名称
+description: &quot;简介 Blablabla&quot; //不需要可以删了
+image: &quot;ffxiv_20210830_230509_817.png&quot; //分类题图，也可以删了
+style:
+    background: &quot;#80aba9&quot; //分类标签底色
+    color: &quot;#fff&quot;
+---
+</code></pre><p>另外一个新发现！在<code>_index.md</code>指定<code>Titie</code>后，会一次性修改全部的分类名称，不需要再逐个修改，换分类名爱好者大喜过望！<br>
+<br/></p>
+<h2 id="修改超链接显示">修改超链接显示</h2>
+<pre tabindex="0"><code>a {
+    text-decoration: none;
+    color: var(--accent-color);
+
+    &amp;:hover {
+        color: var(--accent-color-darker);
+    }
+
+    &amp;.link {  //鼠标未悬停时，超链接显示6px的高亮
+        box-shadow: 0px -7px 0px rgba(var(--link-background-color), var(--link-background-opacity-hover)) inset; 
+        transition: all 0.3s ease;
+
+        &amp;:hover { //鼠标悬停，高亮为10px
+            box-shadow: 0px -11px 0px rgba(var(--link-background-color), var(--link-background-opacity-hover)) inset; 
+        }
+    }
+}
+</code></pre> 
+    <br/>
+
+<h2 id="修改文章标题前提示块">修改文章标题前提示块</h2>
+<p>……我也不知道叫它什么比较好，总之是比较喜欢它长一点，修改<code>assets\scss\variables.scss</code></p>
+<pre tabindex="0"><code>    --heading-border-size: 10px; 
+</code></pre><p>​	顺便删掉引用块里左侧的一小条竖线</p>
+<pre tabindex="0"><code>--blockquote-border-size: 0px;
+</code></pre><p>​</p>
+<h2 id="修改toc样式">修改Toc样式</h2>
+<p>原来的目录行间距太宽，超出一定长度还会出现滑块，调整了一下。</p>
+<pre tabindex="0"><code>.widget--toc {
+    background-color: var(--card-background);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow-l2); //修改阴影样式
+    display: flex;
+    flex-direction: column;
+    color: var(--card-text-color-main);
+    overflow: hidden;
+
+    #TableOfContents {
+        overflow-x: auto;
+        max-height: 150vh; //控制最长高度，超出则出现滑动条
+
+        ol,
+        ul {
+            margin: 10; //应该是上下边距
+            padding: 0;
+        }
+
+        ol {
+            list-style-type: none;
+            counter-reset: item;
+
+            li:before {
+                counter-increment: item;
+                content: counters(item, &quot;.&quot;) &quot;. &quot;;
+                font-weight: bold;
+                margin-right: 5px;
+            }
+        }
+
+        &amp; &gt; ul {
+            padding: 0 1em;
+        }
+
+        li {
+            margin: 5px 20px; //第一个参数是行间距，第二个是卡片周边的宽度
+            
+            padding: 6px; //控制内边距
+
+            &amp; &gt; ol,
+            &amp; &gt; ul {
+                margin-top: 10px;
+                padding-left: 10px;
+                margin-bottom: -5px;
+
+                &amp; &gt; li:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+</code></pre><p>​</p>
+<h2 id="加入字数统计">加入字数统计</h2>
+<p><code>layouts\partials\article\components\details.html</code></p>
+<pre tabindex="0"><code>        {{ if .Site.Params.article.readingTime }} //偷懒直接用阅读时间改的
+            &lt;div&gt;
+                {{ partial &quot;helper/icon&quot; &quot;brush&quot; }} //图标路径为assets\icons
+                &lt;time class=&quot;article-words&quot;&gt;
+                    {{ .WordCount }}字
+                &lt;/time&gt;
+            &lt;/div&gt;
+</code></pre><p>然后在<code>config.yaml</code>中加入一行，以正确显示中文字符数量</p>
+<pre tabindex="0"><code>hasCJKLanguage: true
+</code></pre> 
+    <br/>
+
+<h2 id="调整代码框样式">调整代码框样式</h2>
+<h3 id="代码高亮">代码高亮</h3>
+<p>……这高亮怎么就是显示不出来呢</p>
+<p>参考了<a class="link" href="https://dp2px.com/2020/05/29/hugo-highlighting/"  target="_blank" rel="noopener"
+    >设置 Hugo 的代码高亮</a>，在config.yaml中做以下设置</p>
+<pre tabindex="0"><code>markup:
+	highlight:
+		codeFences: true //代码围栏功能，一般设为true
+		guessSyntax: true //猜测语法，设置为true后自动匹配可能的语法
+		hl_Lines: &quot;&quot; //从第几行开始高亮，一般不设置
+		lineNoStart: 1 //行号从编号几开始显示
+		lineNos: ture //是否显示行号
+		lineNumbersInTable: true //是否使用表来格式化行号和代码，一般设为true，设置true后页面的代码框就不再接连整个文章页面了，但是copy模块会只会复制行号，不知道为什么
+		noClasses: true //使用class标签，设为false后代码框背景消失
+		style: native //样式风格
+		tabWidth: 4 //代码缩进字符数
+</code></pre><p>设置后的一些问题非常明显，因此暂时没动，先保存在这里，看看之后能不能解决。</p>
+<p>​</p>
+<h3 id="代码块自动换行">代码块自动换行</h3>
+<p><code>assets/scss/partials/layout/aritcle.scss</code></p>
+<pre tabindex="0"><code>    pre {
+        overflow-x: auto;
+        display: block;
+        background-color: var(--pre-background-color);
+        color: var(--pre-text-color);
+        font-family: var(--code-font-family);
+        line-height: 1.428571429;
+        word-break: break-all;
+        padding: var(--card-padding);
+        white-space: pre-wrap; //长代码自动换行适应页面
+        word-wrap: break-word; //允许长单词或 URL 地址换行到下一行
+</code></pre><p>​</p>
+<h2 id="增加网站icon">增加网站Icon</h2>
+<p>参考了主题的issue：<a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack/issues/272"  target="_blank" rel="noopener"
+    >配置favicon后，只有首页显示favicon</a></p>
+<p>将Icon命名为<code>favicon.png</code>，放在根目录的<code>/static/img</code>文件夹中，主题没有自带这个文件夹，需要新建。</p>
+<p>然后在<code>config.yaml</code>修改<code>favicon</code>参数</p>
+<pre tabindex="0"><code>favicon: /img/favicon.png 
+</code></pre><p>注意路径的写法，如果写为<code>img/favicon.png</code>就会出现只有首页显示Icon的情况。</p>
+ 
+    <br/>
+
+<h2 id="修改网站字体">修改网站字体</h2>
+<h3 id="修改正文字体">修改正文字体</h3>
+<p>参考<a class="link" href="https://docs.stack.jimmycai.com/zh/modify-theme/example-custom-font-family.html"  target="_blank" rel="noopener"
+    >例子：给文章加上思源宋体</a></p>
+<p>在站点根目录新建文件 <code>layouts/partials/head/custom.html</code>并放置代码，但作者给的字重非常不好，文字看起来让人很难受，把正文字重改到300会好很多，最终使用的代码是：</p>
+<pre tabindex="0"><code>&lt;style&gt;
+    :root {
+        --article-font-family: &quot;Noto Serif SC&quot;, var(--base-font-family);
+    }
+&lt;/style&gt;
+
+&lt;script&gt; //正文字重300，标题字重700
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = &quot;https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&amp;display=swap&quot;; 
+		    customFont.type = &quot;text/css&quot;;
+		    customFont.rel = &quot;stylesheet&quot;;
+		
+		    document.head.appendChild(customFont);
+		}());
+&lt;/script&gt;
+</code></pre> 
+    <br/>
+
+<h3 id="修改全站字体">修改全站字体</h3>
+<p>根据主题文档，修改<code>assets\scss\variables.scss</code></p>
+<pre tabindex="0"><code>    --sys-font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;;
+    --zh-font-family: &quot;Noto Serif SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Droid Sans Fallback&quot;, &quot;Microsoft YaHei&quot;;
+    --base-font-family: &quot;Noto Serif SC&quot;, var(--sys-font-family), var(--zh-font-family), sans-serif;
+    --code-font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;
+</code></pre><p>将<code>--zh-font-family:</code>和<code>--base-font-family:</code>都换成<code>&quot;Noto Serif SC&quot;</code></p>
+<p>……觉得很有意思，这部分起先我一直不知道怎么做，非常苦恼，后来灵光突现，去翻了自己在18年在Hexo Blog里记的修改全站字体笔记，一时豁然洞开。</p>
+ 
+    <br/>
+
+<h2 id="文章按年份分类">文章按年份分类</h2>
+<p>之前的文章都是放在Post文件夹中，文件名以年月日开头，这样文章多了就会比较乱，正好在整理Blog，顺便就改了一下。</p>
+<p>在<code>config.yaml</code>中修改<code>post</code>参数</p>
+<pre tabindex="0"><code>post: /:year/:slug/
+</code></pre><p>现在的链接格式为<code>mantyke.icu/2021/slug参数</code></p>
+<p>​</p>
+<h2 id="配置站点图标">配置站点图标</h2>
+<p>根据<a class="link" href="https://docs.stack.jimmycai.com/zh/configuration/custom-menu.html"  target="_blank" rel="noopener"
+    >主题文档-配置图标</a>，Stack主题使用<a class="link" href="https://tablericons.com/"  target="_blank" rel="noopener"
+    >Tabler Icons</a>图标库，并使用<code>pre</code> 字段来进行指定……一切都很好，但问题来了，Tabler Icons不提供SVG文件下载。</p>
+<p>研究了一会，找了个<a class="link" href="https://www.svgviewer.dev/"  target="_blank" rel="noopener"
+    >转换程序</a>来解决这个问题。</p>
+<p>暂时先改了Friends和字数统计，剩下的看心情之后慢慢改。</p>
+ 
+    <br/>
+
+<h2 id="修复代码出框">修复代码出框</h2>
+<p>在小尺寸屏幕上，如果单行代码过长，会出框一部分并无法显示。</p>
+<p><code>assets/partials/layout/article.scss</code></p>
+<pre tabindex="0"><code>    code {
+        color: var(--code-text-color);
+        background-color: var(--code-background-color);
+        padding: 2px 4px;
+        border-radius: var(--tag-border-radius);
+        font-family: var(--code-font-family);
+        word-wrap: break-word; //允许长单词或 URL 地址换行到下一行
+        
+    }
+</code></pre><p>​</p>
+<h1 id="-headcontentpost20210924-修改stack主题md">&laquo;&laquo;&laquo;&lt; HEAD:content/post/2021/0924-修改stack主题.md</h1>
+<p>参考了<a class="link" href="https://immwind.com/google-analytics-for-hugo/"  target="_blank" rel="noopener"
+    >为 Hugo 配置 Google Analytics</a>这篇文章来配置<a class="link" href="https://search.google.com/search-console"  target="_blank" rel="noopener"
+    >Google Search Console</a>，但前前后后试了好几遍都不能通过DNS验证，最后只能选择通过网址前缀来进行添加，用HTML 标记验证。</p>
+<p>遇到了站点地图无法读取的情况，参考<a class="link" href="https://support.google.com/webmasters/thread/101172591/%E6%98%BE%E7%A4%BA%E6%97%A0%E6%B3%95%E8%AF%BB%E5%8F%96%E6%AD%A4%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE?hl=zh-Hans"  target="_blank" rel="noopener"
+    >Search Console帮助</a>，显示站长工具有一定延迟，过几天再看看。</p>
+<p>另外，写在这儿好了，在装Google Analytics时出了点问题，无论如何无法屏蔽本地的计数——后来发现是因为Stack模板中预先写了一条</p>
+<pre tabindex="0"><code>{{- template &quot;_internal/google_analytics.html&quot; . -}}
+</code></pre><p>而我的文件名叫做<code>google_analytics_async.html</code>…………至于不小心删了<code>{{- partial &quot;head/custom.html&quot; . -}}</code>导致惊慌失措地找了半个点为什么字体失效这件事咱们当它没发生过，好吗？</p>
+<p>​</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>0bb1590e8cc0864d8dc2f52f611f49b6bc6150db:content/post/2021/20210924-修改stack主题.md</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="站点总字数统计">站点总字数统计</h2>
+<p>放置位置在<code>layouts\partials\footer\footer.html</code>，顺便一提，站点上线时间统计也放在这里——上个月前写“在合适位置放置”，这个月找到失去神智，是我坑我自己。</p>
+<p>最终是这么写的，参数和代码参考的是<a class="link" href="https://immmmm.com/hugo-total-count/"  target="_blank" rel="noopener"
+    >Hugo 总文章数和总字数</a></p>
+<pre><code>&lt;section class=&quot;copyright&quot;&gt;
+    &amp;copy; 
+    {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format &quot;2006&quot;))) }}
+        {{ .Site.Params.footer.since }} - 
+    {{ end }}
+    {{ now.Format &quot;2006&quot; }} 小球飞鱼·&lt;i class=&quot;fas fa-bell&quot;&gt;&lt;/i&gt; &lt;a id=&quot;days&quot;&gt;0&lt;/a&gt;Days&lt;br&gt;共嘟嘟了 {{$scratch.Get &quot;total&quot; }}字·共 {{ len (where .Site.RegularPages &quot;Section&quot; &quot;post&quot;) }}篇文章&lt;/br&gt;&lt;span&gt;&lt;p&gt;
+&lt;/section&gt;
+</code></pre>
+<p>记得要在<code>layouts\partials\footer\footer.html</code>里写上总字数参数</p>
+<pre tabindex="0"><code>{{$scratch := newScratch}}
+{{ range (where .Site.Pages &quot;Kind&quot; &quot;page&quot; )}}
+    {{$scratch.Add &quot;total&quot; .WordCount}}
+{{ end }}
+</code></pre><p>利用<code>&lt;br/&gt;</code>和<code>&lt;p&gt;</code>来进行换行调整，另外<code>小球飞鱼</code>的地方本来是<code>{{ .Site.Title }}</code>，但是我为了美观起见把站名中间加了空格，引用过来反而不美观了，于是删掉换成直接写，我好聪明。</p>
+<p>​</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/hugo/">Hugo</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Sep 27, 2021 23:39 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/2021/a08f1963/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo | 增加Google Search Console及其他修改</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2021/e7cf079c/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo | 在博文中显示豆瓣条目</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2021/ca2e5cb6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hugo | 为Blog增加Valine评论区</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    <script src='https://cdn.jsdelivr.net/gh/bigs3cir/picture/blog/files/2021/03/02/Valine.min.js'></script>
+
+<div id="vcomments"></div>
+
+<style>
+    #vcomments .vcards .vcard {
+        background-color: var(--card-background);
+	    padding: 25px 25px 5px 25px;
+        box-shadow: var(--shadow-l2);
+	    border-radius: 10px;
+	    margin-bottom: 15px;
+	    transition: all .3s
+        
+    
+    }
+
+    #vcomments .vcards .vh .vquote .vcard {
+	    padding: 10px 25px 0px 0px;
+    }
+
+    #vcomments .vcards .vcard .vh .vcard {
+        border: none;
+        box-shadow: none;
+    }
+
+    #vcomments .vcards .vcard .vquote .vimg {
+        width: 50px;
+        height: 50px;
+    }
+
+    #vcomments .vcards .vcard .vimg {
+        width: 60px;
+        height: 60px;
+        float: left;
+        border-radius: 5px;
+        margin-right: 18px;
+        border: 0px;
+        padding: 0px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    }
+
+    #vcomments .vcards .vcard .vcontent p{
+        font-size: 1.6rem;
+        color: var(--card-text-color-main);
+    }
+
+    #vcomments .vcards .vcard .vcontent{
+        padding-top: 0px;
+    }
+    
+    #vcomments .vcount {
+        padding: 0px;
+        margin-bottom: 5px;
+        margin-top: 20px;
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: var(--body-text-color);
+        text-transform: uppercase;
+    }
+
+    #vcomments .vwrap .cancel-reply-btn {
+        position: relative;
+        
+    }
+
+    #vcomments .vreply-wrapper .vwrap {
+        box-shadow: var(--shadow-l2);
+        border: 1px solid rgba(143, 143, 143, 0.3);
+        width: 95%;
+    }
+
+    #vcomments .vquote .vreply-wrapper .vwrap {
+        width: 93%;
+    }
+
+    #vcomments .vwrap {
+        background-color: var(--card-background);
+        border: 0px solid #f0f0f0;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        overflow: hidden;
+        position: relative;
+        padding: 0px 0px 0px 0px;
+        font-family: inherit;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--shadow-l2);
+    }
+
+    #vcomments .vwrap .cancel-reply {
+        position: absolute;
+        z-index:999;
+        float: right;
+        top: -20px;
+        right: 0px;
+    }
+
+    #vcomments .vwrap .vheader.item3{
+        order: 0;
+    }
+
+    #vcomments .vwrap .edit{
+        order: 1;
+    }
+
+    #vcomments .vwrap .vinput.vpreview{
+        order: 2;
+    }
+
+    #vcomments .vwrap .vemojis{
+        order: 3;
+    }
+
+    #vcomments .vwrap .vrow{
+        order: 4;
+    }
+
+    #vcomments .vwrap .vmark{
+        order: 5;
+    }
+
+    #vcomments .vpanel {
+        order: 0;
+    }
+
+    #vcomments .vload-top.text-center {
+        padding-top: 20px;
+        order: 1;
+    }
+
+    #vcomments .vcount {
+        order: 2;
+    }
+
+    #vcomments .vcards {
+        order: 3;
+    }
+
+    #vcomments .vload-bottom.text-center {
+        order: 4;
+    }
+
+    #vcomments .vempty {
+        order: 5;
+    }
+
+    #vcomments .vpage.txt-center {
+        order: 6;
+    }
+
+    #vcomments .vpower.txt-right {
+        order: 7;
+    }
+    
+    #vcomments {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #vcomments .vcards .vcard .vhead .vnick {
+        color: var(--accent-color);
+        position: relative;
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-right: .875em;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+    #vcomments .vcards .vcard .vh .vtime {
+        color: var(--card-text-color-secondary);
+        font-weight: lighter;
+        font-size: 1.3rem;
+        margin-right: .875em;
+    }
+
+    #vcomments .veditor {
+        font-size: 1.6rem;
+        color: var(--card-text-color-main);
+        padding: 20px;
+        max-height: 350px;
+        resize: none;
+    }
+    
+    #vcomments .vedit {
+        border-bottom: 1px solid rgba(143, 143, 143, 0.3);
+        background-color: rgba(255, 255, 255, 0.08);
+        padding-top: 0px;
+    }    
+
+    #vcomments .vrow {
+        padding: 20px;
+    }
+
+    #vcomments .vedit .vrow {
+        padding: 0px 20px 5px 20px;
+    }
+
+    #vcomments .vicon.vemoji-btn {
+        fill: var(--card-text-color-tertiary);
+    }
+
+    #vcomments .vicon.vpreview-btn {
+        display:none !important;
+    }
+
+    #vcomments .vwrap .vemojis {
+        padding: 20px;
+    }
+
+    #vcomments .vquote .vmeta .vat {
+        right: 30px;
+    }
+
+    #vcomments .vmeta .vat {
+        background: 0 0;
+        cursor: pointer;
+        border: 0;
+        border-radius: 5px;
+        text-transform: uppercase;
+        color: DarkGray;
+        transition: box-shadow .3s ease;
+        height: 60px;
+        width: 60px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -20px;
+        right: 10px;
+    }
+
+    #vcomments .vmeta .vat svg {
+        stroke-width: 1.33;
+    }
+    
+    #vcomments .vmeta .vat:hover {
+        outline: 0;
+        box-shadow: var(--shadow-l2);
+    }
+
+    #vcomments .vheader {
+        display: flex;
+    }
+
+    #vcomments .vheader p {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1;
+        position: relative;
+        margin: 0;
+    }
+
+    #vcomments .vheader label {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        color: var(--card-text-color-tertiary);
+        margin-top: -4px;
+        font-size: 14px;
+    }
+
+    #vcomments .vheader input {
+         
+        color: var(--card-text-color-main);
+        border: 0;
+        background: 0 0;
+        padding: 35px 20px 15px;
+        width: 100%;
+        line-height: 1;
+        transition: border .3s ease;
+        font-size: 100%;
+    }
+
+    #vcomments .vheader p:not(:last-of-type) {
+        border-right: 1px solid rgba(143, 143, 143, 0.3);
+    }
+    
+
+    #vcomments .vh .vhead {
+        padding-top: 5px;
+    }
+
+    #vcomments .vh .vquote .vhead {
+        padding-top: 0px;
+    }
+
+    #vcomments .vbtn {
+        color: var(--card-text-color-main);
+        font-weight: 700;
+        font-size: 1.0em;
+        border-radius: 3px;
+        border-color: 1px solid #666666;
+    }
+
+    #vcomments .vmore.vbtn {
+        font-size: 13px;
+    }
+
+    #vcomments .vbtn:hover {
+        color: #bebebe;
+        border-color: #707070;
+    }
+
+    #vcomments .vbtn:active {
+        color: #bebebe;
+        border-color: #707070;
+    }
+
+    #vcomments .vcards .vcard .vcontent.expand {
+        cursor: auto;
+        max-height: none;
+        overflow: visible;
+    }
+
+    #vcomments .vcards .vcard .vcontent.expand::after {
+        display:none !important;
+    }
+
+    #vcomments .vcards .vcard .vcontent.expand::before {
+        
+        display:none !important;
+    }
+
+    #vcomments .vsys {
+        display:none !important;
+    }
+
+    #vcomments .vcards .vcard .vh {
+        padding-bottom: 0px;
+        border-bottom: 0px dashed #f5f5f5;
+    }
+
+    #vcomments .vcards .vcard .vquote {
+        padding-top: 5px;
+        padding-left: 15px;
+        border-left: 0px;
+        px solid rgba(187, 187, 187, 0.5);
+    }
+
+    #vcomments .vicon.actived {
+        fill: var(--card-text-color-main);
+    }
+
+
+</style>
+
+<script>
+    
+    let placeholder = `默认显示评论头像为随机小机器人，如果输入QQ邮箱，Valine会自动拉取QQ头像作为评论头像。\n如果想显示自定义头像，需要注册Gravatar并在Email处填写Gravatar的注册邮箱。`
+
+    var valine = new Valine();
+
+    valine.init({
+        el: '#vcomments',
+        appId: 'nBfkBawpQM7bU3fFJqvxdguo-MdYXbMMI',  
+        appKey: 'DxKwYQhldWXe2hKgvcxSrVR8', 
+        avatar: 'robohash',
+        placeholder: placeholder,
+        enableQQ: true,
+        lang:'en',
+        requiredFields: ['nick','mail'],
+        recordIP: false,
+        visitor: true
+    })
+
+    html = `<p><label>Author*</label><input name='nick' placeholder='Your name' class='vnick vinput' type='text'></p>
+            <p><label>Email*</label><input name='mail' placeholder='joe@example.com' class='vmail vinput' type='email'></p>
+            <p><label>Website</label><input name='link' placeholder='https://' class='vlink vinput' type='text'></p>`
+            
+    document.querySelector(".vheader").innerHTML = html
+    document.querySelector(".vpower.txt-right").innerHTML = ""
+
+    if(window.location.hash){
+        var checkExist = setInterval(function() {
+           if (document.getElementById(window.location.hash.substring(1))) {
+              document.getElementById(window.location.hash.substring(1)).scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"})
+              clearInterval(checkExist);
+           }
+        }, 100);
+    }
+
+</script>
+
+
+    
+
+    <footer class="site-footer">
+  
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<script>
+(function(u, c) {
+  var d = document, t = 'script', o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  o.src = u;
+  if (c) { o.addEventListener('load', function(e) { c(e); }); }
+  s.parentNode.insertBefore(o, s);
+})('//cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function() {
+  pangu.spacingPage();
+});
+</script>
+
+    <section class="copyright">
+        &copy; 
+        
+        2021 小球飞鱼·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>嘟嘟了 40404字·共 14篇文章</br><span><p>
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+<script>
+var s1 = '2021-08-24';
+s1 = new Date(s1.replace(/-/g, "/"));
+s2 = new Date();
+var days = s2.getTime() - s1.getTime();
+var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+document.getElementById('days').innerHTML = number_of_days;
+
+</script>
+    
+</footer>
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#to-do">TO-DO</a></li>
+    <li><a href="#调整文章页面的显示样式">调整文章页面的显示样式</a>
+      <ol>
+        <li><a href="#修改中栏阴影样式">修改中栏阴影样式</a></li>
+        <li><a href="#修改手机端目录卡片">修改手机端目录卡片</a></li>
+      </ol>
+    </li>
+    <li><a href="#调整字号">调整字号</a>
+      <ol>
+        <li><a href="#修改文章字号">修改文章字号</a></li>
+        <li><a href="#修改摘要字号">修改摘要字号</a></li>
+      </ol>
+    </li>
+    <li><a href="#调整左侧栏home链接">调整左侧栏Home链接</a></li>
+    <li><a href="#删除vibrantjs插件">删除vibrant.js插件</a>
+      <ol>
+        <li><a href="#删除categories的特色图片">删除Categories的特色图片</a></li>
+        <li><a href="#删除相关文章的特色图片">删除相关文章的特色图片</a></li>
+      </ol>
+    </li>
+    <li><a href="#调整相关文章数量">调整相关文章数量</a></li>
+    <li><a href="#为markdown增加html支持">为Markdown增加Html支持</a></li>
+    <li><a href="#头像与站点描述居中显示">头像与站点描述居中显示</a></li>
+    <li><a href="#修改分类颜色">修改分类颜色</a></li>
+    <li><a href="#修改超链接显示">修改超链接显示</a></li>
+    <li><a href="#修改文章标题前提示块">修改文章标题前提示块</a></li>
+    <li><a href="#修改toc样式">修改Toc样式</a></li>
+    <li><a href="#加入字数统计">加入字数统计</a></li>
+    <li><a href="#调整代码框样式">调整代码框样式</a>
+      <ol>
+        <li><a href="#代码高亮">代码高亮</a></li>
+        <li><a href="#代码块自动换行">代码块自动换行</a></li>
+      </ol>
+    </li>
+    <li><a href="#增加网站icon">增加网站Icon</a></li>
+    <li><a href="#修改网站字体">修改网站字体</a>
+      <ol>
+        <li><a href="#修改正文字体">修改正文字体</a></li>
+        <li><a href="#修改全站字体">修改全站字体</a></li>
+      </ol>
+    </li>
+    <li><a href="#文章按年份分类">文章按年份分类</a></li>
+    <li><a href="#配置站点图标">配置站点图标</a></li>
+    <li><a href="#修复代码出框">修复代码出框</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#站点总字数统计">站点总字数统计</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Archives</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2021">
+                        
+                            <span class="year">2021</span>
+                            <span class="count">14</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Tags</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/hugo/" class="font_size_10">
+                Hugo
+            </a>
+        
+            <a href="/tags/anki/" class="font_size_2">
+                Anki
+            </a>
+        
+            <a href="/tags/mastodon/" class="font_size_1">
+                Mastodon
+            </a>
+        
+    </div>
+</section>
+        
+    </aside>
+
+
+        </div>
+        
+<script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
