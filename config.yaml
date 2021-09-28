@@ -196,6 +196,6 @@ markup:
             unsafe: true
 
 frontmatter:
-  lastmod: [":fileModTime", "lastmod"]
+  lastmod: [":fileModTime", "lastmod"]+08:00
 
 
