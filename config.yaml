@@ -196,4 +196,4 @@ markup:
             unsafe: true
 
 frontmatter:
-  lastmod: [":fileModTime", "lastmod", ":git"]
+  lastmod: [":fileModTime", "lastmod"]
