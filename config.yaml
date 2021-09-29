@@ -188,7 +188,7 @@ markup:
         endLevel: 4
         ordered: true
         startLevel: 2
-    highlight:
+    highlight: 
     codeFences: false
     noClasses: false
     goldmark:
@@ -200,4 +200,4 @@ timeZone: Asia/Shanghai
 enableGitInfo: true
 
 frontmatter:
-    lastmod: [":git",":fileModTime", "lastmod"]
+    lastmod: [":git", "lastmod"]
