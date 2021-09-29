@@ -194,3 +194,8 @@ markup:
     goldmark:
         renderer:
             unsafe: true
+
+timeZone: Asia/Shanghai
+
+frontmatter:
+  lastmod: [":fileModTime", "lastmod"]
