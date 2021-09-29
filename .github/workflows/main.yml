@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       TZ: Asia/Shanghai
-      SOURCE_REPO: "git@github.com:Mantyke/hugo-stack.git"  # 博客源码仓库
-      TARGET_REPO: "git@github.com:Mantyke/mantyke-hugo.git"  # 博客部署仓库
+      SOURCE_REPO: "Mantyke/hugo-stack"  # 博客源码仓库
+      TARGET_REPO: "Mantyke/mantyke-hugo"  # 博客部署仓库
       TARGET_BRANCH: "gh-pages"  # 博客部署的分支名
       SECRET: ${{ secrets.PERSONAL_TOKEN }}
     steps:
