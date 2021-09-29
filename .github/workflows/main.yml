@@ -38,7 +38,7 @@ jobs:
       # 构建网站
       - name: Build
         run:
-          cd site && '''find content -name '*.md' | while read file; do touch -d "$(git log -1 --format="@%ct" "$file")" "$file"; done; hugo --gc --minify'''
+          cd site && hugo --gc --minify --cleanDestinationDir
 
       # 部署至 GitHub Pages
       - name: Deploy
