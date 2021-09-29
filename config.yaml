@@ -198,4 +198,4 @@ markup:
 timeZone: Asia/Shanghai
 
 frontmatter:
-    lastmod: [":fileModTime", "lastmod"]
+    lastmod: [":git",":fileModTime", "lastmod"]
