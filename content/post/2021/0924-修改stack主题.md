@@ -677,27 +677,7 @@ post: /:year/:slug/
         
     }
 ```
-
-​	
-
-
-
-
-<<<<<<< HEAD:content/post/2021/0924-修改stack主题.md
-=======
-参考了[为 Hugo 配置 Google Analytics](https://immwind.com/google-analytics-for-hugo/)这篇文章来配置[Google Search Console](https://search.google.com/search-console)，但前前后后试了好几遍都不能通过DNS验证，最后只能选择通过网址前缀来进行添加，用HTML 标记验证。
-
-遇到了站点地图无法读取的情况，参考[Search Console帮助](https://support.google.com/webmasters/thread/101172591/%E6%98%BE%E7%A4%BA%E6%97%A0%E6%B3%95%E8%AF%BB%E5%8F%96%E6%AD%A4%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9B%BE?hl=zh-Hans)，显示站长工具有一定延迟，过几天再看看。
-
-另外，写在这儿好了，在装Google Analytics时出了点问题，无论如何无法屏蔽本地的计数——后来发现是因为Stack模板中预先写了一条
-
-```
-{{- template "_internal/google_analytics.html" . -}}
-```
-
-而我的文件名叫做`google_analytics_async.html`…………至于不小心删了`{{- partial "head/custom.html" . -}}`导致惊慌失措地找了半个点为什么字体失效这件事咱们当它没发生过，好吗？
-
-      
+            
 
 
 ## 站点总字数统计
