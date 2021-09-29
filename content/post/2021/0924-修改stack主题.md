@@ -697,8 +697,6 @@ post: /:year/:slug/
 
 而我的文件名叫做`google_analytics_async.html`…………至于不小心删了`{{- partial "head/custom.html" . -}}`导致惊慌失措地找了半个点为什么字体失效这件事咱们当它没发生过，好吗？
 
-​	
->>>>>>> 0bb1590e8cc0864d8dc2f52f611f49b6bc6150db:content/post/2021/20210924-修改stack主题.md
 
 
 
