@@ -1,6 +1,6 @@
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-
+<meta name="referrer" content="never">
 {{- $description := partialCached "data/description" . .RelPermalink -}}
 <meta name='description' content='{{ $description }}'>
 
@@ -27,3 +27,4 @@
 {{ if not .Site.IsServer }}
     {{ template "_internal/google_analytics_async.html" . }}
 {{ end }}
+

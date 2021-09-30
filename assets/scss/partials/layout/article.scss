@@ -10,7 +10,7 @@
     .main-article {
         background: var(--card-background);
         border-radius: var(--card-border-radius);
-        box-shadow: var(--shadow-l2);
+        box-shadow: var(--shadow-l3);
         overflow: hidden;
 
         &.main-article {
@@ -257,7 +257,7 @@
         overflow: hidden;
         width: 250px;
         height: 80px;
-        box-shadow: var(--shadow-l2);
+        box-shadow: var(--shadow-l1);
 
         .article-title {
             font-size: 1.4rem;
