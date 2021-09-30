@@ -28,7 +28,7 @@ jobs:
       # 拉取源码
       - name: Clone Repository
         run:
-          git clone --branch=main --quiet https://github.com/$SOURCE_REPO site
+          git clone --branch=main --quiet https://github.com:$SOURCE_REPO site
 
       # 安装 hugo (v0.88.1)
       - name: Setup Hugo
