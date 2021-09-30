@@ -92,6 +92,18 @@ draft: false
 
 ​		
 
+### 调整相关文章数量
+
+`layouts/partials/article/components/related-contents.html`
+
+```
+ {{ $related := (where (.Site.RegularPages.Related .) "Params.hidden" "!=" true) | first 3 }}  //修改数字即可
+```
+
+{{< codehtml >}} 
+    <br/>
+{{< /codehtml >}}
+
 
 
 ### 修改手机端目录卡片
@@ -259,19 +271,6 @@ vibrant.js插件是一个为分类图片加上相似色调滤镜的插件，我�
             justify-content: center; //居中
         }
 ```
-{{< codehtml >}} 
-    <br/>
-{{< /codehtml >}}
-
-
-## 调整相关文章数量
-
-`layouts/partials/article/components/related-contents.html`
-
-```
- {{ $related := (where (.Site.RegularPages.Related .) "Params.hidden" "!=" true) | first 3 }}  //修改数字即可
-```
-
 {{< codehtml >}} 
     <br/>
 {{< /codehtml >}}
@@ -517,7 +516,7 @@ hasCJKLanguage: true
     <br/>
 {{< /codehtml >}}
 
-## 调整代码框样式
+## 调整代码块样式
 
 ### 代码高亮
 
@@ -562,6 +561,28 @@ markup:
 ```
 
 ​	
+
+### 修复代码出框
+
+在小尺寸屏幕上，如果单行代码过长，会出框一部分并无法显示。
+
+`assets/partials/layout/article.scss`
+
+```
+    code {
+        color: var(--code-text-color);
+        background-color: var(--code-background-color);
+        padding: 2px 4px;
+        border-radius: var(--tag-border-radius);
+        font-family: var(--code-font-family);
+        word-wrap: break-word; //允许长单词或 URL 地址换行到下一行
+        
+    }
+```
+
+<br/>
+
+
 
 ## 增加网站Icon
 
@@ -660,25 +681,7 @@ post: /:year/:slug/
     <br/>
 {{< /codehtml >}}
 
-## 修复代码出框
 
-在小尺寸屏幕上，如果单行代码过长，会出框一部分并无法显示。
-
-`assets/partials/layout/article.scss`
-
-```
-    code {
-        color: var(--code-text-color);
-        background-color: var(--code-background-color);
-        padding: 2px 4px;
-        border-radius: var(--tag-border-radius);
-        font-family: var(--code-font-family);
-        word-wrap: break-word; //允许长单词或 URL 地址换行到下一行
-        
-    }
-```
-            
-<br/>
 
 ## 站点总字数统计
 

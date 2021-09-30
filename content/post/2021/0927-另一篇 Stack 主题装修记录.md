@@ -106,18 +106,30 @@ frontmatter:
 
 ​	
 
-## 进一步修改代码框
+## 进一步修改代码块
 
-### 限高和滚动
+### 增加限高和滚动
 
 ```
 overflow-x: auto; 
 max-height: 230px;
 ```
 
-决定溢出内容如何处理的关键参数是[overflow-x](https://developer.mozilla.org/zh-CN/docs/Web/CSS/overflow-x)，另外一个则决定高度。位置在`layout/artcle.scss`的`pre`标签下。
+在代码过长的时候限制代码块高度，决定溢出内容如何处理的参数是[overflow-x](https://developer.mozilla.org/zh-CN/docs/Web/CSS/overflow-x)，另外一个则决定代码块高度。位置在`layout/artcle.scss`的`pre`标签下。
 
-	### 增加描边
+​	
 
-目的是：通过描边和其他参数的调整，使代码框首屏保持美观，不出现剪边情况↓![剪边](剪边.png)
+### 代码块添加边框
 
+**目的：** 通过设置边框描边和调整行距参数，使代码块首屏保持美观，不裁剪底部文字。
+
+**思路：** 给代码块添加一层边框，使代码在边框内滚动，实现上下边距效果，并设置使上下边距与行高等高，代码块限高为行高的倍数。（但滚动时还是没有办法以行高为单位滚动，这个没办法了……）
+
+```
+border:23px  solid #272822; //边框宽度为23px，颜色为#272822
+padding: 0px 30px 0px 30px;; //左右内边距为30px
+max-height: 230px; //限制代码块高度为230px
+line-height: 23px; //行高为23px
+```
+
+​	
