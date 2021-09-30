@@ -348,23 +348,25 @@
     }
 
     pre {
-        overflow-x: auto;
         display: block;
         background-color: var(--pre-background-color);
-        max-height: 35.5vh;
+        border:23px  solid #272822;
+        padding: 0px 30px 0px 30px;;
+        max-height: 230px;
         color: var(--pre-text-color);
         font-family: var(--code-font-family);
-        line-height: 1.428571429;
+        line-height: 23px;
         word-break: break-all;
-        padding: var(--card-padding);
         white-space: pre-wrap;
         word-wrap: break-word;
+        overflow-x: auto;  
 
         code {
             color: unset;
             border: none;
             background: none;
             padding: 0;
+            
         }
     }
 
@@ -374,6 +376,7 @@
         border-spacing: 0;
         margin-bottom: 1.5em;
         font-size: 0.96em;
+        
     }
 
     th,
