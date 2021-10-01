@@ -12,7 +12,7 @@ jobs:
     env:
       TZ: Asia/Shanghai
       SOURCE_REPO: "Mantyke/hugo-stack"  # 博客源码仓库
-      TARGET_REPO: "Mantyke/mantyke-hugo"  # 博客部署仓库
+      TARGET_REPO: "Mantyke/mantyke.github.io"  # 博客部署仓库
       TARGET_BRANCH: "gh-pages"  # 博客部署的分支名
       SECRET: ${{ secrets.PERSONAL_TOKEN }}
     steps:
