@@ -52,7 +52,7 @@ params:
 
     comments:
         enabled: true
-        provider: valine
+        provider: waline
 
         disqusjs:
             shortname:
@@ -81,24 +81,21 @@ params:
 
         # Waline client configuration see: https://waline.js.org/en/reference/client.html
         waline:
-            serverURL:
-            lang:
-            visitor:
-            avatar:
+            serverURL: https://blog-waline-7he2bz0o3-mantyke.vercel.app/
+            lang: 'zh-CN'
+            visitor: ture
+            avatar: 'monsterid'
             emoji:
                 - https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo
-            requiredMeta:
-                - name
-                - email
-                - url
+            requiredMeta: ['nick', 'mail']
             placeholder:
             locale:
                 admin: Admin
 
-        valine:
-            enable: true 
-            appId: nBfkBawpQM7bU3fFJqvxdguo-MdYXbMMI
-            appKey: DxKwYQhldWXe2hKgvcxSrVR8
+        #valine:
+            #enable: true 
+            #appId: nBfkBawpQM7bU3fFJqvxdguo-MdYXbMMI
+            #appKey: DxKwYQhldWXe2hKgvcxSrVR8
 
 
         twikoo:
