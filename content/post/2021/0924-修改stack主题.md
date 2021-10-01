@@ -23,20 +23,19 @@ draft: false
 - [x] 调整左侧栏Home链接，使之不打开新页面
 - [x] 修改文章、摘要字号
 - [x] 删除vibrant.js插件
-- [x] 调整相关文章数量，增加[永久链接](https://mantyke.icu/2021/2f0f8e23/#%E9%85%8D%E7%BD%AE%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5)
+- [x] 调整相关文章数量，增加[永久链接](https://mantyke.icu/2021/2f0f8e23/#%E9%85%8D%E7%BD%AE%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5)和[盘古之白](https://mantyke.icu/p/2f0f8e23/#%E5%8A%A0%E5%85%A5%E7%9B%98%E5%8F%A4%E4%B9%8B%E7%99%BD)
 - [x] 使文章中能够使用html
 - [x] 为分类配色
 - [x] 修改超链接显示
 - [x] 修改About页
 - [x] 增加左侧栏友情链接
 - [x] 加入每篇文章的字数统计
-- [ ] 修改代码框、引用等样式
+- [x] 修改代码框、引用等样式
 - [ ] 加入代码高亮
-- [ ] 修改网站配色
+- [x] 修改网站配色
 - [x] 增加网站icon
 - [x] 修改主题字体
 - [x] 增加[文章评论区](https://mantyke.icu/2021/ca2e5cb6/)
-- [x] 配置[永久链接](https://mantyke.icu/2021/2f0f8e23/#%E9%85%8D%E7%BD%AE%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5)和[盘古之白](https://mantyke.icu/p/2f0f8e23/#%E5%8A%A0%E5%85%A5%E7%9B%98%E5%8F%A4%E4%B9%8B%E7%99%BD)
 - [x] 文章按年份分类
 - [x] 增加[Google Analytics](https://mantyke.icu/2021/2f0f8e23/#google--analytics)
 - [x] 增加[站点运行时间统计](https://mantyke.icu/2021/2f0f8e23/#%E7%AB%99%E7%82%B9%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E7%BB%9F%E8%AE%A1)
