@@ -198,3 +198,9 @@ enableGitInfo: true
 
 frontmatter:
     lastmod: [":git", "lastmod"]
+
+
+outputFormats:
+    outputFormats.RSS:
+        mediatype: "application/rss"
+        baseName: "atom"
