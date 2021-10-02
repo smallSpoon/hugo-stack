@@ -200,8 +200,3 @@ frontmatter:
     lastmod: [":git", "lastmod"]
 
 
-outputs:
-  home: ["Atom", "HTML"] # <domain>/atom.xml
-outputFormats.Atom:
-  mediatype: "application/rss"
-  baseName: "atom"
