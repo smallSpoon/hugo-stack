@@ -12,14 +12,18 @@ menu:
  >我想，交换友链仍然是赛博世界珍贵的仪式感之一：好，我们现在是朋友了！
 
 
-[PIERIS的新站](https://wp.pieris05.pw/)
 
-[此方方有限公司](https://blog.konata.co/)
+|                          Blog                          | Description                                                |
+| :----------------------------------------------------: | :--------------------------------------------------------- |
+|        [PIERIS 的新站](https://wp.pieris05.pw/)        | 生命不息，折腾不止。                                       |
+|       [此方方有限公司](https://blog.konata.co/)        | Everything is interesting if you go into it deeply enough. |
+|       [Morikka’s Blog](https://morikka.me/#blog)       | Morikka's Blog                                             |
+| [一片痴心俱成灰](https://artemisiajaponica.github.io/) | 跳跃式移动，电波系发言。                                   |
+|              [†少女癌†](https://co5.me/)               | 大声BB，小声填坑                                           |
+|              [無色人間。](https://4o.cx/)              | For the glory of mankind.                                  |
 
-[Morikka's Blog](https://morikka.me/#blog)
+​	
 
-[一片痴心俱成灰](https://artemisiajaponica.github.io/)
+……是有想做一个好看的展示样式啦但很明显不会做总之先用表格糊弄一下。
 
-[†少女癌†](https://co5.me/)
-
-[無色人間。](https://hekatech.github.io/)
+​	
