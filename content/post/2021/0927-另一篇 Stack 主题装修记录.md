@@ -134,14 +134,100 @@ max-height: 230px; //限制代码块高度为230px
 line-height: 23px; //行高为23px
 ```
 
-	## 增加引用短代码
+
+## 增加引用短代码
+
+参考[自定义 Hugo Shortcodes 简码](https://guanqr.com/tech/website/hugo-shortcodes-customization/)添加了自己的引用短代码，效果如下：
 
 ```
-{{< quote >}}
-邓布利多：“我让我的弟弟死去的那天之后，我开始衡量我的追随者们，比较彼此的重要性，思考我能够拿谁冒险，我能够牺牲谁，到哪种程度。很奇怪，一旦我知道他们值得多少之后，我失去的棋子少多了。”
-{{< /quote >}}
+{< quote >}
+三月，因久旱不雨，苏轼赴郿，祈雨于太白山之上清宫。数日后，虽有微雨，父老以为不足，于是，再陪宋太守亲往祭祷，回程路上，便见道中有云气自山中来，如群马奔突而至车座左右，苏轼一时好奇心起，开笼收云归家，作《攓云篇》。
+
+”
+{< /quote >}
+// 由于代码块内也会被判断成html，实际使用时需要各加一个花括号
 ```
 
 {{< quote >}}
-邓布利多：“我让我的弟弟死去的那天之后，我开始衡量我的追随者们，比较彼此的重要性，思考我能够拿谁冒险，我能够牺牲谁，到哪种程度。很奇怪，一旦我知道他们值得多少之后，我失去的棋子少多了。”
+三月，因久旱不雨，苏轼赴郿，祈雨于太白山之上清宫。数日后，虽有微雨，父老以为不足，于是，再陪宋太守亲往祭祷，回程路上，便见道中有云气自山中来，如群马奔突而至车座左右，苏轼一时好奇心起，开笼收云归家，作《攓云篇》。
 {{< /quote >}}
+
+稍微改了下CSS的部分，调整了样式细节，增加了一个响应式布局，但本身Stack模板的响应式比较复杂，就只做了最基础的部分，满足我自己设备的美观需求。
+
+```
+<!-- 短代码部分 -->
+<!-- 文件位置：~/layouts/shortcodes/quote.html -->
+
+<blockquote class="quote{{ range .Params }} {{ . }}{{ end }}">
+    {{- $content := .Inner | markdownify -}}
+    {{- if not (strings.HasPrefix $content "<p>") }}
+        {{ printf `<p>%s</p>` $content | safeHTML }}
+    {{- else }}
+        {{- $content }}
+    {{- end -}}
+</blockquote> 
+```
+
+```
+// 引用块CSS
+// 文件位置：~/assets/scss/custom/_custom.scss
+
+blockquote.quote {
+    position: relative;
+    margin: 1.5em -10em 0 -10 ;
+    padding-left: 18%;
+    padding-right: 18%;
+    border: none;
+    background-color: transparent;;
+    &::before {
+        position: absolute;
+        left: 7%;
+        content: '“';
+        color: var(--color-contrast-low);
+        font-size: 3em;
+        font-weight: bold;
+        line-height: 1;
+    }
+    &.poetry {
+        display: table;
+        padding: 0;
+        &::before {
+            left: -1em;
+        }
+        p:last-child {
+            margin: 0;
+        }
+    }
+    &.en {
+        p {
+            line-height: 1.618;
+            text-align: left;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+        }
+    }
+}
+@media (max-width:650px) {
+    blockquote.quote {
+        &::before {
+            position: absolute;
+            left: 3.5%;          
+        }
+    }
+}
+
+@media (max-width:500px) {
+    blockquote.quote {
+        &::before {
+            position: absolute;
+            left: 3.5%; 
+            top: 0.5%         
+        }
+    }
+}
+
+
+```
+
+​	

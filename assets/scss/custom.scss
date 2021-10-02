@@ -23,6 +23,7 @@
 // }
 
 
+// 引用块CSS
 // 文件位置：~/assets/scss/custom/_custom.scss
 
 blockquote.quote {
@@ -34,7 +35,7 @@ blockquote.quote {
     background-color: transparent;;
     &::before {
         position: absolute;
-        left: 8%;
+        left: 7%;
         content: '“';
         color: var(--color-contrast-low);
         font-size: 3em;
@@ -61,14 +62,22 @@ blockquote.quote {
         }
     }
 }
-@media (max-width:550px) {
+@media (max-width:650px) {
     blockquote.quote {
-        &.poetry {
-            padding-left: 3em;
-            padding-right: 3em;
-            &::before {
-                left: 0;
-            }
+        &::before {
+            position: absolute;
+            left: 3.5%;          
         }
     }
 }
+
+@media (max-width:500px) {
+    blockquote.quote {
+        &::before {
+            position: absolute;
+            left: 3.5%; 
+            top: 0.5%         
+        }
+    }
+}
+
