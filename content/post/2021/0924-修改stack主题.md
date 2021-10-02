@@ -443,6 +443,7 @@ a {
     flex-direction: column;
     color: var(--card-text-color-main);
     overflow: hidden;
+    display:inline-block; //根据内容调整宽度
 
     #TableOfContents {
         overflow-x: auto;

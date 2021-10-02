@@ -192,10 +192,12 @@
     flex-direction: column;
     color: var(--card-text-color-main);
     overflow: hidden;
+    display:inline-block;
 
     #TableOfContents {
         overflow-x: auto;
         max-height: 150vh;
+
 
         ol,
         ul {
