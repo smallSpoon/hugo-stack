@@ -81,16 +81,16 @@ params:
 
         # Waline client configuration see: https://waline.js.org/en/reference/client.html
         waline:
-            serverURL: https://blog-waline-7he2bz0o3-mantyke.vercel.app/
+            serverURL: https://waline-kappa-lilac.vercel.app/
             lang: 'zh-CN'
             visitor: ture
             avatar: 'monsterid'
             emoji:
                 - https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo
             requiredMeta: ['nick', 'mail']
-            placeholder:
+            placeholder: 默认留言头像为随机小怪物，登录后可以使用Libravatar/Gravatar头像
             locale:
-                admin: Admin
+                admin: 博主
 
         #valine:
             #enable: true 
