@@ -134,6 +134,7 @@ max-height: 230px; //限制代码块高度为230px
 line-height: 23px; //行高为23px
 ```
 
+​	
 
 ## 增加引用短代码
 
@@ -222,7 +223,7 @@ blockquote.quote {
         &::before {
             position: absolute;
             left: 3.5%; 
-            top: 0.5%         
+            top: 0.1%         
         }
     }
 }
