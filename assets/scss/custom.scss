@@ -21,3 +21,54 @@
 //         display: none;
 //     }
 // }
+
+
+// 文件位置：~/assets/scss/custom/_custom.scss
+
+blockquote.quote {
+    position: relative;
+    margin: 1.5em -10em 0 -10 ;
+    padding-left: 18%;
+    padding-right: 18%;
+    border: none;
+    background-color: transparent;;
+    &::before {
+        position: absolute;
+        left: 8%;
+        content: '“';
+        color: var(--color-contrast-low);
+        font-size: 3em;
+        font-weight: bold;
+        line-height: 1;
+    }
+    &.poetry {
+        display: table;
+        padding: 0;
+        &::before {
+            left: -1em;
+        }
+        p:last-child {
+            margin: 0;
+        }
+    }
+    &.en {
+        p {
+            line-height: 1.618;
+            text-align: left;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+        }
+    }
+}
+@media (max-width:550px) {
+    blockquote.quote {
+        &.poetry {
+            padding-left: 3em;
+            padding-right: 3em;
+            &::before {
+                left: 0;
+            }
+        }
+    }
+}
