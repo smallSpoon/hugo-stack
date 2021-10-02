@@ -176,7 +176,7 @@ blockquote.quote {
     position: relative;
     margin: 1.5em -10em 0 -10 ;
     padding-left: 18%;
-    padding-right: 18%;
+    padding-right: 15%;
     border: none;
     background-color: transparent;;
     &::before {
