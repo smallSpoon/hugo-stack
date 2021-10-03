@@ -232,3 +232,84 @@ blockquote.quote {
 ```
 
 ​	
+
+## 修改友链样式
+
+参考[添加友情链接 shortcodes](https://bore.vip/archives/hugo-theme-stack/#%E6%B7%BB%E5%8A%A0%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5-shortcodes)，在源代码仓库里找了半天又评论问了问博主，然后才发现原来文章里有写明过程ORZ，把修改方式抄录如下：
+
+新建`layouts\page\links.html`
+
+```
+<footer class="article-footer">
+    {{ partial "article/components/tags" . }}
+
+    {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
+    <section class="article-copyright">
+        {{ partial "helper/icon" "copyright" }}
+        <span>{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span>
+    </section>
+    {{ end }}
+
+	{{ if and (.Site.Params.article.edit.enabled) (not (eq .Params.edit false)) }}
+    <section class="article-edit">
+        {{ partial "helper/icon" "external-link" }}
+        <span><a href="https://github.com/iwyang/iwyang.github.io/edit/develop/content/{{ replace .File.Path "\\" "/" }}" target="_blank">在 GitHub 上编辑此页</a></span>
+    </section>
+    {{ end }}
+
+    {{- if ne .Lastmod .Date -}}
+    <section class="article-time">
+        {{ partial "helper/icon" "clock" }}
+        <span class="article-time--modified">
+            {{ T "article.lastUpdatedOn" }} {{ .Lastmod.Format ( or .Site.Params.dateFormat.lastUpdated "Jan 02, 2006 15:04 MST" ) }}
+        </span>
+    </section>
+    {{- end -}}
+</footer>
+```
+
+新建`layouts\shortcodes\link.html`
+
+```
+{{$URL := .Get 0}}
+{{ with .Site.GetPage $URL }}
+<div class="post-preview">
+  <div class="post-preview--meta" style="width:100%;">
+    <div class="post-preview--middle">
+      <h4 class="post-preview--title">
+        <a target="_blank" href="{{ .Permalink }}">{{ .Title }}</a>
+      </h4>
+      <time class="post-preview--date">{{ .Date.Format ( default "2006-01-02") }}</time>
+      {{ if .Params.tags }}
+      <small>{{ range .Params.tags }}#{{ . }}&nbsp;{{ end }}</small>
+      {{ end }}
+      <section style="max-height:105px;overflow:hidden;" class="post-preview--excerpt">
+        {{ .Summary | plainify}}
+      </section>
+    </div>
+  </div>
+</div>
+{{ end }}
+```
+
+友链头像放在`\assets\link-img\`，友链数据放在`\data\links.json`
+
+```
+[
+    {
+        "title": "",
+        "website": "",
+        "image": "",
+     "description": ""
+    },
+	{
+        "title": "",
+        "website": "",
+        "image": "",
+     "description": ""
+    }
+]
+```
+
+​	
+
