@@ -92,11 +92,6 @@ params:
             locale:
                 admin: 博主
 
-        #valine:
-            #enable: true 
-            #appId: nBfkBawpQM7bU3fFJqvxdguo-MdYXbMMI
-            #appKey: DxKwYQhldWXe2hKgvcxSrVR8
-
 
         twikoo:
             envId:
@@ -168,6 +163,15 @@ menu:
           params:
               ### For demonstration purpose, the home link will be open in a new tab
               newTab: false
+        - identifier: rss
+          name: rss
+          url: /index.xml
+          weight: -10
+          pre: home
+          params:
+            ### For demonstration purpose, the home link will be open in a new tab
+            newTab: true
+
 
 related:
     includeNewer: true
