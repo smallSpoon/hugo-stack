@@ -164,10 +164,10 @@ menu:
               ### For demonstration purpose, the home link will be open in a new tab
               newTab: false
         - identifier: rss
-          name: rss
+          name: Rss
           url: /index.xml
           weight: -10
-          pre: home
+          pre: RSS
           params:
             ### For demonstration purpose, the home link will be open in a new tab
             newTab: true
