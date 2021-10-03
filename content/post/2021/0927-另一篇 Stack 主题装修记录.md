@@ -311,5 +311,29 @@ blockquote.quote {
 ]
 ```
 
-​	
+​		
 
+## 侧栏加入RSS
+
+其实Hugo会自动生成Rss订阅地址`index.xml`，直接在地址栏输入即可，用Rss阅读器试了一下也可以自动发现订阅源，所以不加也不会影响什么。但习惯的力量是巨大的……
+
+第一反应新建一个page，`slug: "index.xml"`，`hugo sever`一下发现哇哦真简单非常完美就这么结束了——才怪！自动部署会出问题，部署后在Bulid步骤报错，具体为
+
+```
+Error building site: failed to render pages: open /home/runner/work/hugo-stack/hugo-stack/site/public/index.xml: is a directory
+```
+
+解决方法是在config.yaml里来加，写成：
+
+```
+- identifier: rss
+	name: Rss
+    url: /index.xml
+    weight: -10
+    pre: RSS
+    params:
+       ### For demonstration purpose, the home link will be open in a new tab
+       newTab: true
+```
+
+​	
