@@ -34,10 +34,13 @@
         {{- $Generator := `<a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>` -}}
         {{- $Theme := printf `<b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="%s">Stack</a></b>` $ThemeVersion -}}
         {{- $DesignedBy := `<a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>` -}} 
+        
 
         {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }} <br />
-        {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }}
+        {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }}<br />
+         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">© Licensed Under CC BY-NC-SA 4.0</a>
     </section>
+
 <script>
 var s1 = '2021-08-24';//设置为建站时间
 s1 = new Date(s1.replace(/-/g, "/"));
@@ -45,7 +48,6 @@ s2 = new Date();
 var days = s2.getTime() - s1.getTime();
 var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
 document.getElementById('days').innerHTML = number_of_days;
-
 </script>
     
 </footer>
