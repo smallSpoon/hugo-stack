@@ -354,5 +354,56 @@ markup:
 
 ​	另外只能复制行号的问题解决了，同时加上行号显示就只能复制行号，去掉行号显示就可以复制代码块的内容，也很神秘……
 
-​	
+​		
+
+## 文本显示样式
+
+往`custom.css`里塞了一些东西，总之效果如下
+
+```
+<span class="blur">高斯模糊，捎带一点（一点）欲迎还拒风味</span>
+<span class="shady">黑幕效果，把Boss直接写在这里不会太明显了吗</span>
+```
+
+<span class="blur">高斯模糊，捎带一点（一点）欲迎还拒风味 </span> 
+
+<span class="shady">黑幕效果，把Boss直接写在这里不会太明显了吗</span>
+
+
+<details>
+  <summary>以及学了一下文本折叠的写法，以下是文本样式的代码</summary>
+
+```
+//文本高斯模糊
+.blur {
+   color: transparent;
+   text-shadow:0px 0px 8px rgba(0,0,0,0.5)
+}
+
+.blur:hover {
+   color: transparent;
+   text-shadow:0px 0px 0px rgba(0,0,0,1)
+  
+}
+
+//文本黑幕效果
+.shady {
+   color:#000;
+   font-weight: bold;
+   box-shadow: 0px -20px 0px rgba(0,0,0,1) inset; 
+   transition: all 0.3s ease;
+}
+.shady:hover{
+  font-weight: bold;
+   color:#FFF;
+   box-shadow: 0px -20px 0px rgba(0,0,0,1) inset; 
+}
+```
+</details>
+
+总之就是这样啦！
+
+……但好像这样tab+回车的空白行就完蛋了，但可以用`&nbsp;`或者`<br>`来添加空白行这样子。
+
+<br>
 
