@@ -190,6 +190,7 @@ markup:
         ordered: true
         startLevel: 2
     highlight: 
+        guessSyntax: true
     codeFences: false
     noClasses: false
     goldmark:

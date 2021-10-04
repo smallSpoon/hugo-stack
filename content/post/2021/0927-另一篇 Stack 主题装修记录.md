@@ -27,7 +27,7 @@ slug: a08f1963
 
 另外，写在这儿好了，在装Google Analytics时出了点问题，无论如何无法屏蔽本地的计数——后来发现是因为Stack模板中预先写了一条
 
-```
+``` 
 {{- template "_internal/google_analytics.html" . -}}
 ```
 
@@ -337,3 +337,22 @@ Error building site: failed to render pages: open /home/runner/work/hugo-stack/h
 ```
 
 ​	
+
+## 关于代码块……
+
+实测在代码块上加入代码类型是可以被识别并着色的，例如：
+
+```yaml
+markup:
+    tableOfContents:
+        endLevel: 4
+        ordered: true
+        startLevel: 2
+    highlight: 
+        guessSyntax: true *读别人写的文章句是控制自动识别代码类型的，但实际加上后只是多了一个复制按钮，很神秘
+```
+
+​	另外只能复制行号的问题解决了，同时加上行号显示就只能复制行号，去掉行号显示就可以复制代码块的内容，也很神秘……
+
+​	
+
