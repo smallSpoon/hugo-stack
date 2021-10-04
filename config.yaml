@@ -83,7 +83,7 @@ params:
         waline:
             serverURL: https://waline-kappa-lilac.vercel.app/
             lang: 'zh-CN'
-            visitor: ture
+            visitor: false
             avatar: 'monsterid'
             emoji:
                 - https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo
