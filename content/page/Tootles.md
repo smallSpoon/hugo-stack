@@ -47,10 +47,11 @@ menu:
   -moz-transition:-moz-transform .4s ease-out!important;
   border-width:0!important;
   opacity: 0!important;
+  position: absolute;
 }
 
 #artitalk_main .cbp_tmtimeline>li .cbp_tmlabel {
-  margin:0 28px 35px 28px!important;
+  margin:0 1% 35px 1%!important;
   z-index: 1!important;
   background:" + color2 + ";
   color:" + color3 + ";
@@ -64,5 +65,7 @@ menu:
   cursor:pointer;
   display:block;
 }
+
+
 
 </style>
