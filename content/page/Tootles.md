@@ -35,3 +35,17 @@ menu:
 })
 </script>
 
+<style>
+#artitalk_main .artitalk_avatar {
+  border-radius:100%!important;
+  -moz-border-radius:0%!important;
+  box-shadow:inset: 0!important;
+  -webkit-box-shadow:inset 0 0px 0 3333sf!important;
+  -webkit-transition: 0s!important;
+  -webkit-transition:-webkit-transform 0s ease-out!important;
+  transition:transform 0s ease-out!important;
+  -moz-transition:-moz-transform .4s ease-out!important;
+  border-width:0!important;
+}
+
+</style>
