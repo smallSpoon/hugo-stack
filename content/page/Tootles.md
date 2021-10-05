@@ -50,11 +50,11 @@ menu:
 }
 
 #artitalk_main .cbp_tmtimeline>li .cbp_tmlabel {
-  margin:0 0 35px 5px!important;
-  z-index:1;
+  margin:0 28px 35px 28px!important;
+  z-index: 1!important;
   background:" + color2 + ";
   color:" + color3 + ";
-  padding:.8em 1.2em .4em 1.2em;
+  padding: .2em 1.2em .4em 1.2em!important;
   font-weight:300;
   line-height:1.4;
   position:relative;
