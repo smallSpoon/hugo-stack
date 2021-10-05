@@ -46,6 +46,23 @@ menu:
   transition:transform 0s ease-out!important;
   -moz-transition:-moz-transform .4s ease-out!important;
   border-width:0!important;
+  opacity: 0!important;
+}
+
+#artitalk_main .cbp_tmtimeline>li .cbp_tmlabel {
+  margin:0 0 35px 5px!important;
+  z-index:1;
+  background:" + color2 + ";
+  color:" + color3 + ";
+  padding:.8em 1.2em .4em 1.2em;
+  font-weight:300;
+  line-height:1.4;
+  position:relative;
+  border-radius:10px!important;
+  transition:all .3s ease 0s;
+  box-shadow:0 1px 2px rgba(0,0,0,.15);
+  cursor:pointer;
+  display:block;
 }
 
 </style>
