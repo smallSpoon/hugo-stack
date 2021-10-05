@@ -8,7 +8,7 @@ comments: false
 license: false
 menu:
     main:
-        weight: -70
+        weight: -60
         pre: friends
 ---
 

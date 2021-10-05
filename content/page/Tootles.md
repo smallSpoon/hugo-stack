@@ -1,13 +1,13 @@
 ---
-title: "碎碎念"
-slug: "didigugu"
+title: "Tootles"
+slug: "Tootles"
 comments: false
 toc: false
 license: false
 menu:
     main:
         weight: -70
-        pre: friends
+        pre: Tootles
 ---
 <style>
 .article-header {
@@ -19,7 +19,7 @@ menu:
 ## 片语只言
 <br>
 <!-- 引用 artitalk -->
-<script type="text/javascript" src="https://unpkg.com/artitalk"></script>
+<script type="text/javascript" src="/js/artitalk.js"></script>
 <!-- 存放说说的容器 -->
 <div id="artitalk_main"></div>
 <script>
@@ -30,6 +30,8 @@ menu:
    		color1: '#f8f8f8',
    		color2: '#f8f8f8',
    		color3: '#000',
+      bgImg: '/blank.jpg',
+      atComment: 0,
 })
 </script>
 
