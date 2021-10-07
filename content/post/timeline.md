@@ -1,10 +1,15 @@
 ---
-title: Timeline
-description: 
-date: '2021-08-24'
-toc: false
-slug: "Timeline"
-comments: false
+title: "Timeline"
+date: 2021-10-08T01:29:36+08:00
+lastmod: 2021-10-08T01:29:36+08:00
+description: 简明麻瓜快速念咒Hugo搭建笔记
+tags:
+  - Hugo
+categories:
+  - 麻瓜快速念咒互助小组
+image: 
+slug: a1539aea
+hidden: true
 ---
 
 <style>
