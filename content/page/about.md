@@ -2,11 +2,7 @@
 title: About
 description: 
 date: '2021-08-24'
-aliases:
-  - about-us
-  - about-hugo
-  - contact
-license: CC BY-NC-ND
+slug: "about"
 toc: false
 menu:
     main: 
