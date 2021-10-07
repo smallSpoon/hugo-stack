@@ -7,7 +7,15 @@ slug: "Timeline"
 comments: false
 ---
 
-
+<style>
+.article-header {
+    display: none;
+  }
+.article-footer {
+  display: none;
+  }
+</style>
+<br>
 
 ## 结绳记事
 <br>
