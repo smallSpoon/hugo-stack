@@ -13,6 +13,9 @@ menu:
 .article-header {
     display: none;
   }
+.article-footer {
+  display: none;
+  }
 </style>
 <br>
 
