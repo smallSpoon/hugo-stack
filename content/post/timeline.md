@@ -2,11 +2,13 @@
 title: "Timeline"
 date: 2021-10-08T01:29:36+08:00
 lastmod: 2021-10-08T01:29:36+08:00
-description:
+description: 简明麻瓜快速念咒Hugo搭建笔记
 tags:
   - Hugo
 categories:
   - 麻瓜快速念咒互助小组
+image: 
+slug: timeline
 hidden: true
 ---
 
