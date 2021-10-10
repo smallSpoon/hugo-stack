@@ -407,3 +407,23 @@ markup:
 
 <br>
 
+## 站点标题字符间距
+
+是这样的，我的站点名称一直叫做“小 球 飞 鱼”，为什么呢，是因为我觉得中间空格，左侧页面站点名的排版，会显得比较好看。
+
+但同时也会引发一个问题，球看完了之后说：用 空 格 说 话 标 题 栏 它 会 显 得 比 较 蒸 汽 朋 波。
+
+并且向我推荐了[CSS letter-spacing 属性](https://www.w3school.com.cn/cssref/pr_text_letter-spacing.asp)用以改善这一问题。
+
+于是我跑去`layouts\partials\head\custom.html`写了
+
+```
+<style>
+h1 {letter-spacing: 4px}
+</style>
+```
+
+好了，我只看了一个开头的Html课程忠诚地发挥了作用，现在它看上去比较正常了。
+
+​	
+

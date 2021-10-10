@@ -3,7 +3,7 @@ languageCode: zh-cn
 hasCJKLanguage: true
 theme: stack
 paginate: 5
-title: 小 球 飞 鱼
+title: 小球飞鱼
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
