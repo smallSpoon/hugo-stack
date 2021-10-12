@@ -1,0 +1,24 @@
+---
+label: Hugo-FrontMatter
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: title
+- type: datetime
+  name: date
+  label: date
+- type: list
+  name: tags
+  label: tags
+- type: list
+  name: categories
+  label: categories
+- type: text
+  name: description
+  label: description
+- type: text
+  name: slug
+  label: slug
+pages:
+- content/post/2021/hugo-blog-forestry.md
