@@ -2,7 +2,6 @@
 categories = ["麻瓜快速念咒课程笔记"]
 date = 2021-10-12T10:44:00Z
 description = "Hugo | 试验由forestry.io进行后端管理"
-draft = true
 slug = "A-B-C"
 tags = ["Hugo"]
 title = "Hugo | 试验由forestry.io进行后端管理"
