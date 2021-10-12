@@ -22,4 +22,4 @@ fields:
   name: slug
   label: slug
 pages:
-- content/post/2021/hugo.md
+- content/post/2021/1012-一个（些）后端管理方案.md
