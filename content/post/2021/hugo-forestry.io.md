@@ -25,4 +25,12 @@ title = "Hugo | 试验由forestry.io进行后端管理"
 
 \`\`\`
 
-    好像是代码块
+
+这里用Markdown原始编辑器写
+```
+df 
+```
+
+[这里是一个链接](www.wordpress.com)
+
+`df`
