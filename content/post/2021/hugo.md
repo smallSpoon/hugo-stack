@@ -7,7 +7,6 @@ categories:
 - 麻瓜快速念咒课堂笔记
 description: 好像没解决又好像解决了，小惠金区常有这样的事情
 slug: D946B9
-draft: true
 
 ---
 ## 大家好我又来了
