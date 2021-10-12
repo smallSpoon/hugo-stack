@@ -21,3 +21,5 @@ fields:
 - type: text
   name: slug
   label: slug
+pages:
+- content/post/2021/hugo.md
