@@ -1,12 +1,12 @@
-+++
-categories = []
-date = 2021-10-11T16:00:00Z
-description = ""
+---
+
+date: 2021-10-11T16:00:00Z
 slug = "952C64"
 tags = ["Hugo"]
-title = "Hugo | 利用Headless cms进行Blog后端管理"
+title: Hugo | 利用Headless cms进行Blog后端管理
 hidden: true
-+++
+
+---
 ## 大家好我又来了
 
 行了博客没人看，其实没有什么大家，但这么说比较好开头一点。
