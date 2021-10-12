@@ -15,6 +15,10 @@ googleAnalytics: G-QSQ229TQWS
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn, es, de, nl, it
 DefaultContentLanguage: en
 
+## Possible options "yaml", "toml" or "json"
+metaDataFormat: "yaml"
+
+
 permalinks:
     post: /:year/:slug/
     page: /:slug/
