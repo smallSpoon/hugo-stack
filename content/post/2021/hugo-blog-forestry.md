@@ -5,7 +5,7 @@ description = ""
 slug = "952C64"
 tags = ["Hugo"]
 title = "Hugo | 利用Headless cms进行Blog后端管理"
-
+hidden: true
 +++
 ## 大家好我又来了
 
