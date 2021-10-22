@@ -1,5 +1,4 @@
-<!--{{- partial "helper/external" (dict "Context" . "Namespace" "Vibrant") -}}-->
-<!--去掉主題裏的vibrant.js插件-->
+
 
 {{- $opts := dict "minify" hugo.IsProduction -}}
 {{- $script := resources.Get "ts/main.ts" | js.Build $opts -}}

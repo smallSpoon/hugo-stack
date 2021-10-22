@@ -6,7 +6,7 @@
 *   @link: https://github.com/CaiJimmy/hugo-theme-stack
 */
 import StackGallery from "ts/gallery";
-import { getColor } from 'ts/color';
+//import { getColor } from 'ts/color';
 import menu from 'ts/menu';
 import createElement from 'ts/createElement';
 import StackColorScheme from 'ts/colorScheme';
