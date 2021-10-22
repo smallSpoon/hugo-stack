@@ -9,6 +9,7 @@ categories:
   - 麻瓜快速念咒互助小组
 image: 
 slug: shiyan
+hidden: true
 
 ---
 
