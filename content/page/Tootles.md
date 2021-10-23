@@ -4,7 +4,7 @@ slug: "Tootles"
 comments: false
 toc: false
 license: false
-//menu:
+menu:
     main:
         weight: -70
         pre: Tootles
@@ -67,10 +67,7 @@ license: false
   box-shadow:0 1px 2px rgba(0,0,0,.15);
   cursor:pointer;
   display:block;
-  --accent-color:#fff;
-  --heading-border-size:10px;
 }
-
 
 
 
