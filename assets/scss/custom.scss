@@ -111,3 +111,21 @@ blockquote.quote {
 
 
 
+
+.swiper-container {
+    max-width: 800px;
+    margin: 2em auto;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background-color: hsla(var(--color-contrast-lower-h), var(--color-contrast-lower-s), var(--color-contrast-lower-l), 0.5);
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        margin: 0 !important;
+    }
+}
+

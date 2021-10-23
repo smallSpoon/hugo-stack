@@ -1,3 +1,4 @@
+{{ if not .Site.IsServer }}
 <script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
 <div id="waline" class="waline-container"></div>
 <style>
@@ -20,6 +21,7 @@
     }
 
 </style>
+{{- end -}}
 
 {{- with .Site.Params.comments.waline -}}
 {{- $config := dict "el" "#waline" "dark" `html[data-scheme="dark"]` -}}
