@@ -5,7 +5,7 @@
 *   @website: https://jimmycai.com
 *   @link: https://github.com/CaiJimmy/hugo-theme-stack
 */
-import StackGallery from "ts/gallery";胡工
+import StackGallery from "ts/gallery";
 import menu from 'ts/menu';
 import createElement from 'ts/createElement';
 import StackColorScheme from 'ts/colorScheme';
@@ -25,7 +25,8 @@ let Stack = {
         /**
          * Add linear gradient background to tile style article
          */
-        
+        const articleTile = document.querySelector('.article-list--tile');
+
         /**
          * Add copy button to code block
         */
