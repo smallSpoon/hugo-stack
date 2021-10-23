@@ -34,7 +34,7 @@ params:
         customText: 
 
     # 是否开启轮播图
-    enableCarousel: true 
+    enableimgloop: true 
 
     dateFormat:
         published: Jan 02, 2006

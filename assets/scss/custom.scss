@@ -115,11 +115,12 @@ blockquote.quote {
 .swiper-container {
     max-width: 800px;
     margin: 2em auto;
+
 }
 .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background-color: hsla(var(--color-contrast-lower-h), var(--color-contrast-lower-s), var(--color-contrast-lower-l), 0.5);
+    background-color: #fff;
     /* Center slide text vertically */
     display: flex;
     justify-content: center;
@@ -128,4 +129,3 @@ blockquote.quote {
         margin: 0 !important;
     }
 }
-
