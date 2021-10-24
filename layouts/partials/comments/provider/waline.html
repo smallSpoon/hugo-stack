@@ -1,6 +1,7 @@
 {{ if not .Site.IsServer }}
 <script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
 <div id="waline" class="waline-container"></div>
+{{- end -}}
 <style>
     .waline-container {
         background-color: var(--card-background);
@@ -21,7 +22,7 @@
     }
 
 </style>
-{{- end -}}
+
 
 {{- with .Site.Params.comments.waline -}}
 {{- $config := dict "el" "#waline" "dark" `html[data-scheme="dark"]` -}}
