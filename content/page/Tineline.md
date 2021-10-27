@@ -21,6 +21,7 @@ comments: false
 <br>
 
 ### 2021年10月
+**10-27 |** 完善Waline黑暗模式样式    
 **10-26 |** 加入表情包短代码  
 **10-24 |** 加入轮播图片功能，换用Umami进行[站点浏览量统计](https://umami.mantyke.icu/share/f0Z0rGyU/%E5%B0%8F%E7%90%83%E9%A3%9E%E9%B1%BC)  
 **10-19 |** 搭建[猫与笔记](https://doc.mantyke.icu)，删除Artitalk   
