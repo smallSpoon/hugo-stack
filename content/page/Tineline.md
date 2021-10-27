@@ -23,7 +23,7 @@ comments: false
 ### 2021年10月
 **10-26 |** 加入表情包短代码  
 **10-24 |** 加入轮播图片功能，换用Umami进行[站点浏览量统计](https://umami.mantyke.icu/share/f0Z0rGyU/%E5%B0%8F%E7%90%83%E9%A3%9E%E9%B1%BC)  
-**10-19 |** 搭建[猫与笔记](https://doc.mantyke.icu)   
+**10-19 |** 搭建[猫与笔记](https://doc.mantyke.icu)，删除Artitalk   
 **10-07 |** 迁移[导航](https://archive.mantyke.icu/)站到Gridea，并（惨叫着）装修完成   
 **10-05 |** 加入Artitalk，用草莽CSS改了外观，能用，竟然能用    
 **10-03 |** 搭建个人[导航](https://archive.mantyke.icu/)站，很糙，能用，难用，不想装修      
