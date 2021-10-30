@@ -412,7 +412,7 @@ git commit -m "first commit"
 #### 推送到Github
 
 ```
-git push -u orgin master
+git push -uorigin master
 ```
 
 这个指令是告诉Git，把之前存储的内容推送到远端服务器，origin是Git默认远端服务器的名字，master是默认的分支名字。
