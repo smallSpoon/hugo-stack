@@ -5,11 +5,11 @@
 {{ end }}
 
 {{ define "container-class" }}
-    {{ if (.Scratch.Get "hasTOC") }}
+    <!-- {{ if (.Scratch.Get "hasTOC") }}
         extended
     {{ else }}
         on-phone--column {{ if .Site.Params.widgets.enabled }}extended{{ else }}compact{{ end }}
-    {{ end }} 
+    {{ end }} -->
     on-phone--column {{ if .Site.Params.widgets.enabled }}extended{{ else }}compact{{ end }}
 {{ end }}
 
@@ -23,6 +23,8 @@
     {{ end }}
 
     {{ partialCached "footer/footer" . }}
+
+    {{ partialCached "article/components/photoswipe" . }}
 {{ end }}
 
 {{ define "left-sidebar" }}
@@ -64,5 +66,3 @@
     {{ end }} -->
     {{ partial "sidebar/right.html" . }}
 {{ end }}
-
-

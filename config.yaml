@@ -37,7 +37,6 @@ params:
     enableimgloop: true 
 
     # Fancybox
-    fancybox: true
 
     dateFormat:
         published: Jan 02, 2006
