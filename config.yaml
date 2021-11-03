@@ -1,7 +1,7 @@
 baseurl: https://mantyke.icu
 languageCode: zh-cn
-hasCJKLanguage: true
 theme: stack
+hasCJKLanguage: true
 paginate: 5
 title: 小球飞鱼
 

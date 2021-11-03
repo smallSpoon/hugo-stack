@@ -137,7 +137,7 @@ The authenticity of host 'github.com (192.30.255.112)' can't be established.
 
 #### 将公钥与服务器链接
 
-首先要找到公钥，公钥的地址是`C:\Users\用户名\.ssh\id_rsa.pub`，邮件用记事本打开，复制里面的全部内容。
+首先要找到公钥，公钥的地址是`C:\Users\用户名\.ssh\id_rsa.pub`，右键用记事本打开，复制里面的全部内容。
 
 打开Github账号，右上角头像-Settings，在左边找到`SSH and GPG keys`选项，新建一个SSH密钥，标题可以随便填，把之前复制的密钥内容粘贴进去，保存。
 
