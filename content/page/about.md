@@ -25,17 +25,21 @@ menu:
 <br>
 
 ### 相关站点
-[废旧二手书摘五斤起卖](https://ink.mantyke.icu/)&ensp;&ensp;&ensp;[龙与烟熏火燎的藏宝图](https://archive.mantyke.icu/)
+搭了根本不用的书摘站：[废旧二手书摘五斤起卖](https://ink.mantyke.icu/)
+
+自用网页收藏夹：[龙与烟熏火燎的藏宝图](https://archive.mantyke.icu/)
+
+FF14高难副本攻略导航：[Raid从入门到入土](https://ff14.link/)
 
 <br>
 
 ### Timeline
 
-[结绳记事](https://mantyke.icu/timeline)
+网站更新记录，偶尔记得更新：[结绳记事](https://mantyke.icu/timeline)
 
 <br>
 
 ### 联系我
-[文艺社的恋爱咨询信箱](https://box.n3ko.co/_/Mantyke)
+匿名提问箱：[文艺社的恋爱咨询信箱](https://box.n3ko.co/_/Mantyke)
 
 <br>

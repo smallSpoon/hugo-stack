@@ -694,7 +694,7 @@ post: /:year/:slug/
         {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
             {{ .Site.Params.footer.since }} - 
         {{ end }}
-        {{ now.Format "2006" }} 小球飞鱼·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>共嘟嘟了 {{$scratch.Get "total" }}字·共 {{ len (where .Site.RegularPages "Section" "post") }}篇文章</br><span><p>
+        {{ now.Format "2006" }} <a rel="me" href="https://o3o.ca/@Hydrangea">Mastodon</a>小球飞鱼·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>共嘟嘟了 {{$scratch.Get "total" }}字·共 {{ len (where .Site.RegularPages "Section" "post") }}篇文章</br><span><p>
     </section>
 
 记得要在`layouts\partials\footer\footer.html`里写上总字数参数
