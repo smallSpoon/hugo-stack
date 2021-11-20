@@ -26,4 +26,7 @@ menu:
 
   
 
+> 博客名称：小球飞鱼  
+> 博客简介：我们会一起遇见鲸鱼吗？  
+> 头像地址：[https://cdn.jsdelivr.net/gh/Mantyke/photo@master/star_min.png](https://cdn.jsdelivr.net/gh/Mantyke/photo@master/star_min.png)
 
