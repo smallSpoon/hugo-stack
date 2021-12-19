@@ -18,7 +18,11 @@ menu:
 .article-footer {
 	display: none;
   }
+
 </style>
+
+
+
 
 {{< quote >}}
 我想，交换友链仍然是赛博世界珍贵的仪式感之一：好，我们现在是朋友了！
