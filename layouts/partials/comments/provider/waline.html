@@ -1,3 +1,9 @@
+{{ if not .Site.IsServer }}
+<script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
+<div id="waline" class="waline-container"></div>
+{{- end -}}
+
+
 <style>
    .waline-container {
        background-color: var(--card-background);
@@ -19,6 +25,8 @@
        --waline-dark-grey: #34495e; /*ID颜色*/
        --waline-border-color:hsl(0deg 0% 100% / 0%);
 
+       
+
    }
 
  /*夜间模式*/
@@ -30,6 +38,7 @@
        --waline-dark-grey: #acc6e0; /*ID颜色*/
        --waline-badge-color: #acc6e0;
        --waline-border-color:hsl(0deg 0% 100% / 0%);
+
 
        /* 布局颜色 */
        --waline-text-color: rgba(255, 255, 255, 0.7);
