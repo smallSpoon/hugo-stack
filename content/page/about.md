@@ -24,9 +24,11 @@ menu:
 <br>
 
 ### 相关站点
-搭了根本不用的书摘站：[废旧二手书摘五斤起卖](https://ink.mantyke.icu/)
+废旧二手书摘五斤起卖：[小球飞槎](https://ink.mantyke.icu/)
 
-自用网页收藏夹：[龙与烟熏火燎的藏宝图](https://archive.mantyke.icu/)
+龙与烟熏火燎的藏宝图：[小球飞藏](https://archive.mantyke.icu/)
+
+很显然地暴露了我最近什么也没学的笔记站：[小球飞记](https://doc.mantyke.icu/#/)
 
 FF14高难副本攻略导航：[Raid从入门到入土](https://ff14.link/)
 
