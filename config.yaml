@@ -181,8 +181,41 @@ menu:
             ### For demonstration purpose, the home link will be open in a new tab
             newTab: true
 
+    social:
+        - identifier: 小球飞藏
+          name: 小球飞藏
+          url: https://archive.mantyke.icu/
+          weight: 1
+          params:
+            icon: feicang
 
+        - identifier: 小球飞记
+          name: 小球飞记
+          weight: 2
+          url: https://doc.mantyke.icu/#/
+          params:
+            icon: feiji
 
+        - identifier: 小球飞读
+          name: 小球飞读
+          weight: 3
+          url: https://rss.mantyke.icu/unread
+          params:
+            icon: feidu
+
+        - identifier: 小球飞槎
+          name: 小球飞槎
+          weight: 4
+          url: https://ink.mantyke.icu
+          params:
+            icon: feicha
+
+        - identifier: FF14
+          name: Raid从入门到入土
+          weight: 5
+          url: https://ff14.link/
+          params:
+            icon: gaonan
 
 
 related:
