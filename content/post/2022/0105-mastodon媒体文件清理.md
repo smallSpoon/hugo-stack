@@ -1,5 +1,5 @@
 ---
-title: "Mastodon | 长毛象媒体文件清理"
+title: "Mastodon | 大扫除，移除本地缓存的其它实例媒体附件"
 date: 2022-01-05T19:14:32+08:00
 lastmod: 2022-01-05T19:14:32+08:00
 description: 
