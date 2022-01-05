@@ -90,11 +90,7 @@ ERROR: No such service: web
 
 而刚刚的报错为：`ERROR: No such service: web`
 
-这个web容器到底是什么？
-
-运行`docker ps`来列出容器，很容易就能发现一个叫做**mastodon_mastodon-web_1**的容器，是不是它？
-
-试着修改命令为`docker-compose run --rm mastodon-web bin/tootctl help`
+运行`docker ps`来列出容器，很容易就能发现一个叫做**mastodon_mastodon-web_1**的容器，于是试着修改命令为`docker-compose run --rm mastodon-web bin/tootctl help`
 
 ```
 root:/opt/mastodon# docker-compose run --rm mastodon-web bin/tootctl help
