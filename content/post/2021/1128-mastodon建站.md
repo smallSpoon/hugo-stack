@@ -8,7 +8,7 @@ tags:
 categories:
   - 麻瓜快速念咒互助小组
 image: 
-slug: Mastodon_bulid
+slug: Mastodon-bulid
 ---
 
 踩在2021年的尾巴上也当了站长，在魔改前总之先记一下建站过程。

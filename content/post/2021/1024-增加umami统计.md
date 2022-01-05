@@ -8,7 +8,7 @@ tags:
 categories:
   - 麻瓜快速念咒互助小组
 image: 
-slug: d2ab87c0
+slug: Umami-build
 ---
  截至今日已经在Vercel上挂了七个项目，万一某天它崩了墙了，我就可以就地取材尝试西北风烹饪菜谱。
 
