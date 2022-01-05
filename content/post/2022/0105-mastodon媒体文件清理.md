@@ -29,7 +29,7 @@ slug: mastodon-Media-file-cleanup
 
 ## 缩了，但没完全缩
 
-废话不表，来讲结果，首先根据[Mastodon文档](https://docs.joinmastodon.org/zh-cn/admin/tootctl/)我们可以发现，Masodon给出了媒体相关命令`tootctl media usage`，可以计算被Mastodon消耗的硬盘空间，但在VPS中，`tootctl`命令是不能直接运行的，如果使用源代码建站，需要在命令中指定环境，如`RAILS_ENV=production bin/tootctl help`，而如果用docker建站，则需要在命令前指定运行的容器名称。但每次都输入这么一长串命令实在非常麻烦，于是根据[Mastodon | 采用docker建站后的使用与维护](https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/)，我们写入一个脚本文件，这样就可以对命令进行简化，将`docker-compose run --rm web bin/tootctl help`简化为`tootctl help`
+废话不表，来讲结果，首先根据[Mastodon文档](https://docs.joinmastodon.org/zh-cn/admin/tootctl/)我们可以发现，Masodon给出了媒体相关命令`tootctl media usage`，可以计算被Mastodon消耗的硬盘空间，但，`tootctl`命令是不能直接运行的，如果使用源代码建站，需要在命令中指定环境，如`RAILS_ENV=production bin/tootctl help`，而如果用docker建站，则需要在命令前指定运行的容器名称。每次都输入这么一长串命令实在非常麻烦，于是根据[Mastodon | 采用docker建站后的使用与维护](https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/)，我们写入一个脚本文件，这样就可以对命令进行简化，将`docker-compose run --rm web bin/tootctl help`简化为`tootctl help`
 
 ```
 cd /opt/mastodon   #跳转至目标文件夹
