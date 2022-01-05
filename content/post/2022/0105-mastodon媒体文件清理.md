@@ -84,8 +84,6 @@ root@vmi729048:/opt/mastodon# tootctl help
 ERROR: No such service: web
 ```
 
-<br>
-
 阅读[Docker命令教程](https://www.runoob.com/docker/docker-run-command.html)，一个完整的在Docker内运行tootctl的命令为`docker-compose run --rm web bin/tootctl help`，其中，`docker-compose run`，意味着在创建一个新的容器并运行一个命令，加上`--rm`参数，意味着容器退出时自动清理容器内部的文件数据，根据文档，Mastodon的命令行界面是一个位于Mastodon根目录内`bin`目录中的名为`tootctl`的可执行文件，因此，完整的命令，意味着用docker-compose创建一个名为web的容器，并运行bin目录中的tootctl文件，在容器退出时清理干净内部数据。
 
 而刚刚的报错为：`ERROR: No such service: web`
