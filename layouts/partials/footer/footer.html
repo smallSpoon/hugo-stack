@@ -4,7 +4,6 @@
 {{$scratch := newScratch}}
 {{ range (where .Site.Pages "Kind" "page" )}}
     {{$scratch.Add "total" .WordCount}}    
-    {{ div ($scratch.Get "total") 1000 }}
 {{ end }}
 
 <script>
