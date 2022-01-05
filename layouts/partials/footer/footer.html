@@ -3,7 +3,7 @@
   
 {{$scratch := newScratch}}
 {{ range (where .Site.Pages "Kind" "page" )}}
-    {{$scratch.Add "total" .FuzzyWordCount}}
+    {{$scratch.Add "total" .WordCount}}
 {{ end }}
 
 <script>
@@ -23,7 +23,7 @@
         {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
             {{ .Site.Params.footer.since }} - 
         {{ end }}
-        {{ now.Format "2006" }} <a rel="me" href="https://toot.mantyke.icu/@Hydrangea">小球飞鱼</a>·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>共嘟嘟了 {{div ($scratch.Get "total") 1000.0}}k字·共 {{ len (where .Site.RegularPages "Section" "post") }}篇文章</br><span><p>
+        {{ now.Format "2006" }} <a rel="me" href="https://toot.mantyke.icu/@Hydrangea">小球飞鱼</a>·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>共嘟嘟了 {{div ($scratch.Get "total") 1000}}k字·共 {{ len (where .Site.RegularPages "Section" "post") }}篇文章</br><span><p>
     </section>
     
     <section class="powerby">
