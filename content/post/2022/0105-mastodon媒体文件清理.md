@@ -2,9 +2,9 @@
 title: "Mastodon | 大扫除，移除本地缓存的其它实例媒体附件"
 date: 2022-01-05T19:14:32+08:00
 lastmod: 2022-01-05T19:14:32+08:00
-description: 
+description: 换了最新免责说明，大扫除令人心情愉快
 tags:
-  - Hugo
+  - Mastodon
 categories:
   - 麻瓜快速念咒互助小组
 image: 
