@@ -30,6 +30,12 @@
      "description": "有风有雨有晴天"
     },
     {
+        "title": "suica",
+        "website": "https://suicablog.cobaltkiss.blue/",
+        "image": "suica.png",
+     "description": "博客装修中"
+    },
+    {
         "title": "槽",
         "website": "https://miyehn.me/blog/",
         "image": "miyehn.jpg",
