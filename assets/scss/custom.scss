@@ -130,11 +130,7 @@ blockquote.quote {
     }
 }
 
-//修改选中颜色
-::selection {
-    color: #fff;
-    background: #34495e;
-}
+
 
 //友情链接双栏
 @media (min-width: 1024px) {
@@ -155,4 +151,10 @@ blockquote.quote {
             }
         }
     }
+}
+
+//修改选中颜色
+::selection {
+    color: #fff;
+    background: #34495e;
 }
