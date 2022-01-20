@@ -124,7 +124,7 @@ params:
             #- search
             - toc
             - archives
-            - tag-cloud
+            - categories
 
         archives:
             limit: 1000
@@ -226,7 +226,7 @@ related:
         - name: tags
           weight: 100
 
-        - name: categories
+        - name:categories
           weight: 200
 
 markup:
