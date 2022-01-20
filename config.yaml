@@ -124,7 +124,7 @@ params:
             #- search
             - toc
             - archives
-            - categories
+           
 
         archives:
             limit: 1000
