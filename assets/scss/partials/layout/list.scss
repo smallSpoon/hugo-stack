@@ -55,6 +55,7 @@
     .article-list--tile {
         display: flex;
         padding-bottom: 15px;
+    
         
 
         article {
@@ -67,6 +68,7 @@
             .article-title {
                 margin: 0;
                 font-size: 1.5rem; //改爲1.5rem，調整字體尺寸
+                font-weight: 300;
             }
 
             .article-details {
