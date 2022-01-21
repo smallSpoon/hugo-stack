@@ -1,5 +1,5 @@
 ---
-title: "麻瓜快速念咒课堂笔记"
+title: "甘普基本变形定律"
 description: 
 image: 
 style:
