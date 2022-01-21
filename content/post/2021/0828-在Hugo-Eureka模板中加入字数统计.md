@@ -6,7 +6,7 @@ toc: true
 tags:
   - Hugo
 categories:
-  - 麻瓜快速念咒互助小组
+  - 甘普基本变形定律
 series:
 date: 2021-08-28T11:06:09+08:00
 lastmod: 2021-08-28T17:06:09+08:00

@@ -6,7 +6,7 @@ description: 人生四大名言警句：喜欢就买、不行就分、多喝热�
 tags:
   - Mastodon
 categories:
-  - 麻瓜快速念咒互助小组
+  - 甘普基本变形定律
 image: 
 slug: Mastodon-bulid
 ---

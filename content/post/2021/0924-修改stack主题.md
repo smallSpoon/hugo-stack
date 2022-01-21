@@ -6,7 +6,7 @@ toc: true
 tags:
   - Hugo
 categories:
-  - 麻瓜快速念咒互助小组
+  - 甘普基本变形定律
 description: 装修是一种健身运动，一天三次、少量多餐、一二三四、再来一次
 series:
 draft: true

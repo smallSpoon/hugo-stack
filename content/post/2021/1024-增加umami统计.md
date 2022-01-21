@@ -6,7 +6,7 @@ description: 打开Vercel一看倒吸一口凉气：哪天Vercel崩了我立刻�
 tags:
   - Hugo
 categories:
-  - 麻瓜快速念咒互助小组
+  - 甘普基本变形定律
 image: 
 slug: Umami-build
 ---
