@@ -124,8 +124,8 @@ params:
             #- search
             - toc
             - archives
+            - categories
             - tag-cloud
-
         archives:
             limit: 1000
 

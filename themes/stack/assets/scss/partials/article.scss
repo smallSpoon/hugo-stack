@@ -258,7 +258,6 @@
 
         .article-title {
             font-size: 2rem;
-            font-weight: 500;
             color: var(--card-text-color-main);
 
             @include respond(sm) {

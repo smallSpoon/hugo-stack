@@ -61,6 +61,8 @@
     margin: 10px 0;
     color: var(--card-text-color-main);
     font-size: 2.2rem;
+    font-weight: 700;
+    
 
     @include respond(xl) {
         font-size: 2.4rem;
@@ -258,7 +260,6 @@
 
         .article-title {
             font-size: 2rem;
-            font-weight: 500;
             color: var(--card-text-color-main);
 
             @include respond(sm) {
