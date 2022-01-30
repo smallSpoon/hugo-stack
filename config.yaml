@@ -95,7 +95,7 @@ params:
             visitor: false
             avatar: 'monsterid'
             emoji:
-                - https://cdn.jsdelivr.net/gh/sowhereso/waline-blobcatemojis@1.2/blobs
+                - https://cdn.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs
             requiredMeta: ['nick', 'mail']
             placeholder: 默认留言头像为随机小怪物，登录后可以使用Libravatar/Gravatar头像。
             locale:
