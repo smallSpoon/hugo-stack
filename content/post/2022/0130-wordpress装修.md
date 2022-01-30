@@ -62,9 +62,7 @@ slug: Wordpress-css
 
 4. Shift+F5强制刷新，之后CSS生效，检查版本，引入版本变为`style.css?ver=20220130`
 
-5. 大功告成！
+5. 大功告成！{{< emoji name="灵机一动"  width="40" >}}
 
-
-
-<br>
+   <br>
 
