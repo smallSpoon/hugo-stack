@@ -33,7 +33,7 @@ Github仓库地址：[Mantyke](https://github.com/Mantyke)/[stack-theme-mod](htt
 
 ## 魔改内容
 
-- 调整文章页面为三栏显示（代码来自[ShadowySpirits](https://github.com/ShadowySpirits/hugo-theme-stack)
+- 调整文章页面为三栏显示（代码来自[ShadowySpirits](https://github.com/ShadowySpirits/hugo-theme-stack)）https://github.com/ShadowySpirits/hugo-theme-stack)
 - 文章按年份分类
 - 增加文章字数统计与站点总字数、总篇数显示
 - 修改全站字体为思源宋体
@@ -77,6 +77,38 @@ Github仓库地址：[Mantyke](https://github.com/Mantyke)/[stack-theme-mod](htt
      "description": ""
     }
 ]
+```
+
+<br>
+
+### 修改页尾信息
+
+站点名称及建站时间请修改以下代码
+
+站点名称及链接：
+
+```
+#位置：layout/partials/footer/footer.html
+
+    <section class="copyright">
+        &copy; 
+        {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
+            {{ .Site.Params.footer.since }} - 
+        {{ end }}
+        {{ now.Format "2006" }} <a href="https://stack-theme-mod.vercel.app/">Example Site</a>·<i class="fas fa-bell"></i> <a id="days">0</a>Days<br>
+      {{$var :=  $scratch.Get "total"}}{{$var = div $var 100.0}}{{$var = math.Ceil $var}}{{$var = div $var 10.0}}共书写了{{$var}}k字·共 {{ len (where .Site.RegularPages "Section" "post") }}篇文章</br><span><p>
+    </section>
+```
+
+```
+#位置：layout/partials/footer/footer.html
+
+var s1 = '2022-02-13';//设置为建站时间
+s1 = new Date(s1.replace(/-/g, "/"));
+s2 = new Date();
+var days = s2.getTime() - s1.getTime();
+var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+document.getElementById('days').innerHTML = number_of_days;
 ```
 
 <br>
