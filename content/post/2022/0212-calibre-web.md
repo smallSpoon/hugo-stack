@@ -74,7 +74,7 @@ mkdir library #创建library文件夹
 cd library #进入library文件夹
 mkdir books #创建books文件夹
 cd books #进入books文件夹
-#下载一份空白的metadata文件，也可以用cali
+#下载一份空白的metadata文件，也可以用Calibre自己创建一份出来
 wget "https://cloud.volkantasci.com/index.php/s/YaKZdrneBwz3dME/download/metadata.zip" 
 mv metadata.zip database.zip
 unzip database.zip
