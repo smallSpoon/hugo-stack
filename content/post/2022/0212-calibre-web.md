@@ -27,8 +27,6 @@ docker container prune -f: 删除所有停止的容器
 ```
 mkdir calibre-web #创建calibre-web文件夹
 cd calibre-web #进入calibre-web文件夹
-
-mkdir metadata_generator.sh
 ```
 
 ```
