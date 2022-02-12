@@ -17,6 +17,8 @@ Github仓库地址：[Mantyke](https://github.com/Mantyke)/[stack-theme-mod](htt
 
 本主题由[CaiJimmy](https://github.com/CaiJimmy)制作并[发布](https://github.com/CaiJimmy/hugo-theme-stack)，这个仓库是由[Mantyke](https://mantyke.icu/)修改的魔改版本
 
+预览：[Demo站](https://stack-theme-mod.vercel.app/)
+
 <br>
 
 ## 使用方式
@@ -25,7 +27,7 @@ Github仓库地址：[Mantyke](https://github.com/Mantyke)/[stack-theme-mod](htt
 
 **旧博客更换主题**：不同主题方式不同，推荐只保留原博客的content文件夹，迁移到本仓库content文件夹后再按情况调整。
 
-预览：[Demo站](https://stack-theme-mod.vercel.app/)。
+
 
 <br>
 
