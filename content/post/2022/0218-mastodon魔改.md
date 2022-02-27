@@ -13,7 +13,7 @@ slug: mastodon_mammota
 
 一些基础说明：
 
-1. 我的Mastodon站点以Docker搭建，运行在搭载Debian 10系统的VPS上，VPS购买于[Cantabo](https://contabo.com/en/?utm_source=google&utm_medium=cpc&utm_campaign=brand&gclid=CjwKCAiAsNKQBhAPEiwAB-I5zcTPXcO2ZigGWfXI_AAL7qPmALPwTxmLdw711TnNHXGjFsEOPLyZbBoCzbQQAvD_BwE)，选择4v8g的基础套餐，搭建过程见[建站笔记](https://mantyke.icu/2021/mastodon-bulid/)。
+1. 我的Mastodon站点以Docker搭建，运行在搭载Debian 10系统的VPS上，VPS购买于[Contabo](https://contabo.com/en/)，选择5欧元的基础套餐，搭建过程见[建站笔记](https://mantyke.icu/2021/mastodon-bulid/)。
 2. 本文涉及的绝大部分内容均来源于Fedi内的朋友们手把手教学，本文仅作记录/汇总/补充，万分感谢！
 3. 本文内容基于以Docker搭建的Mastodon站点写作。
 
