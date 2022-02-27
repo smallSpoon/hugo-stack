@@ -187,6 +187,40 @@ docker-compose up -d #重新启动镜像
 路径：`mastodon/config/locales/simple_form.zh-CN.yml`，找到`invite_request`项，修改`text`的内容。
 ![修改注册提示语](https://res.cloudinary.com/mantyke/image/upload/v1645953330/%E4%BD%A0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%83%B3%E8%A6%81%E5%8A%A0%E5%85%A5_pd6mp7.png)
 
+#### 调整吉祥物位置
+
+吉祥物就是发嘟页面最下方（手机可以看到/浏览器页面调窄也可以看到）的图片，站长可以自主上传，同时也会出现在“关于本站”“站点公告”中
+
+吉祥物默认居左，如果想让它居右
+
+```
+/*站点吉祥物*/
+.drawer__inner__mastodon>img {
+    object-position: right bottom;
+    margin-left: auto;
+}
+```
+
+如果居中：
+
+```
+/*站点吉祥物*/
+.drawer__inner__mastodon>img {
+	object-position: bottom;
+    margin: auto;
+}
+```
+
+另外，也可以调节大小：
+
+```
+/*站点吉祥物*/
+.drawer__inner__mastodon>img {
+	width: 65%;
+    height: 100%;
+}
+```
+
 <br>
 
 ## 手册：使用站点后台管理
