@@ -9,7 +9,7 @@ categories:
 image: 
 slug: mastodon_mammota
 ---
-2021年11月28日我搭建了自己的Mastodon个人站点，这篇文章汇总了我对个人站点进行的运维/魔改相关操作，希望能给后来者站长们提供一些便利。
+2021年11月28日我搭建了自己的Mastodon个人站点，这篇文章汇总了站点相关的运维/魔改操作，并计划进行不断更新，希望能给后来者站长们提供一些便利。
 
 一些基础说明：
 
@@ -245,6 +245,18 @@ docker-compose up -d #重新启动镜像
 
 <br>
 
-其他内容持续更新……
+## 参考资料：
+
+Mastodon搭建指南：[链接](https://pullopen.github.io/catalog/)
+
+Mastodon | 采用docker建站后的使用与维护：[链接](https://blog.tantalum.life/posts/how-to-run-your-mastodon-by-docker/#%E4%BD%BF%E7%94%A8alias%E8%84%9A%E6%9C%AC%E7%BC%A9%E5%86%99tootctl%E5%91%BD%E4%BB%A4)
+
+Mastodon | 记录大型魔改过程：[链接](https://blog.tantalum.life/posts/notes-on-modifying-mastodon-in-docker/)
+
+使用 Mastodon 搭建个人信息平台：前篇：[链接](https://soulteary.com/2022/01/24/building-a-personal-information-platform-with-mastodon-part-1.html)
+
+使用 Mastodon 搭建个人信息平台：调优篇：[链接](https://soulteary.com/2022/01/25/building-a-personal-information-platform-with-mastodon-part-2.html)
+
+Mastodon 的基本维护：[链接](https://tand.me/36117)
 
 <br>
