@@ -9,6 +9,12 @@ categories:
 image: 
 slug: mastodon_mammota
 ---
+{{< quote >}}
+
+{{< emoji name="artist" ext="png" width="35" >}} 本文作者没有任何代码基础，所有说明性文字主要靠连蒙带猜兼灵光一现，参考时请务必注意，欢迎提出意见和给出建议~
+
+{{< /quote >}}
+
 2021年11月28日我搭建了自己的Mastodon个人站点，这篇文章汇总了站点相关的运维/魔改操作，并计划进行不断更新，希望能给后来者站长们提供一些便利。
 
 一些基础说明：
@@ -137,6 +143,18 @@ docker-compose up -d #重新启动镜像
 
 可以通过以下路径查看数据库空间：管理-PgHero-space，可以查看到目前未使用的索引/档案大小和七天增长。
 
+#### 增加sidekiq线程数
+
+sidekiq是后台任务处理系统，这里引用bgme站长的[文章](https://blog.bgme.me/posts/the-experience-of-mastodons-follows-and-followers-managing-function/)，解释一下跨实例接收嘟文的机制（原文写的是跨实例关注，实际差不多）
+
+> 比方说，位于BGME实例的账号A关注了位于CMX实例的账号B。 关注之后，账号A可以接收到账号B的动态（新嘟文、点赞 转发等）。
+>
+> 其背后的机制则是这样的：账号B有新动态，CMX实例服务器根据关注列表（订阅列表）生成推送任务，`mastodon-sidekiq` 执行推送任务。 BGME实例接收到动态推送，将新动态存入实例数据库，同时根椐本实例关注账号B的用户列表，生成相应账号的时间线与通知。
+
+所以，如果由于大实例嘟文数量过多，造成了小实例的嘟文堵塞，可以通过增加sidekiq线程数来提高处理能力。
+
+具体操作方法可以参考南狐的[mastodon 增加 sidekiq 线程](https://note.southfox.me/#/page/mastodon%20%E5%A2%9E%E5%8A%A0%20sidekiq%20%E7%BA%BF%E7%A8%8B)
+
  <br>
 
 ### 开启安全模式
@@ -160,6 +178,14 @@ docker-compose up -d #重新启动镜像
 参考：[Mastodon | 记录大型魔改过程](https://blog.tantalum.life/posts/notes-on-modifying-mastodon-in-docker/#%E5%8A%A0%E5%85%A5%E9%AD%94%E6%94%B9%E9%85%8D%E7%BD%AE)的步骤进行。
 
 **注意**：如果使用小森林站长的魔改镜像， 需要注意下这个镜像的编辑嘟文功能，目前编辑后的嘟文只能在实装这个功能的站点之内互通，也就是说，如果对方站点没有更新编辑嘟文功能，就只能看到编辑前的内容，看不到编辑后的嘟文内容。
+
+另外特别提醒：迁移镜像很有可能会碰到`500报错`，即无法发送嘟文，左下角弹出500提示，此时需要根据[后续工作](https://blog.tantalum.life/posts/notes-on-modifying-mastodon-in-docker/#%E5%90%8E%E7%BB%AD%E5%B7%A5%E4%BD%9C)的代码进行数据库迁移（web同样需要改为自己的web容器名称）：
+
+```
+docker-compose run --rm web rails db:migrate
+```
+
+之后如果还是有问题，尝试多次`docker-compose down` &`docker-compose up -d`，在实操中，我遇见过重启镜像2-3次后恢复正常的情况，原因不明。
 
 ### 自己魔改镜像
 参考：[如何利用Docker搭建Mastodon实例（二）：进阶魔改篇](https://pullopen.github.io/%E8%BF%9B%E9%98%B6%E9%AD%94%E6%94%B9/2020/11/01/Mastodon-on-Docker-2.html)
@@ -201,7 +227,7 @@ docker-compose up -d #重新启动镜像
 }
 ```
 
-如果居中：
+如果想让它居中：
 
 ```
 /*站点吉祥物*/
