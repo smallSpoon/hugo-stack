@@ -151,9 +151,9 @@ sidekiq是后台任务处理系统，这里引用bgme站长的[文章](https://b
 >
 > 其背后的机制则是这样的：账号B有新动态，CMX实例服务器根据关注列表（订阅列表）生成推送任务，`mastodon-sidekiq` 执行推送任务。 BGME实例接收到动态推送，将新动态存入实例数据库，同时根椐本实例关注账号B的用户列表，生成相应账号的时间线与通知。
 
-所以，如果由于大实例嘟文数量过多，造成了小实例的嘟文堵塞，可以通过增加sidekiq线程数来提高处理能力。
+所以，如果由于大实例嘟文数量过多，造成了小实例的嘟文堵塞，可以通过增加sidekiq线程数来提高处理能力，如何判断合适的线程数可以参考bgme的[嘟文](https://bgme.me/@bgme/104811829396720912)
 
-具体操作方法可以参考南狐的[mastodon 增加 sidekiq 线程](https://note.southfox.me/#/page/mastodon%20%E5%A2%9E%E5%8A%A0%20sidekiq%20%E7%BA%BF%E7%A8%8B)
+具体操作方法，参考南狐的[mastodon 增加 sidekiq 线程](https://note.southfox.me/#/page/mastodon%20%E5%A2%9E%E5%8A%A0%20sidekiq%20%E7%BA%BF%E7%A8%8B)
 
  <br>
 
