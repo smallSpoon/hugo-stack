@@ -308,7 +308,7 @@ docker-compose run --rm web rails db:migrate
 
 可以使用小森林站长写的python脚本：[weibo2toot](https://github.com/mashirozx/weibo2toot)
 
-使用教程待补
+[Mastodon | 微博转发到 Mastodon bot](https://mantyke.icu/2022/weibo2toot/)
 
 ### 其他bot功能
 
