@@ -22,7 +22,7 @@ page = "/:slug/"
 
 [[menu.main]]
 name = "Writings"
-url = "/post"
+url = "/posts"
 weight = 2
 
 [[menu.main]]
