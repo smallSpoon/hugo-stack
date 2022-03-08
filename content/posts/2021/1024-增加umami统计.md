@@ -1,7 +1,6 @@
 ---
 title: Hugo | 使用Umami进行站点浏览量统计
 date: 2021-10-24T23:46:58+08:00
-lastmod: 2021-10-24T23:46:58+08:00
 description: 打开Vercel一看倒吸一口凉气：哪天Vercel崩了我立刻成为西北喝风塔塔
 tags:
   - Hugo

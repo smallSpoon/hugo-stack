@@ -56,7 +56,7 @@
     {{ if (isset .Site.Params "showallpostsonhomepage") }}
       {{ $showAllPostsOnHomePage = .Site.Params.ShowAllPostsOnHomePage }}
     {{ end }}
-    {{ $dataFormat := .Site.Params.dateFormat | default "2006-01-02" }}
+    {{ $dataFormat := .Site.Params.homeDatePageFormat | default "2006-01-02" }}
     {{ $mainPosts := (sort ( where site.RegularPages "Type" "in" site.Params.mainSections ) "Date" "desc") }}
     {{ if $showAllPostsOnHomePage }}
     <ul class="post-list">
@@ -98,7 +98,7 @@
       {{ $projectsUrl = .Site.Params.projectsUrl }}
     {{ end }}
   <section id="projects">
-    <span class="h1"><a href="{{ $projectsUrl }}">Projects</a></span>
+    <span class="h1"><a href="{{ $projectsUrl }}">{{ .Site.Params.projectsSectionTitle}}</a></span>
     <ul class="project-list">
         {{ range .Site.Data.projects.list }}
         <li class="project-item">

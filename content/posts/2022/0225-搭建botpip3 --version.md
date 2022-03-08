@@ -1,7 +1,6 @@
 ---
 title: "Tools | 最近的赛博舒适区搭建小记"
 date: 2022-02-20T18:01:47+08:00
-lastmod: 2022-02-20T18:01:47+08:00
 description: 写一写最近常用的一些数字工具
 tags:
   - Tools

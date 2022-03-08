@@ -1,7 +1,6 @@
 ---
 title: "Hugo | 看中Stack主题的归档功能，搬家并做修改"
 date: 2021-09-24T14:15:04+08:00
-lastmod: 2021-09-27T01:21:04+08:00
 toc: true
 tags:
   - Hugo

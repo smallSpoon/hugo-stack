@@ -1,7 +1,6 @@
 ---
 title: Hugo |另一篇Stack主题装修记录
 date: 2021-09-27T22:55:08+08:00
-lastmod: 2021-09-28T23:55:08+08:00
 description: 非魔法界人士与样板间搏斗全纪实，闻者也，落泪，见者也，伤心
 toc: true
 tags:

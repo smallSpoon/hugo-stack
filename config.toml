@@ -3,19 +3,13 @@ languageCode = "en-us"
 title = "小球飞鱼"
 theme = "cactus"
 copyright = "You" # cactus will use title if copyright is not set
-disqusShortname = "example" # Used when comments is enabled. Cactus will use site title if not set
-hasCJKLanguage = true
+# disqusShortname = "example" # Used when comments is enabled. Cactus will use site title if not set
 # googleAnalytics = "UA-1234-5"
 
 
 # summaryLength = 2
 
 # Main menu which appears below site header.
-[[menu.main]]
-name = "Home"
-url = "/"
-weight = 1
-
 [permalinks]
 posts = "/:year/:slug/"
 page = "/:slug/"
@@ -56,19 +50,16 @@ weight = 5
     style = "dracula"
     tabWidth = 4
 
-
-
-
 [params]
 
   colortheme = "classic" # dark, light, white, or classic
   rss = true # generate rss feed. default value is false
-  googleAnalyticsAsync = false # use asynchronous tracking. Synchronous tracking by default
+  googleAnalyticsAsync = true # use asynchronous tracking. Synchronous tracking by default
   showAllPostsArchive = false # default
 
   # Home page settings
   description = "我们会一起遇见鲸鱼吗？"
-  mainSection = "post" # your main section
+  mainSection = "posts" # your main section
   showAllPostsOnHomePage = false # default
   postsOnHomePage = 10 # this option will be ignored if showAllPostsOnHomePage is set to true
   tagsOverview = false # show tags overview by default.
@@ -83,7 +74,7 @@ weight = 5
   showReadTime = true # default
 
   [params.comments]
-    enabled = true # default
+    enabled = false # default
     engine = "cactus_comments" # only disqus, utterances, and cactus_comments is supported
     [params.comments.utterances]
       repo = "<github_username>/<github_reponame>"
@@ -93,20 +84,5 @@ weight = 5
       siteName = "your_cactus_comments_sitename" # see https://cactus.chat/ on how to register your site name
       #serverUrl = "" # Defaults to https://matrix.cactus.chat:8448 (Cactus Chat public server)
       #serverName = "" # Defaults to cactus.chat
-
-    [waline]
-      serverURL = "https://waline-kappa-lilac.vercel.app/"
-      lang = "zh-CN"
-      visitor = false
-      avatar = "monsterid"
-        emoji = [
-      "https://cdn.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs"
-              ]
-      requiredMeta = [ "nick", "mail" ]
-      placeholder = "默认留言头像为随机小怪物，登录后可以使用Libravatar/Gravatar头像。"
-
-        [waline.locale]
-        admin = "博主"
-
 
 

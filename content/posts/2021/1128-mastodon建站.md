@@ -1,7 +1,6 @@
 ---
 title: "Mastodon | 小球飞象建站笔记"
 date: 2021-11-28T13:36:00+08:00
-lastmod: 2021-11-28T13:36:00+08:00
 description: 人生四大名言警句：喜欢就买、不行就分、多喝热水、重启试试
 tags:
   - Mastodon

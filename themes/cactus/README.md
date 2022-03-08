@@ -1,56 +1,80 @@
-## Cactus
+---
+title: Hugo Cactus主题国内优化
+date: 2021-11-24T19:50:25+08:00
+---
 
-A hugo theme for personal blog. Fork from hexo theme [cactus](https://github.com/probberechts/hexo-theme-cactus) created by @probberechts.
+<!--more-->
 
-[Live demo on github pages](https://www.takuzen.me/hugo-theme-cactus/).
+Hugo是一款基于Golang的博客框架，速度极其快，通常远高于Vuepress、Hexo、Jekyll等基于解释型语言的框架。
 
-Some works are still in progress. See [TODOS](#todos) below.
+Cactus主题是一款十分简洁的主题，从Hexo平台移植过来的。然而，它对于国内用户而言不太友好，Cactus主题内部的部分文件引用来自国外。因此，笔者将引用改为本地引用。在此之上，笔者还增加了一种新的主题，命名为Autumn。
 
-## Install
+即使使用了笔者修改过的Cactus主题，相比其他主题，该主题依然有更多的步骤。因此在此给出指导方向。基于Windows安装，其他操作系统更加简单。
 
-1. clone cactus to your hugo site's `themes` folder.
+### 1. Golang、MinGW的安装
+
+这是[Golang官网](https://go.dev/)，依据操作系统下载最新版本，并且安装。安装完毕后，请保证Golang的环境变量已经正确设置。
+
+```shell
+go version
 ```
-git clone https://github.com/monkeyWzr/hugo-theme-cactus.git themes/cactus
+
+这是[Sourceforge的系统文件目录](https://jaist.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/)，下载mingw-w64-install.exe，并安装。在安装时，请注意记录其安装位置，需要手动添加Path环境变量。
+
+```shell
+gcc --version
 ```
 
-2. change your theme to cactus in your site config
+### 2. 安装Hugo与Hugo extended
+
+推荐采用Golang的安装方式，而不采用Choco的方式，以便于Golang后续对包的管理。
+
+我们必须安装extended版本，因为Cactus主题中使用了SCSS。
+
+```shell
+mkdir %USERPROFILE%/src
+cd %USERPROFILE%/src
+git clone https://github.com/gohugoio/hugo.git
+cd hugo
+$CGO_ENABLED = 1
+go install --tags extended
+```
+
+随后测试hugo是否安装成功。
+
+```shell
+hugo version
+```
+
+### 3. 使用Hugo创建项目
+
+创建Hugo项目需要实现准备一个空的文件夹，假设名为hugo-blog。
+
+```shell
+mkdir ./hugo-blog
+hugo new site ./hugo-blog
+cd ./hugo-blog
+```
+
+下载笔者修改过的cactus主题。
+```shell
+mkdir themes
+git remote add origin git@github.com:seekwindJH/hugo-theme-cactus-seekwind-edition.git
+```
+
+### 4. TOML配置文件
+
+下面给出了配置文件的示例。
+
 ```toml
-# config.toml
-
+languageCode = "zh-CN"
+title = "追风の物语"
 theme = "cactus"
-```
+copyright = "SeekWind" # cactus will use title if copyright is not set
 
-3. config your site. See [Config] or a [complete config sample](exampleSite/config.toml)
-4. test your site
-```
-hugo server
-```
 
-5. publish your site in your prefered way. See hugo's doc: [Hosting & Deployment](https://gohugo.io/hosting-and-deployment/)
+# summaryLength = 2
 
-## Config
-
-### Color themes
-
-```toml
-[params]
-
-  colortheme = "white" # dark, light, white, or classic
-```
-
-### Custom CSS
-
-```toml
-[params]
-  css = ["css/custom.css"]
-```
-
-You can add multiple custom stylesheets which will be loaded after the main theme css.
-For example, the above line will load the CSS-file placed at `/static/css/custom.css`.
-
-### Navigation
-
-```toml
 # Main menu which appears below site header.
 [[menu.main]]
 name = "Home"
@@ -58,242 +82,98 @@ url = "/"
 weight = 1
 
 [[menu.main]]
-name = "All posts"
-url = "/post"
+name = "Posts"
+url = "/posts"
 weight = 2
+
+[[menu.main]]
+name = "Docs"
+url = "/docs"
+weight = 3
+
+[[menu.main]]
+name = "Categories"
+url = "/categories"
+weight = 4
 
 [[menu.main]]
 name = "Tags"
 url = "/tags"
-weight = 3
+weight = 5
 
 [[menu.main]]
 name = "About"
 url = "/about"
-weight = 4
-```
+weight = 6
 
-### Homepage settings
-
-* description: description will be displayed in the homepage. Markdown syntax is supported in the description string.
-```toml
-[params]
-
-  description = "Hugo is a general-purpose website framework. Technically speaking, Hugo is a static site generator. Unlike systems that dynamically build a page with each visitor request, Hugo builds pages when you create or update your content. Since websites are viewed far more often than they are edited, Hugo is designed to provide an optimal viewing experience for your website’s end users and an ideal writing experience for website authors."
-```
-
-* set your main section (used as the link for the "writings" title on the homepage)
-
-```toml
-[params]
-  mainSection = "posts"
-```
-
-* change the default main section title from Writings, to something else:
-
-```toml
-[params]
-  mainSectionTitle = "Blog"
-```
-
-* Show only the 5 most recent posts (default)
-
-```toml
-[params]
-  showAllPostsOnHomePage = false
-  postsOnHomePage = 5
-```
-* show all posts
-
-```toml
-[params]
-  showAllPostsOnHomePage = true
-  postsOnHomePage = 5 # this option will be ignored
-```
-
-* show tagsoverview (default) or not
-* 
-```toml
-[params]
-  tagsOverview = true
-```
-
-* display the table of contents inline on blog posts, rather than as part of the navigation menu:
-
-```toml
-[params]
-  tocInline = true
-```
-
-* show projects list (default) or not.
-
-```toml
-[params]
-  showProjectsList = true
-  projectsUrl = "https://github.com/monkeyWzr"
-```
-
-Projects section will not be shown if no data file is detected. See [Projects list](#projects-list) below.
-
-### Projects list
-
-Create your projects data file `data/projects.yaml|toml|json`. Hugo support yaml, toml and json formats.
-for former hexo cactus users: please assign your json array to a `list` key.
-
-for example, `data/projects.json`:
-```json
-{
-   "list": [
-      {
-         "name":"Hexo",
-         "url":"https://hexo.io/",
-         "desc":"A fast, simple & powerful blog framework"
-      },
-      {
-         "name":"Font Awesome",
-         "url":"http://fontawesome.io/",
-         "desc":"The iconic font and CSS toolkit"
-      }
-   ]
-}
-```
-
-### Social media links
-
-```toml
-[[params.social]]
-  name = "github"
-  link = "https://github.com/monkeyWzr"
-
-[[params.social]]
-  name = "email"
-  link = "monkeywzr@gmail.com" # no need for "mailto:" at the start
-
-[[params.social]]
-  name = "linkedin"
-  link = "https://www.linkedin.com/in/monkeywzr/"
-```
-
-The `name` key expects the name of a [Font Awesome icon](https://fontawesome.com/icons?d=gallery&s=brands).
-
-### Copyright
-
-Assign your copy right to `.Site.Copyright`. Cactus will append current year to the head.
-
-TODO: Customizable copyright year
-
-```toml
-copyright = "Zeran Wu" # cactus theme will use site title if copyright is not set
-```
-
-### Comments
-
-Comments is disabled by default. Enable comments in your `.Site.Params`.
-```toml
-[params]
-  [params.comments]
-    enabled = true
-    # engine = "disqus" # in progress
-```
-
-You can also enable/disable comments per post. in your posts' front matter, add:
-```yaml
-comments: true
-```
-
-The site config is ignored when `comments` option exists in front matter.
-
-The default engine is disqus. **By now only disqus is supported in cactus.** I will add more options sooner or later. See [Comments Alternatives](https://gohugo.io/content-management/comments/#comments-alternatives)
-
-Before using disqus, you need to register and get your [disqus shortname](https://help.disqus.com/en/articles/1717111-what-s-a-shortname). Assign your shortname in `.Site.disqusShortname`, or cactus will use `.Site.Title` by default.
-
-```
-disqusShortname = "wzr" # cactus will use site title if not set
-```
-
-### highlight
-
-Use hugo's built-in [syntax highlighting](https://gohugo.io/getting-started/configuration-markup#highlight).
-
-default config:
-
-```toml
 [markup]
+  [markup.tableOfContents]
+    endLevel = 4
+    ordered = false
+    startLevel = 2
   [markup.highlight]
     codeFences = true
     guessSyntax = false
     hl_Lines = ""
     lineNoStart = 1
-    lineNos = false
+    lineNos = true
+    # line Number will Not Be copied
     lineNumbersInTable = true
     noClasses = true
-    style = "monokai"
+    # perldoc paraiso-dark pastie
+    style = "perldoc"
     tabWidth = 4
-```
 
-### Analytics
-
-Cactus uses hugo's bulit in analytics templates. Check [hugo's documents](https://gohugo.io/templates/internal#google-analytics) for details.
-
-Set you tracking id in your site config.
-```toml
-googleAnalytics = "UA-XXXXXXXX-XX" # or G-XXXXXXXX if you are using Google Analytics v4 (gtag.js)
-```
-
-If you are using Google Analytics v3 (analytics.js), you can switch to asynchronous tracking by set `params.googleAnalyticsAsync` to `true`.
-```toml
 [params]
-googleAnalyticsAsync = true # not required
+  
+  colortheme = "autumn" # dark, light, white, classic, autumn
+  rss = false # generate rss feed. default value is false
+  showAllPostsArchive = false # default
+
+  # Home page Main Section settings
+  description = "SeekWind的文档站。愿你所追寻的风，都能如期而至。"
+  mainSection = "posts" # your main section
+  mainSectionTitle = "笔记"
+  showAllPostsOnHomePage = false # defaultmnm     bnmnmfmj676     vbnvnvnbbbbbbbbbbbbbbbbbbbbbbbb    vny=t
+  postsOnHomePage = 6 # this option will be ignored if showAllPostsOnHomePage is set to true
+  
+  # Home page Project Section settings
+  projectsSectionTitle = "作品"
+  tagsOverview = true # show tags overview by default.
+  showProjectsList = true # show projects list by default (if projects data file exists).
+  projectsUrl = "https://github.com/seekwindJH/seekwindJH.github.io" # title link for projects list
+
+  # https://gohugo.io/functions/format/#hugo-date-and-time-templating-reference
+  dateFormat = "Mon, 15:04:05" # post Date Format
+  homeDatePageFormat = "2006-01-02 Mon" # Home page Date Format, more purity
+
+  # Post page settings
+  show_updated = true # default
+  showReadTime = true # default
+
+  [params.comments]
+    enabled = true # default
+    engine = "utterances" # only disqus, utterances, and cactus_comments is supported
+    [params.comments.utterances]
+      repo = "seekwindJH/seekwindJH.github.io"
+      label = "追风の物语" # you can use however you want to label your name in your repo's issues
+      theme = "gruvbox-dark"
+
+
+  # the value of name should be an valid font awesome icon name (brands type)
+  # https://fontawesome.com/icons?d=gallery&s=brands
+  [[params.social]]
+    name = "github"
+    link = "https://github.com/seekwindJH"
+
+  [[params.social]]
+    name = "email"
+    link = "seekwind@foxmail.com"  # no need for "mailto:" in the head
+
+[author]
+    name = "SeekWind"
+    homepage = "https://github.com/seekwindJH"
+tags = ["blog", "simple", "clean"]
+features = ["mathjax", "customizable", "color"]
+description = "SeekWind的文档站"
 ```
-
-### RSS
-
-The rss feed is not generated by default. you can enable it in your site config:
-
-```toml
-[params]
-  rss = true
-```
-
-The rss link will be `https://example.com/index.xml` assuming your `baseURL` is set to `https://example.com/`
-
-Please also check [Configure RSS](https://gohugo.io/templates/rss/#configure-rss)
-
-### Mathjax
-
-Cactus supports mathjax. Just add `mathjax` option in your site config:
-```toml
-[params]
-  mathjax = true  # not required
-```
-
-You can also enable/disable mathjax per post. In your posts' front matter, add:
-```yaml
-mathjax: true # or false
-```
-
-The site config will be ignored when `mathjax` option exists in front matter.
-
-### Archive 
-Pagination on posts archive can be disabled to show all posts in chronological order
-
-```toml
-[params]
-  showAllPostsArchive = true # or false (default)
-```
-
-## TODOS
-
-- [ ] More comments engines
-- [x] RSS
-- [ ] I18n
-- [x] Analytics
-- [ ] Local Search
-- [ ] toc template
-- [ ] Customizable copyright year
-- [ ] gallery
-- [ ] expose [mathjax configuration](https://docs.mathjax.org/en/latest/web/configuration.html#web-configuration) 
-
-## License
-
-MIT

@@ -9,7 +9,6 @@ categories:
   - 甘普基本变形定律
 series:
 date: 2021-08-26T02:06:09+08:00
-lastmod: 2021-08-26T02:06:09+08:00
 featuredImage:
 draft: false
 slug: f185ce41
