@@ -141,7 +141,9 @@ WeiboRss = https://rsshub.app/weibo/user/微博的User_id
 
 ```
 crontab -e
-*/20 *    * * *   root    cd miniconda/weibo2toot && python3 run.py
+*/20 *    * * *   root    cd miniconda/weibo2toot && conda activate mastbot && python3 run.py
 ```
+
+实际上：死活跑不起来，让我试试怎么搞定它……
 
 <br>
