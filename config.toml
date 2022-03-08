@@ -85,28 +85,8 @@ weight = 5
   [params.comments]
     enabled = true # default
     engine = "waline" # only disqus, utterances, and cactus_comments is supported
-    [params.comments.utterances]
-      repo = "<github_username>/<github_reponame>"
-      label = "hugo-site-name" # you can use however you want to label your name in your repo's issues
-      theme = "github-light"
-    [params.comments.cactuscomments]
-      siteName = "your_cactus_comments_sitename" # see https://cactus.chat/ on how to register your site name
-      #serverUrl = "" # Defaults to https://matrix.cactus.chat:8448 (Cactus Chat public server)
-      #serverName = "" # Defaults to cactus.chat
 
-    [waline]
-      serverURL = "https://waline-kappa-lilac.vercel.app/"
-      lang = "zh-CN"
-      visitor = false
-      avatar = "monsterid"
-        emoji = [
-      "https://cdn.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs"
-              ]
-      requiredMeta = [ "nick", "mail" ]
-      placeholder = "默认留言头像为随机小怪物，登录后可以使用Libravatar/Gravatar头像。"
 
-        [waline.locale]
-        admin = "博主"
 
 
 

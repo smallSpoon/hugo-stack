@@ -1,7 +1,26 @@
-{{ if not .Site.IsServer }}
-<script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
-<div id="waline" class="waline-container"></div>
-{{- end -}}
+<head>
+  ..
+  <script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
+  ...
+</head>
+<body>
+  ...
+  <div id="waline"></div>
+  <script>
+    Waline({
+      el: '#waline',
+      serverURL = "https://waline-kappa-lilac.vercel.app/"
+      lang = "zh-CN"
+      visitor = false
+      avatar = "monsterid"
+        emoji = [
+      "https://cdn.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs"
+              ]
+      requiredMeta = [ "nick", "mail" ]
+      placeholder = "默认留言头像为随机小怪物，登录后可以使用Libravatar/Gravatar头像。"
+    });
+  </script>
+</body>
 
 
 <style>
@@ -65,24 +84,3 @@
 		margin:.25em
 	}
 </style>
-
-
-
-{{- with .Site.Params.comments.waline -}}
-{{- $config := dict "el" "#waline" "dark" `html[data-scheme="dark"]` -}}
-{{- $replaceKeys := dict "serverurl" "serverURL" "requiredmeta" "requiredMeta" "wordlimit" "wordLimit" "pagesize" "pageSize" "avatarcdn" "avatarCDN" "avatarforce" "avatarForce" -}}
-
-{{- range $key, $val := . -}}
-    {{- if $val -}}  
-        {{- $replaceKey := index $replaceKeys $key -}}
-        {{- $k := default $key $replaceKey -}}
-
-        {{- $config = merge $config (dict $k $val) -}}
-    {{- end -}}
-{{- end -}}
-
-<script>
-    /// Waline client configuration see: https://waline.js.org/en/reference/client.html
-    new Waline({{ $config | jsonify | safeJS }});
-</script>
-{{- end -}}
