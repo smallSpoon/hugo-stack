@@ -80,6 +80,7 @@
         <li class="post-item">
           <div class="meta"><time datetime="{{ time .Date }}" itemprop="datePublished">{{ .Date.Format $dataFormat }}</time></div>
           <span><a href="{{ .Permalink }}">{{ if .Title }} {{- .Title -}} {{ else }} {{- print "Untitled" -}}{{ end }}</a></span>
+          
         </li>
       {{ end }}
     </ul>
@@ -109,3 +110,4 @@
   </section>
   {{ end }}
 {{ end }}
+

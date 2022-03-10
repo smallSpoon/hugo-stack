@@ -33,9 +33,8 @@
         {{ $showReadTime := .Site.Params.showReadTime | default false }}
         {{if $showReadTime}}
         <div class="article-read-time">
-          <i class="far fa-clock"></i>
-          {{ $readTime := math.Round (div (countwords .Content) 220.0) }}
-          {{ $readTime }} minute read
+          <i class="fa fa-car"></i>
+          {{ .WordCount }}字
         </div>
         {{ end }}
         {{ if gt .Params.categories 0 }}
