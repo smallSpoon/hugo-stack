@@ -7,7 +7,6 @@ copyright = "You" # cactus will use title if copyright is not set
 # googleAnalytics = "UA-1234-5"
 hasCJKLanguage = true
 
-# summaryLength = 2
 
 # Main menu which appears below site header.
 [permalinks]
@@ -49,6 +48,9 @@ weight = 5
     noClasses = true
     style = "dracula"
     tabWidth = 4
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
 [params]
 
