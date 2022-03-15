@@ -8,6 +8,11 @@
   {{ .Scratch.Set "enable_comments" true }}
 {{ end }}
 
+{{ if not .Site.IsServer }}
+<script src='//cdn.jsdelivr.net/npm/@waline/client'></script>
+<div id="waline" class="cactus_comments"></div>
+{{- end -}}
+
 {{ $enable_comments := .Scratch.Get "enable_comments" }}
 {{ if $enable_comments }}
   <div class="blog-post-comments">
