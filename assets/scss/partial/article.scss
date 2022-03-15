@@ -26,6 +26,7 @@ article {
     }
   }
   .content {
+    a {text-decoration:underline;}
     h2 {
       &:before {
         position: absolute;
@@ -89,11 +90,12 @@ article {
         font-size: 11px;
 
         a {
-          background-image: linear-gradient(transparent, transparent 5px, $color-meta 5px, $color-meta);
+          //background-image: linear-gradient(transparent, transparent 5px, $color-meta 5px, $color-meta);
           color: $color-meta;
+          text-decoration:underline;
         }
         a:hover {
-          background-image: linear-gradient(transparent, transparent 4px, lighten($color-meta, 20%) 4px, lighten($color-meta, 20%));
+          //background-image: linear-gradient(transparent, transparent 4px, lighten($color-meta, 20%) 4px, lighten($color-meta, 20%));
           color: lighten($color-meta, 20%);
         }
         cite {
@@ -157,3 +159,4 @@ article {
     }
   }
 };
+

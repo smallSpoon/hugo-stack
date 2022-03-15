@@ -6,6 +6,7 @@
 
   {{ partial "page_nav.html" . }}
 
+
   <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     <header>
       <h1 class="posttitle" itemprop="name headline">
@@ -73,6 +74,7 @@
     </div>
     {{ end }}
     <div class="content" itemprop="articleBody">
+    	
       {{ .Content}}
     </div>
   </article>
@@ -80,8 +82,10 @@
   {{ partial "comments.html" . }}
 
   {{ partial "page_nav_mobile.html" . }}
+  
 
   {{ partial "footer.html" . }}
+
 
   </div>
 </body>
@@ -108,9 +112,12 @@
       fontCache: 'global'
     }
   };
+
 </script>
 <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
 {{ end }}
+
+
 </html>
