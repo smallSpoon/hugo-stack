@@ -19,9 +19,9 @@ url = "/posts"
 weight = 2
 
 [[menu.main]]
-name = "Categories"
-url = "/categories"
-weight = 3
+name = "Friends"
+url = "/Friends"
+weight = 6
 
 [[menu.main]]
 name = "Tags"
