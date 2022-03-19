@@ -116,15 +116,15 @@ body {
   </div>
   <script>
 
-let Data = []
+let Data = {}
 let Rest = []
 let CurType = 'all'
 
-fetch('https://gitlab.com/api/v4/projects/27919354/issues/6')
+fetch('https://api.github.com/repos/Mantyke/ONE/issues/1')
   .then(res => res.json())
   .then(data =>
     toObject(
-      data.description.replace(/`/g, '').replace(/\n/g, '')
+      data.body.replace(/`/g, '').replace(/\n/g, '')  
     )
   )
   .then(data => {
