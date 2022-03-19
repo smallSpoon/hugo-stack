@@ -11,6 +11,8 @@ slug: friendslink
 
 我想，交换友链仍然是赛博世界珍贵的仪式感之一：好，我们现在是朋友了！
 
+外面的友情链接访问页面来自[Mengru](https://mengru.space/)
+
 <br>
 
 <table>
@@ -35,7 +37,7 @@ slug: friendslink
   </tr>
   </tr>
    <tr>
-    <td><a href="blog.southfox.me">狐狸反走矣</a></td>
+    <td><a href="https://blog.southfox.me">狐狸反走矣</a></td>
     <td>KEEP CALM AND CARRY ON.</td>
   </tr>
   <tr>
@@ -44,8 +46,12 @@ slug: friendslink
   </tr>
   </tr>
    <tr>
-    <td><a href="blog.southfox.me">YangRiPie</a></td>
+    <td><a href="https://yangripie.com/">YangRiPie</a></td>
     <td>发布小说 日记 绘画 游戏</td>
+  </tr>
+   <tr>
+    <td><a href="https://mengru.space/">Mengru的空间</a></td>
+    <td>互联网上的小小角落</td>
   </tr>
   <tr>
     <td><a href="https://gregueria.vercel.app/#/">谢谢所有的鱼</a></td>

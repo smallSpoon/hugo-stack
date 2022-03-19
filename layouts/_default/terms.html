@@ -13,7 +13,7 @@
         {{ $AllRegularPagesCount := len .Site.RegularPages }}
         {{ range $elem := .Data.Terms.Alphabetical }}
          <!-- tag云大小 -->
-        <a style="font-size: {{ (add 0.8 (mul 8 (div (float $elem.Count) $AllRegularPagesCount))) }}rem;" href="{{ $elem.Page.Permalink }}">
+        <a style="font-size: {{ (add 0.7 (mul 8 (div (float $elem.Count) $AllRegularPagesCount))) }}rem;" href="{{ $elem.Page.Permalink }}">
           {{- .Page.Title -}}
         </a>
         {{ end }}
