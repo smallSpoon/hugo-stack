@@ -116,7 +116,7 @@ body {
   </div>
   <script>
 
-let Data = {}
+let Data = []
 let Rest = []
 let CurType = 'all'
 
