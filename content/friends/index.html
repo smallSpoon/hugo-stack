@@ -1,7 +1,5 @@
 ---
 
-
-
 title: 小球飞鱼和她的朋友们
 date: 2021-08-24 17:51:42
 ---
@@ -14,7 +12,6 @@ date: 2021-08-24 17:51:42
   <style>
 html {
   height: 100%;
-  overflow: hidden;
 }
 body {
   height: 100%;
@@ -24,8 +21,8 @@ body {
 }
 #top-header {
   width: 100%;
-  background-color: #f6f5ec;
-  border-bottom: .5em solid #afdfe4;
+  background-color: #f6f6f6;
+  border-bottom: .5em solid #22272a;
   min-height: 9%;
 }
 .header-content {
@@ -43,41 +40,37 @@ body {
 #top-header h1 {
   font-size: 1.5em;
   margin: 0;
-  color: #7c8577;
+  color: #22272a;
 }
 #top-header h1::before {
   content: "# ";
-  color: #afdfe4;
+  color: #cc2a41;
 }
 .surf-filter {
   text-align: right;
 }
 .surf-filter select {
   height: 2.2em;
-  border-color: #7c8577;
-  background-color: #f6f5ec;
+  border-color: #22272a;
+  background-color: #f6f6f6;
   border-width: 3px;
-  color: #404a39;
+  color: #22272a;
+  display: none;
 }
 .surf-filter button {
   height: 2.2em;
-  border-color: #7c8577;
-  background-color: #f6f5ec;
+  border-color: #22272a;
+  background-color: #f6f6f6;
   border-width: 3px;
-  color: #404a39;
+  color: #22272a;
 }
 .current-info {
   padding-top: 5px;
   color: #7c8577;
 }
-.current-info a {
-  color: #f6f5ec;
-  padding: 1px 3px;
-  border-radius: 3px;
-  background-color: #7c8577;
-}
+
 .view-container {
-  height: 91%;
+  height: 330px;
 }
 .view-container iframe {
   height: 100%;
@@ -97,16 +90,16 @@ body {
 <body>
   <header id="top-header">
     <div class="header-content">
-      <h1>冲浪时间</h1>
+      <h1>小球飞鱼和她的朋友们</h1>
       <div>
         <div class="surf-filter" id="surf-filter">
           <select id="type-select">
             <option value="all">全部</option>
           </select>
-          <button id="btn-start">开始冲浪</button>
+          <button id="btn-start">开始拜访</button>
         </div>
         <div class="current-info">
-          <div>此刻，你来到了：<a target="_blank" id="url-display">无人之境</a></div>
+          <div>你敲了敲：<a target="_blank" id="url-display"></a>的门，<a href="http://mantyke.icu/friendslink/">全部友链</a></div>
         </div>
       </div>
     </div>
@@ -114,17 +107,17 @@ body {
   <div class="view-container">
     <iframe id="viewer"></iframe>
   </div>
-  <script>
 
+  <script>
 let Data = {}
 let Rest = []
 let CurType = 'all'
 
-fetch('https://api.github.com/repos/Mantyke/ONE/issues/1')
+fetch('https://api.github.com/repos/Mantyke/friend-link/issues/1')
   .then(res => res.json())
   .then(data =>
     toObject(
-      data.body.replace(/`/g, '').replace(/\n/g, '')  
+      data.body.replace(/`/g, '').replace(/\n/g, '')  // 注意这里要从 data.description 改成 data.body
     )
   )
   .then(data => {
@@ -181,6 +174,7 @@ function rand (n) {
   return Math.floor(Math.random() * n)
 }
   </script>
+
 </body>
 </html>
 
