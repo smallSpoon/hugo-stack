@@ -12,11 +12,8 @@ slug: stack-theme-mod
 
 ---
 
-{{< quote >}}
+> {{< emoji name="artist"  ext="png" width="35" >}} 本文作者没有任何代码基础，所有说明性文字主要靠连蒙带猜兼灵光一现，参考时请务必注意，欢迎提出意见和给出建议~
 
-{{< emoji name="artist" ext="png" width="35" >}} 本文作者没有任何代码基础，所有说明性文字主要靠连蒙带猜兼灵光一现，参考时请务必注意，欢迎提出意见和给出建议~
-
-{{< /quote >}}
 
 
 

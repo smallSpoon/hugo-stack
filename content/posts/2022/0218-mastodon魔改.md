@@ -9,11 +9,8 @@ categories:
 image: 
 slug: mastodon_mammota
 ---
-{{< quote >}}
+> {{< emoji name="artist"  ext="png" width="35" >}}蒙带猜兼灵光一现，参考时请务必注意，欢迎提出意见和给出建议~
 
-{{< emoji name="artist" ext="png" width="35" >}} 本文作者没有任何代码基础，所有说明性文字主要靠连蒙带猜兼灵光一现，参考时请务必注意，欢迎提出意见和给出建议~
-
-{{< /quote >}}
 
 2021年11月28日我搭建了自己的Mastodon个人站点，这篇文章汇总了站点相关的运维/魔改操作，并计划进行不断更新，希望能给后来者站长们提供一些便利。
 

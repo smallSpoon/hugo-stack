@@ -10,11 +10,7 @@ image:
 slug: mastodon-Media-file-cleanup
 ---
 
-{{< quote >}}
-
-{{< emoji name="artist"  ext="png" width="35" >}} 本文作者没有任何代码基础，所有说明性文字主要靠连蒙带猜兼灵光一现，参考时请务必注意，欢迎提出意见和给出建议~
-
-{{< /quote >}}
+> {{< emoji name="artist"  ext="png" width="35" >}} 本文作者没有任何代码基础，所有说明性文字主要靠连蒙带猜兼灵光一现，参考时请务必注意，欢迎提出意见和给出建议~
 
 西风推荐了Servercat app来查看服务器状态，我深夜下载，快乐打开，然后：![](https://res.cloudinary.com/mantyke/image/upload/v1641382508/20220105%E9%95%BF%E6%AF%9B%E8%B1%A1%E5%AA%92%E4%BD%93%E6%B8%85%E7%90%86/save-1_vk7kif.jpg)
 
