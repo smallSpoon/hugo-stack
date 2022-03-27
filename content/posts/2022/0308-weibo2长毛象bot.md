@@ -137,9 +137,11 @@ WeiboRss = https://rsshub.app/weibo/user/微博的User_id
 
 ```
 crontab -e
-*/20 *    * * *   root    cd miniconda/weibo2toot && conda activate mastbot && python3 run.py
+/1 *    * * *    cd /root/miniconda/weibo2toot && /root/miniconda3/envs/mastbot/bin/python run.py >> /root/miniconda/weibo2toot/log.txt 2>&1
 ```
 
 实际上：死活跑不起来，让我试试怎么搞定它……
+
+**3月27更新**：在此方的仗义救命下解决了，为什么呢，是因为路径要写绝对路径。
 
 <br>

@@ -53,8 +53,14 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+::selection {
+  color: #fff;
+  background: #000000d1;
+}
+
 strong {
   font-weight: bold;
+  color: #a93546;
 }
 em
 cite {
