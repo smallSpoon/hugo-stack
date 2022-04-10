@@ -40,6 +40,7 @@ article {
     }
   }
   .content img,
+  
   .content video {
     //display: block;
     margin: auto;
@@ -160,3 +161,22 @@ article {
   }
 };
 
+.content img[alt$=">"] {
+  float: right;
+  margin: 1.5rem 0rem 1.5rem 1.5rem;     /* this margin is totally up to you */
+  box-shadow: var(--shadow-l2);
+  border-radius: 10px;
+  -webkit-box-shadow: var(--shadow-l2);
+  -moz-box-shadow: var(--shadow-l2);
+  max-width: 45%;
+}
+
+.content img[alt$="<"] {
+  float: left;
+  margin: 1.5rem 0rem 1.5rem 1.5rem;      /* this margin is totally up to you */
+  box-shadow: var(--shadow-l2);
+  border-radius: 10px;
+  -webkit-box-shadow: var(--shadow-l2);
+  -moz-box-shadow: var(--shadow-l2);
+  max-width: 45%;
+}
