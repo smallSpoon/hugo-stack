@@ -53,6 +53,7 @@ weight = 5
       unsafe = true
 
 [params]
+  fancybox = true
   enableimgloop = true
   colortheme = "classic" # dark, light, white, or classic
   rss = true # generate rss feed. default value is false
