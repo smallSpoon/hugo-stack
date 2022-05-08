@@ -118,6 +118,19 @@ slug: friendslink
     <td><a href="https://blog.mysto.cyou/">沉目的博客</a></td>
     <td>当我把眼睛沉入你的眼睛 / 我瞥见幽深的黎明 / 我看到古老的昨天 / 看到我不能领悟的一切 / 我感到宇宙正在流动 / 在你的眼睛和我之间</td>
   </tr>
+    <tr>
+    <td><a href="https://plaskier.vercel.app/">Plaskier</a></td>
+    <td>总之欢迎你来！和您隔着屏幕热情地握手！</td>
+  </tr>
+    </tr>
+	<tr>
+    <td><a href="https://hugo-mukokka.vercel.app/">Muko</a></td>
+    <td>We don't have complete emotions about the present, only about the past.</td>
+  </tr>
+    </tr>
+  <tr>
+    <td><a href="https://hugo-missingid.vercel.app/">Missing 不想睡</a></td>
+  </tr>
   <tr>
     <td><a href="https://moe.tips/">萌 (//∇//) 贴士</a></td>
     <td>愿你把酒执剑，归来仍是少年</td>

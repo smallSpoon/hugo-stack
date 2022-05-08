@@ -204,8 +204,8 @@ Password of PostgreSQL user: # 刚刚写的数据库密码，填写时不显示�
 Redis host: # mastodon-redis //注意名称
 Redis port: # 6379 //默认端口，直接回车
 Redis password: # 留空，直接回车
-Do you want to store uploaded files on the cloud? # No //这里是问文件要不要上云，Contabo有200G SSD，我就不上了
-Do you want to send e-mails from localhost? # Yes //是不是从主机发邮件，这里我也没配置明白，考虑到短期不打算开放注册，就先不用邮件服务了
+Do you want to store uploaded files on the cloud? # No //这里是问文件要不要上云存储，可以暂时先不上，之后再根据情况做修改
+Do you want to send e-mails from localhost? # Yes //是不是从主机发邮件？
 Send a test e-mail with this configuration right now? # No //问是不是要发测试邮件，No掉它
 Save configuration? Yes //是否保存
 ```
@@ -314,6 +314,25 @@ docker-compose up -d
 猜测Zoho配置失败是因为SMTP server用了欧洲版的地址（smtp.zoho.eu），改成国际版（smtp.zoho.com）可能就可以了，暂时不考虑开放注册，因此再说再说。
 
 通过[管理命令行](https://docs.joinmastodon.org/zh-cn/admin/tootctl/)也可以增加账号，不打算增加太多用户的话，好像也没必要一定配置邮件功能。
+
+**4.29日补充**：数据库出错，不断重启，之后找到了一个解决办法（没有尝试过）可能有效：列出资料库容器并删除相关数据，命令如下：
+
+```
+docker volume ls -q 列出资料库容器
+docker volume rm 容器名称 #删除数据
+```
+
+Zoho配置失败的猜想是正确的，是因为SMTP server需要配置为国际版的地址，附上我之后使用的配置做参考：
+
+```
+SMTP_SERVER=smtp.zoho.com
+SMTP_PORT=587
+SMTP_LOGIN=admin@mantyke.icu（设定好的zoho发件邮箱）
+SMTP_PASSWORD=密码
+SMTP_AUTH_METHOD=plain
+SMTP_OPENSSL_VERIFY_MODE=none
+SMTP_FROM_ADDRESS=mastodon <admin@mantyke.icu>
+```
 
 <br>
 

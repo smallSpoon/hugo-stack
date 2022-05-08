@@ -1,5 +1,5 @@
 ---
-title: "Weekly | Apr.28-Apr10 阳光劈头盖面打在身上。"
+title: "Weekly | Apr.28-Apr.10 阳光劈头盖面打在身上。"
 date: 2022-04-10T19:44:57+08:00
 description: 。
 tags:
@@ -8,7 +8,7 @@ tags:
   - 游戏
 categories:
   - 竟挑蝴蝶下山来
-slug: Apr.28-Apr10
+slug: Apr.28-Apr.10
 ---
 
 本期BGM：深夜食堂·东京故事
