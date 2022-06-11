@@ -3,7 +3,7 @@ title: "搭完了就想跑 | Calibre-Web搭建记录"
 date: 2022-02-12T20:48:09+08:00
 description: 一份冷酷无情的踩坑笔记
 tags:
-  - 
+  - VPS
 categories:
   - 甘普基本变形定律
 image: 

@@ -4,6 +4,7 @@ date: 2021-11-28T13:36:00+08:00
 description: 人生四大名言警句：喜欢就买、不行就分、多喝热水、重启试试
 tags:
   - Mastodon
+  - VPS
 categories:
   - 甘普基本变形定律
 image: 

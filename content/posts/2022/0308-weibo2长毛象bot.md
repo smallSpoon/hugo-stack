@@ -4,6 +4,7 @@ date: 2022-03-06T16:44:57+08:00
 description: 如此这般，这般如此。
 tags:
   - Mastodon
+  - VPS
 categories:
   - 甘普基本变形定律
 image: 
