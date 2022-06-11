@@ -138,7 +138,7 @@ WeiboRss = https://rsshub.app/weibo/user/微博的User_id
 
 ```
 crontab -e
-/1 *    * * *    cd /root/miniconda/weibo2toot && /root/miniconda3/envs/mastbot/bin/python run.py >> /root/miniconda/weibo2toot/log.txt 2>&1
+*/180 *    * * *    cd /root/miniconda/weibo2toot && /root/miniconda3/envs/mastbot/bin/python run.py >> /root/miniconda/weibo2toot/log.txt 2>&1
 ```
 
 实际上：死活跑不起来，让我试试怎么搞定它……
