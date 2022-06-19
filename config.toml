@@ -10,11 +10,17 @@ hasCJKLanguage = true
 
 # Main menu which appears below site header.
 [permalinks]
-posts = "/:year/:slug/"
+weekly = "/:year/:slug/"
 page = "/:slug/"
 
+
 [[menu.main]]
-name = "Writings"
+name = "Weekly"
+url = "/weekly"
+weight = 1
+
+[[menu.main]]
+name = "Others"
 url = "/posts"
 weight = 2
 
@@ -28,10 +34,6 @@ name = "Tags"
 url = "/tags"
 weight = 4
 
-[[menu.main]]
-name = "About"
-url = "/about"
-weight = 5
 
 [markup]
   [markup.tableOfContents]

@@ -37,55 +37,25 @@
   {{ partial "optional-about.html" . }}
   </section>
 
-  <section id="writing">
-    <span class="h1"><a href="{{ .Site.Params.mainSection | absURL }}">{{ .Site.Params.mainSectionTitle | default "Writings" }}</a></span>
-    {{ if (and (and (isset .Site.Params "tagsoverview") (eq .Site.Params.tagsOverview true)) (gt (len .Site.Taxonomies.tags) 0)) }}
-    <span class="h2">Topics</span>
-    <span class="widget tagcloud">
-      {{ $AllRegularPagesCount := len .Site.RegularPages }}
-      {{ range $elem := .Site.Taxonomies.tags.Alphabetical }}
-      <a style="font-size: {{ (add 0.5 (mul 5 (div (float $elem.Count) $AllRegularPagesCount))) }}rem;" href="{{ $elem.Page.Permalink }}">
-        {{- .Page.Title -}}
-      </a>
-      {{ end }}
-    </span>
-    <span class="h2">Most recent</span>
-    {{ end }}
 
-    {{ $showAllPostsOnHomePage := false }}
-    {{ if (isset .Site.Params "showallpostsonhomepage") }}
-      {{ $showAllPostsOnHomePage = .Site.Params.ShowAllPostsOnHomePage }}
-    {{ end }}
-    {{ $dataFormat := .Site.Params.homeDatePageFormat | default "2006-01-02" }}
-    {{ $mainPosts := (sort ( where site.RegularPages "Type" "in" site.Params.mainSections ) "Date" "desc") }}
-    {{ if $showAllPostsOnHomePage }}
-    <ul class="post-list">
-      {{ range (.Paginate $mainPosts).Pages }}
-        <li class="post-item">
-          <div class="meta"><time datetime="{{ time .Date }}" itemprop="datePublished">{{ .Date.Format $dataFormat }}</time></div>
-          <span><a href="{{ .Permalink }}">{{ if .Title }} {{- .Title -}} {{ else }} {{- print "Untitled" -}}{{ end }}</a></span>
-        </li>
-      {{ end }}
-    </ul>
+<div>
+  <a href="/about">
+  <img id="feiyu" src="https://drive.mantyke.icu/api/v3/file/get/2747/%E5%B0%8F%E7%90%83%E9%A3%9E%E9%B1%BC%E7%AB%99%E8%83%8C%E6%99%AF%E5%9B%BE-%E5%BA%95%E8%89%B2%E9%80%8F%E6%98%8E-%E8%A1%A5%E9%BD%90%E4%B9%A6%E6%9C%AC.png?sign=QIusHBXSFAgZ6zJhlgu_G4r230kiiOdlu9-Rmw-NHqc%3D%3A0">
+</div>
 
-    {{ partial "pagination.html" . }}
 
-    {{ else }}
-    <ul class="post-list">
-      {{ .Scratch.Set "count" 5 }}
-      {{ if isset .Site.Params "postsonhomepage" }}
-        {{ .Scratch.Set "count" .Site.Params.postsOnHomePage }}
-      {{ end }}
-      {{ range (first (.Scratch.Get "count") $mainPosts) }}
-        <li class="post-item">
-          <div class="meta"><time datetime="{{ time .Date }}" itemprop="datePublished">{{ .Date.Format $dataFormat }}</time></div>
-          <span><a href="{{ .Permalink }}">{{ if .Title }} {{- .Title -}} {{ else }} {{- print "Untitled" -}}{{ end }}</a></span>
-          
-        </li>
-      {{ end }}
-    </ul>
-    {{ end }}
-  </section>
+<style>
+#about {
+  margin: 0 0 3.8rem 0;
+  }
+
+#feiyu {
+    max-width: 90%;
+    background: #5c697b3b
+
+}
+
+</style>
 
   {{ $showProjectsList := false }}
   {{ if (isset .Site.Params "showprojectslist") }}
