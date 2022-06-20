@@ -1,6 +1,7 @@
 .pagination {
   display: inline-block;
   margin-top: 2rem;
+  margin-left: 10rem;
   width: 100%;
   text-align: center;
 
@@ -15,6 +16,7 @@
     background-image: none;
     color: $color-text;
     text-decoration: none;
+    
   }
   a:hover {
     background-image: none;
