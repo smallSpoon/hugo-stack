@@ -100,19 +100,7 @@
       <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="year" data-method="equal" data-value="{{$year}}">{{$year}}</a>
       {{end}}
     </div>
-    <div class="sc-bdnxRM">
-      <a href="javascript:void 0;" class="sc-gtsrHT kEoOHR" data-search="star" data-method="equal" data-value="">全部</a>
-      <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="star" data-method="equal" data-value="5">五星</a>
-      <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="star" data-method="equal" data-value="4">四星</a>
-      <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="star" data-method="equal" data-value="3">三星</a>
-      <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="star" data-method="equal" data-value="2">二星</a>
-      <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="star" data-method="equal" data-value="1">一星</a>
-      <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="star" data-method="equal" data-value="0">零星</a>
-    </div>
-    <div class="jvCTkj sort-by">
-      <a href="javascript:void 0;" class="sort-by-item active" data-order="time">时间排序</a>
-      <a href="javascript:void 0;" class="sort-by-item" data-order="rating">评分排序</a>
-    </div>
+ 
     <div class="sc-dIsUp fIuTG">
       {{range $idx, $book := $books}}
       {{if ne $idx 0 }}
@@ -129,17 +117,7 @@
             </div>
           </div>
           <div class="sc-iCoGMd kMthTr">{{index $book 1}}</div>
-          <div class="sc-fujyAs eysHZq">
-            <span class="sc-jSFjdj jcTaHb">
-              {{range $star := (seq 0 2 8)}}
-              <svg viewBox="0 0 24 24" width="24" height="24" class="sc-dlnjwi {{if gt (index $book 7) $star}}lhtmRw{{else}}gaztka{{end}}">
-                <path fill="none" d="M0 0h24v24H0z"></path>
-                <path fill="currentColor" d="M12 18.26l-7.053 3.948 1.575-7.928L.587 8.792l8.027-.952L12 .5l3.386 7.34 8.027.952-5.935 5.488 1.575 7.928z"></path>
-              </svg>
-              {{end}}
-            </span>
-            <span class="sc-pNWdM iibjPt">{{index $book 7}}</span>
-          </div>
+          
         </a>
       </div>
       {{end}}
