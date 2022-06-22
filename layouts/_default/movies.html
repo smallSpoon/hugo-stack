@@ -95,6 +95,12 @@
     {{end}}
   {{end}}
   <div class="sc-ksluID gFnzgG">
+    <div class="sc-bdnxRM">
+       <a href="javascript:void 0;" class="sc-gtsrHT kEoOHR" data-search="year" data-method="equal" data-value="">全部</a>
+       {{range $year := (seq 2022 -1 2017)}}
+       <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="year" data-method="equal" data-value="{{$year}}">{{$year}}</a>
+       {{end}}
+     </div>
 
     <div>
       <br>
@@ -126,7 +132,7 @@
               </svg>
               {{end}}
             </span>
-            <span class="sc-pNWdM iibjPt">{{index $movie 6}}</span>
+
           </div>
         </a>
       </div>
