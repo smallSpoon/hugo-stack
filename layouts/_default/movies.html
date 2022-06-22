@@ -93,7 +93,6 @@
       {{$scratch.Set "genres" (union ($scratch.Get "genres") (split (index $movie 7) ","))}}
     {{end}}
   {{end}}
-
     <div class="sc-bdnxRM">
       <a href="javascript:void 0;" class="sc-gtsrHT kEoOHR" data-search="year" data-method="equal" data-value="">全部</a>
       {{range $year := (seq 2022 -1 2009)}}
@@ -119,10 +118,6 @@
             </div>
           </div>
           <div class="sc-iCoGMd kMthTr">{{index $movie 1}}</div>
-          <div class="sc-fujyAs eysHZq">
-            </span>
-            
-          </div>
         </a>
       </div>
       {{end}}
