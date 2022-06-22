@@ -29,15 +29,14 @@ url = "/posts"
 weight = 3
 
 [[menu.main]]
-name = "Friends"
-url = "/Friends"
+name = "About"
+url = "/tags-wall"
 weight = 4
 
 [[menu.main]]
 name = "Tags"
 url = "/tags"
-weight = 5
-
+weight = 4
 
 [markup]
   [markup.tableOfContents]

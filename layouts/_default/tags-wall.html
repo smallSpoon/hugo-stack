@@ -1,0 +1,67 @@
+{{ define "main" }}
+    <style>
+      #test {
+        width: 900px;
+        height: 600px;
+      }
+    </style>
+      <div id="test"></div>
+      <script src="/js/tags-wall.js"></script>
+      <script>
+        Tags({
+          style: {
+            fn: Style1,
+            title: '塔塔',
+            animation: 0,
+            scale: 0.48 
+          },
+          text: `
+          偶尔读书/10/关于我/https://mantyke.icu/books
+          有时电影/8/关于我/https://mantyke.icu/movies
+          抽空打游戏/7/关于我
+          拜访朋友们/10/关于我/https://mantyke.icu/friends
+          竟挑蝴蝶下山来/8/关于博客/https://mantyke.icu/weekly/2022/apr.27-may.8/
+          做猫贵在折腾/8/关于博客/https://mantyke.icu/categories/%E5%81%9A%E7%8C%AB%E8%B4%B5%E5%9C%A8%E6%8A%98%E8%85%BE
+          甘普基本变形定律/8/关于博客/https://mantyke.icu/categories/%E7%94%98%E6%99%AE%E5%9F%BA%E6%9C%AC%E5%8F%98%E5%BD%A2%E5%AE%9A%E5%BE%8B
+          无意义读书会/7/关于我/https://book.mantyke.icu/
+          Nintendo Switch/8/是玩家
+          Steam/8/是玩家
+          FINAL FANTASY XIV/9/是玩家/https://ff14.link/
+          买书如山倒/7/是读者
+          读书如抽丝/5/是读者
+          爆米花电影爱好者/6/是观众
+          附庸风雅看文艺/6/是观众
+          德奥法音乐剧/5/是观众
+          喜欢看现场/3/是观众
+          不求甚解听粤语/4/是听众
+          Sound Horizon/8/是听众
+          游戏OST/8/是听众
+          喜欢您来/10/想对您说
+          `,
+          rootDOM: document.getElementById('test')
+        })
+
+       /** 使用说明
+  * 1. 将 index.js 引入自己的页面
+  * 2. 在引入上述脚本的下方插入代码：
+      Tags({
+        style: {
+          fn: Style1,
+          title: '你的名字',
+          animation: 1 // 如果是1，则开启动画，否则不开启动画
+          scale: 1 // 放缩比例，即可调节标签和背景字的整体大小
+        },
+        text: `
+        <标签名>/<分数（0-10，决定标签大小）>/<标签类型>/<链接（点击标签会跳转到这个链接）>
+        ...
+        `, // 可以写在单独的文件中，如果写在的文件中，需要像上方那样使用fetch请求文件
+        rootDOM: document.getElementById('目标载入dom的id')
+      })
+  */
+    </script>
+      </script>
+
+
+
+{{ end }}
+
