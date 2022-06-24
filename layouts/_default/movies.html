@@ -97,10 +97,17 @@
   <div class="sc-ksluID gFnzgG">
     <div class="sc-bdnxRM">
        <a href="javascript:void 0;" class="sc-gtsrHT kEoOHR" data-search="year" data-method="equal" data-value="">全部</a>
-       {{range $year := (seq 2022 -1 2017)}}
+       {{range $year := (seq 2022 -1 2014)}}
        <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="year" data-method="equal" data-value="{{$year}}">{{$year}}</a>
        {{end}}
      </div>
+
+<!-- 喜欢/不喜欢 -->
+    <div class="sc-bdnxRM">
+      <a href="javascript:void 0;" class="sc-gtsrHT kEoOHR" data-search="star" data-method="equal" data-value="">全部</a>
+      <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="star" data-method="equal" data-value="5">爆弹怪所喜之物</a>
+      <a href="javascript:void 0;" class="sc-gtsrHT dvtjjf" data-search="star" data-method="equal" data-value="1">救救仙子猪！</a>
+    </div>
 
     <div>
       <br>
