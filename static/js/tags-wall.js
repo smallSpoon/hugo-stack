@@ -209,7 +209,7 @@ const Style1 = (data, marks, $tags, $style, Config) => {
 
   $style.innerHTML = genCSS() + `
     #my-tags { overflow-x: hidden; padding: 7%; text-align: center; width: 100%; height: 100%; position: relative; box-sizing: border-box; }
-    #my-tags a::after { content: "→"; }
+    #my-tags a::after { content: "🎐"; }
     #my-tags a:hover::after { animation: move .3s linear infinite; position: relative; }
     #my-tags mark { position: absolute; padding: .2em .3em; display: inline-block; border-radius: .3em; margin: .15em .1em; opacity: .8; transition: opacity .2s; }
     @media (max-width: 1000px) {
