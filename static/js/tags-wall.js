@@ -99,8 +99,9 @@ const Tags = ({ style, text, rootDOM }) => {
     const a = (text, link) => `<a href="${link}" target="_blank">${text}</a>`
     Math.random()
     const randNum = Math.random()
+    const computedScore = score || (style.randomScoreIfNoSetting ? Math.ceil(randNum * 10) : 5)
     return `
-      <mark data-rand="${randNum}" data-score="${score || 5}" class="score-${score || 5}" data-type="${type || ''}">
+      <mark data-rand="${randNum}" data-score="${computedScore}" class="score-${computedScore}" data-type="${type || ''}">
       ${link ? a(tag, link) : tag}
       </mark>
     `
@@ -121,14 +122,14 @@ const Style1 = (data, marks, $tags, $style, Config) => {
   Config.scale = Config.scale || 1
   Utils.DOM.setStyle(Config.rootDOM, {
     position: 'relative',
-    overflow: 'hidden'
+    overflowX: 'hidden'
   })
 
   // const Size = [2.5, 3.5, 4.3, 5.1, 5.8, 6.5, 7, 7.5, 8, 8.4, 8.8]
   const Size = [2.5, 3.2, 3.9, 4.5, 5.1, 5.6, 6.1, 6.5, 6.9, 7.3, 7.7]
-  const Color = Array.isArray(Config.color) ? Config.color : [
-    '#776D9A',  '#7C99B4', '#6B7F82','#418CA1','#699BB0','#ABA689','#8099A0','#9D8697','#AAAAAA','#8D919F','#8196A2','#5A8996','#7E9D94',
-  ].map(color => Utils.Color.format(color))
+  const Color = (Array.isArray(Config.color) ? Config.color : [
+    '#776D9A',  '#7C99B4', '#6B7F82','#418CA1','#699BB0','#ABA689','#8099A0','#9D8697','#AAAAAA','#8D919F','#8196A2','#5A8996','#7E9D94'
+  ]).map(color => Utils.Color.format(color))
   const FontSize = (size) => size * 5 * Config.scale
 
   const getIntFromRand = (rand, end) => Math.floor(parseFloat(rand) * end)
@@ -207,8 +208,8 @@ const Style1 = (data, marks, $tags, $style, Config) => {
   })
 
   $style.innerHTML = genCSS() + `
-    #my-tags { overflow: hidden; padding: 7%; text-align: center; width: 100%; height: 100%; position: relative; box-sizing: border-box; }
-    #my-tags a::after { content: "➜"; }
+    #my-tags { overflow-x: hidden; padding: 7%; text-align: center; width: 100%; height: 100%; position: relative; box-sizing: border-box; }
+    #my-tags a::after { content: "→"; }
     #my-tags a:hover::after { animation: move .3s linear infinite; position: relative; }
     #my-tags mark { position: absolute; padding: .2em .3em; display: inline-block; border-radius: .3em; margin: .15em .1em; opacity: .8; transition: opacity .2s; }
     @media (max-width: 1000px) {

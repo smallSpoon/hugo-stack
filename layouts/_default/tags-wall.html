@@ -17,7 +17,8 @@
             fn: Style1,
             title: '塔塔',
             animation: 0,
-            scale: 0.48 
+            scale: 0.48,
+            randomScoreIfNoSetting: 1 // 如果是1，则如果未设置标签大小那么随机设置一个大小；否则使用默认大小5
           },
           text: `
           偶尔读书/10/关于我/https:&#47;&#47;mantyke.icu&#47;books
@@ -29,21 +30,21 @@
           甘普基本变形定律/8/关于博客/https:&#47;&#47;mantyke.icu&#47;categories/%E7%94%98%E6%99%AE%E5%9F%BA%E6%9C%AC%E5%8F%98%E5%BD%A2%E5%AE%9A%E5%BE%8B
           无意义读书会/7/关于我/https:&#47;&#47;book.mantyke.icu/
           Nintendo Switch/8/是玩家
-          Steam/8/是玩家
+          Steam//是玩家
           FINAL FANTASY XIV/9/是玩家/https:&#47;&#47;ff14.link/
-          买书如山倒/7/是读者
-          读书如抽丝/5/是读者
-          爆米花电影爱好者/6/是观众
-          附庸风雅文艺片/6/是观众
-          德奥法音乐剧/5/是观众
-          喜欢看现场/3/是观众
-          不求甚解听粤语/4/是听众
+          买书如山倒//是读者
+          读书如抽丝//是读者
+          爆米花电影爱好者//是观众
+          附庸风雅文艺片//是观众
+          德奥法音乐剧//是观众
+          喜欢看现场//是观众
+          不求甚解听粤语//是听众
           Sound Horizon/8/是听众
-          游戏OST/8/是听众
+          游戏OST//是听众
           尼姆军师/7/FF14
           高难玩家/7/FF14
-          倾听感受思考/3/FF14
-          钓鱼打牌赛鸟/5/FF14
+          倾听感受思考//FF14
+          钓鱼打牌赛鸟//FF14
           喜欢您来/10/想对您说
           `,
           rootDOM: document.getElementById('test')
