@@ -1,18 +1,24 @@
 <head>
-{{ if not .Site.IsServer }}
+"<!--{{ if not .Site.IsServer }}
 <script src='//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js'></script>
 <div id="waline" class="waline-container"></div>
-{{- end -}}
+{{- end -}}-->
 </head>
 <body>
   <div id="waline"></div>
   <script>
+      const locale = {
+        placeholder: '在想些什么？',
+        sofa: '啤酒饮料矿泉水，花生瓜子八宝粥，有时春光有时愁',
+        submit: '嘟嘟！',
+
     Waline({
       el: '#waline',
       serverURL: 'waline-kappa-lilac.vercel.app',
       emoji: [
       'https://cdn.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs'],
       avatar: 'monsterid',
+
     });
   </script>
 <style>
