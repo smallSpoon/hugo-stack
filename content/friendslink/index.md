@@ -18,14 +18,14 @@ slug: friendslink
 | Title            | Description                                                             |
 |------------------|-------------------------------------------------------------------------|
 | [毛毛的朋友](https://hugo-git-main-natherie.vercel.app/)            | 毛绒绒的翅膀也能创造希望和奇迹！                                                        |
-| [红豆年糕汤  ](https://bibli.info/)          |
+| [红豆年糕汤  ](https://bibli.info/)          ||
 | [狐狸反走矣](https://blog.southfox.me/)            | KEEP CALM AND CARRY ON.                                                 |
 | [晴空](https://summerwasover.vercel.app/)               | 优哉游哉，聊以卒岁。                                                              |
 | [YangRiPie](https://yangripie.com/)        | 发布小说 日记 绘画 游戏                                                           |
 | [Mengru的空间](https://mengru.space/)        | 互联网上的小小角落                                                               |
 | [谢谢所有的鱼](https://gregueria.vercel.app/#/)           | 分你一半太阳伞                                                                 |
 | [Asphyxia.](https://tantalum.life/)        | No Game No Life                                                         |
-| [Seviche.cc ](https://seviche.cc/blog/)      |
+| [Seviche.cc ](https://seviche.cc/blog/)      ||
 | [Ashsilent Planet](https://www.ashsilent.com/) | 時代與你                                                                    |
 | [波澜随心起](https://randomwaves.space/)            | 有风有雨有晴天                                                                 |
 | [瓠樽](https://blog.dylanwu.space/)               | 今子有五石之瓠，何不慮以為大樽，而浮於江湖，而憂其瓠落無所容？                                         |
@@ -44,8 +44,11 @@ slug: friendslink
 | [Brsu's Blog](https://brsu.me/)             | BiBiBi？ BiBiBi！ |
 | [Sharktale](https://blog.sharktale.xyz/)             | 一花一世界，一叶一菩提 |
 | [苹果核聚变](https://coccimore.cyou/)             | 要紧的是不仅仅成为一个人 |
-| [Missing 不想睡  ](https://hugo-missingid.vercel.app/)    |
+| [Missing 不想睡  ](https://hugo-missingid.vercel.app/)    ||
+| [一片积雪地](https://hugo-three-snowy.vercel.app/) |你身上有苦杏仁的香味。|
 | [萌 (//∇//) 贴士](https://moe.tips/)     | 愿你把酒执剑，归来仍是少年                                                           |
+
+
 
 
 
